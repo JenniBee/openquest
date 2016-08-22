@@ -1,0 +1,225 @@
+#include "scripts\base.inc"
+#include "scripts\keys.inc"
+
+// store some of the game's attributes in global variables for convenience
+Keyboard = Game.Keyboard;
+Scene = Game.Scene;
+
+// load the verb bar
+global WinMenu = Game.LoadWindow("interface\verbbar\verbbar.window");
+WinMenu.Visible = true;
+
+// load the "caption" window
+var win = Game.LoadWindow("interface\system\caption.window");
+global WinCaption = win.GetWidget("caption");
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+// init the verb bar and "clean" it (set the default values)
+verb_initBar();
+verb_cleanBar();
+
+// load our main actor
+actor = Game.LoadActor("entities\spaceship\ship.actor");
+Game.MainObject = actor;
+
+// run the "daemon" script
+Game.AttachScript("scripts\game_daemon.script");
+
+Game.TakeItem("scanner");
+
+// which scene to load?
+Game.ChangeScene("scenes\title\title.scene");
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  // what did we click?
+  var ActObj = Game.ActiveObject;
+  if(ActObj!=null)
+  {
+    // clicking an inventory item
+    if((ActObj.Type=="item" || ActObj.Type=="entity") && ActObj.Name != "PickUp" && ActObj.Name != "Use" && ActObj.Name != "TalkTo" && ActObj.Name != "LookAt" && ActObj.Name != "Give" && ActObj.Name != "Push" && ActObj.Name != "Move" && ActObj.Name != "Open" && ActObj.Name != "Smell")
+    {
+      if (ActObj.Caption != null && ActObj.Caption != "" && (Command.Verb == "Use" || Command.Verb == "Give"))
+      {
+        if(Command.Object1_name != "") 
+        {
+          Command.Object2_caption = ActObj.Caption;
+          Command.Object2_name = ActObj.Name;
+          Object2 = ActObj;
+        }
+        else
+        {
+          Command.Object1_caption = ActObj.Caption;
+          Command.Object1_name = ActObj.Name;
+          Object1 = ActObj;
+        }
+      }
+      if((Command.Verb == "Use" || Command.Verb == "Give") && Command.Object2_name != "")
+      {
+        if(Object1.CanHandleEvent(Command.Object2_name))
+        {
+          Object1.ApplyEvent(Command.Object2_name);
+        }
+        else if(Object2.CanHandleEvent(Command.Object1_name))
+        {
+          Object2.ApplyEvent(Command.Object1_name);
+        }
+        else 
+        {
+          verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+          Game.Interactive=false;
+          verb_doesNotWork();
+          verb_cleanBar();
+          Game.Interactive=true;
+        }
+      }
+      else if(Command.Verb == "Open" && ActObj.CanHandleEvent("Open"))
+      {
+        ActObj.ApplyEvent("Open");
+      }
+      else if(Command.Verb == "Move" && ActObj.CanHandleEvent("Move"))
+      {
+        ActObj.ApplyEvent("Move");
+      }
+      else if(Command.Verb == "Smell" && ActObj.CanHandleEvent("Smell"))
+      {
+        ActObj.ApplyEvent("Smell");
+      }
+      else if(Command.Verb == "Push" && ActObj.CanHandleEvent("Push"))
+      {
+        ActObj.ApplyEvent("Push");
+      }
+      else if(Command.Verb == "Give" && ActObj.CanHandleEvent("Give"))
+      {
+        ActObj.ApplyEvent("Give");
+      }
+      else if(Command.Verb == "Use" && ActObj.CanHandleEvent("Use"))
+      {
+        ActObj.ApplyEvent("Use");
+      }
+      else if(Command.Verb=="Examine" && ActObj.CanHandleEvent("LookAt"))
+      {
+        ActObj.ApplyEvent("LookAt");
+      }
+      else if (Command.Verb=="Talk to" && ActObj.CanHandleEvent("TalkTo")) 
+      {
+        ActObj.ApplyEvent("TalkTo");
+      }
+      else if (Command.Verb=="Pick up" && ActObj.CanHandleEvent("PickUp")) 
+      {
+        ActObj.ApplyEvent("PickUp");
+      }
+      else if(Command.Verb !="" && Command.Verb != "Give" && Command.Verb != "Use")
+      {
+        verb_setBar(Command.Verb + " "+ActObj.Caption);
+        Game.Interactive=false;
+        verb_doesNotWork();
+        verb_cleanBar();
+        Game.Interactive=true;
+      }
+      else
+      {
+        ActObj.ApplyEvent("LeftClick");
+      }
+    }
+    // just a simple click
+    else
+    {
+      ActObj.ApplyEvent("LeftClick");
+    }
+  }
+  // else propagate the LeftClick event to a scene
+  else if(ActObj.Name != "PickUp" && ActObj.Name != "Use" && ActObj.Name != "TalkTo" && ActObj.Name != "LookAt" && ActObj.Name != "Give" && ActObj.Name != "Push" && ActObj.Name != "Move" && ActObj.Name != "Open" && ActObj.Name != "Smell")
+  {
+    Command.Object1_caption = "";
+    Command.Object1_name = "";
+    Command.Object1 = "";
+    Command.Object2_caption = "";
+    Command.Object2_name = "";
+    Command.Object2 = "";
+    Command.Running = "";
+    Scene.ApplyEvent("LeftClick");
+  }
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  // if inventory item selected? deselect it
+  if (Game.SelectedItem != null)
+  {
+    Game.SelectedItem = null;
+    return;
+  }
+
+  var ActObj = Game.ActiveObject;
+  if(ActObj!=null)
+  {
+      ActObj.ApplyEvent("RightClick");
+  }
+  else
+  {
+    verb_cleanBar();
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "Keypress"
+{
+  // on Esc or F1 key
+  if(Keyboard.KeyCode==VK_ESCAPE || (!Keyboard.Printable && (Keyboard.KeyCode==VK_F1)))
+  {
+    // load and display the main menu window
+    WinCaption.Visible = false;
+    var WinMainMenu = Game.LoadWindow("interface\system\mainmenu.window");
+    WinMainMenu.Center();
+    WinMainMenu.GoSystemExclusive();
+    Game.UnloadObject(WinMainMenu);
+  }
+  if(Keyboard.Printable && (Keyboard.KeyCode==84 || Keyboard.KeyCode==116)) // 't'
+  {
+    verb_cleanBar();
+    button_talkto.ApplyEvent("LeftClick");
+  }
+  if(Keyboard.Printable && (Keyboard.KeyCode==76 || Keyboard.KeyCode==108)) // 'l'
+  {
+    verb_cleanBar();
+    button_lookat.ApplyEvent("LeftClick");
+  }
+  if(Keyboard.Printable && (Keyboard.KeyCode==85 || Keyboard.KeyCode==117)) // 'u'
+  {
+    verb_cleanBar();
+    button_use.ApplyEvent("LeftClick");
+  }
+  if(Keyboard.Printable && (Keyboard.KeyCode==80 || Keyboard.KeyCode==112)) // 'p'
+  {
+    verb_cleanBar();
+    button_pickup.ApplyEvent("LeftClick");
+  }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "QuitGame"
+{
+  // on Alt+F4 (window close)
+  // load and display the quit confirmation window
+  WinCaption.Visible = false;
+  var WinQuit = Game.LoadWindow("interface\system\quit.window");
+  WinQuit.Center();
+  WinQuit.GoSystemExclusive();
+
+  // and if the user selected Yes
+  if(WinQuit.xResult)
+  {
+    // quit the game
+    Game.QuitGame();
+  }
+  // otherwise just unload the quit window from memory
+  else Game.UnloadObject(WinQuit);
+}

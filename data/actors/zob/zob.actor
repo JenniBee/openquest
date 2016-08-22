@@ -1,0 +1,50 @@
+; $EDITOR_PROJECT_ROOT_DIR$ ..\..\..\
+
+ACTOR
+{
+  NAME = "zob"
+  CAPTION=""
+  SCALABLE = TRUE
+  REGISTRABLE = FALSE
+  X = 100
+  Y = 100
+  SCRIPT="actors\zob\zob.script"
+
+  FONT = "fonts\outline_white.font"
+;-------------------------------------------------------------------------------
+  WALK
+  {
+    SPRITESET
+    {
+      LEFT       = "actors\zob\ll\walk.sprite"
+      RIGHT      = "actors\zob\rr\walk.sprite"
+      UP         = "actors\zob\uu\walk.sprite"
+      DOWN       = "actors\zob\dd\walk.sprite"
+    }
+  }
+
+;-------------------------------------------------------------------------------
+  STAND
+  {
+    SPRITESET
+    {
+      LEFT       = "actors\zob\ll\stand.sprite"
+      RIGHT      = "actors\zob\rr\stand.sprite"
+      UP         = "actors\zob\uu\stand.sprite"
+      DOWN       = "actors\zob\dd\stand.sprite"
+    }
+  }
+
+
+;-------------------------------------------------------------------------------
+  TALK
+  {
+    SPRITESET
+    {
+      LEFT       = "actors\zob\ll\talk.sprite"
+      RIGHT      = "actors\zob\rr\talk.sprite"
+      UP         = "actors\zob\uu\talk.sprite"
+      DOWN       = "actors\zob\dd\talk.sprite"
+    }
+  }
+}

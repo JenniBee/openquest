@@ -1,0 +1,62 @@
+OpenQuest
+---------
+by Michael Sheail - October 2007
+
+
+What is it?
+-----------
+OpenQuest is a short two room demo game that demonstrates a number of the basic and intermediate features available in Adventure Game Studio. The source project file is available as well as the final executable.
+
+
+who is it for?
+--------------
+OpenQuest is intended to assist newcomers to Adventure Game Studio make the jump from the basic tutorial within the included help file to a fully scripted and playable adventure. The source project is heavily annotated so that features of interest may be copied and reused if desired. It is not an optimal game, there are parts that could be better done in other ways, perhaps using modules. That said, it is robust enough for a basic adventure.
+
+To make sense of the project you will need a basic understanding the Adventure Game Studio editor and how it works.
+
+
+what is included?
+-----------------
+The basic tenets of old school adventuring are covered:
+a customised scumm style GUI
+a dialogue puzzle
+altering a dialogue after you have met the character once
+an inventory combo puzzle
+triggered animations
+a "move something to reveal something else" puzzle
+a "do something with a computer terminal" puzzle
+a locked door
+use of a custom verb (smell)
+default right click interactions
+default responses to interactions
+cut-scenes
+basic sound
+load/save dialogs
+
+
+what can be reused?
+-----------------
+Anything you want.
+
+
+solution
+--------
+Open the cabinet to get the gun and keycard
+Examine the plant to find the ammo
+Attempt to move the plant
+Talk to Carol and ask to move the plant
+Move the plant
+Pick up the ammo
+Use the ammo with the gun
+Smell the door plate
+Attempt to use the door plate
+Talk to Zif to get him to follow
+Use the plate again
+Go to the other room
+Use the keycard in the slot
+Use the terminal
+Reconstruct the triangle from the segments on the left
+Use the gun with the node near the top
+Give the gun to Zif
+The end!
+(you can also open the scanner to get batteries out)

@@ -1,0 +1,20 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+#include "scripts\keys.inc"
+
+on "LeftClick"
+{
+  var WinQuit = Game.LoadWindow("interface\system\quit.window");
+  WinQuit.Center();
+  WinQuit.GoSystemExclusive();
+  if(WinQuit.xResult==true)
+  {
+    Game.QuitGame();
+  }
+  else
+    Game.UnloadObject(WinQuit);
+}

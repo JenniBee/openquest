@@ -1,0 +1,199 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Talk to";
+
+var Carol = Scene.GetNode("carol");
+
+Carol.SubtitlesPosX = 168; //position of subtitles for your 
+Carol.SubtitlesPosY = -20;
+
+actor.SubtitlesPosX = 168; //position of subtitles for your 
+actor.SubtitlesPosY = -20;
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("My commanding officer, Commander Carol.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "scanner"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+  Carol.Talk("You're the scientist on this team. You use it.");
+  Carol.DetachScript("entities\Carol\dd\talk.sprite");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Is that a new cologne, sir?");
+  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+  Carol.Talk("I thought we got past these... feelings.");
+  Carol.DetachScript("entities\Carol\dd\talk.sprite");
+  actor.Talk("Sorry sir.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("They don't seem to open.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Moving them would accomplish nothing.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("I don't know how to operate them.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  var Responses;
+  var Selected;
+  GoToObject();
+
+  Game.Interactive = false;
+
+  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+  Carol.Talk("Yes, ensign?");
+  Carol.DetachScript("entities\Carol\dd\talk.sprite");
+  
+  verb_changeMode(1);
+
+  var EndBranch = false;
+
+  while(!EndBranch) // loop until the player ends this dialogue
+  {  
+    Game.AddResponse(0, "What are your orders?");
+    Game.AddResponse(1, "I'll continue my search.");
+    
+    var Res = Game.GetResponse(true); // automatically select last response
+    
+    actor.Talk(Game.LastResponse);
+    
+    // handle the responses
+    switch(Res)
+    {
+      case 0:
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("Locate the stolen artifact.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        actor.Talk("Any ideas where?");
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("Study your surroundings.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("Use all the cunning and guile at your disposal.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("If you do this, you shall surely be successful.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        actor.Talk("Guile. Right. Aye, sir.");
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("Also, get a gun with which to shoot things.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        break;
+      case 1:
+        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
+        Carol.Talk("Very good.");
+        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        EndBranch = true;
+        break;        
+    }
+  }
+  verb_cleanBar();
+  verb_changeMode(0);
+
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  if(Command.Verb == "")
+  {
+    GoToObject();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover(verb_default);
+}
+
+function GoToObject()
+{
+var GoToCarolX = Carol.X + 50;
+var GoToCarolY = Carol.Y + 12;
+
+  actor.GoTo(GoToCarolX, GoToCarolY);
+  actor.TurnTo(DI_LEFT);
+}

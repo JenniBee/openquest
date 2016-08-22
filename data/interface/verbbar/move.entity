@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="Move"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\move_off.bmp"
+  SCRIPT="interface\verbbar\move.script"
+}

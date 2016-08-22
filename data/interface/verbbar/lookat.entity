@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="LookAt"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\lookat_off.bmp"
+  SCRIPT="interface\verbbar\lookat.script"
+}

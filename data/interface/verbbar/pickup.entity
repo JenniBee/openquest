@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="PickUp"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\pickup_off.bmp"
+  SCRIPT="interface\verbbar\pickup.script"
+}

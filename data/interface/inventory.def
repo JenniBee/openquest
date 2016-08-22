@@ -1,0 +1,52 @@
+INVENTORY_BOX
+{
+  ITEM_WIDTH = 28
+  ITEM_HEIGHT = 18
+  SPACING = 0
+  SCROLL_BY = 3
+  HIDE_SELECTED = TRUE
+
+  AREA { 1, 0, 94, 42 }
+
+  EXCLUSIVE = FALSE
+  ALWAYS_VISIBLE = TRUE
+
+  WINDOW
+  {
+    X = 211
+    Y = 153
+    WIDTH = 95
+    HEIGHT = 36
+    IMAGE = "interface\inventory.bmp"
+  
+    BUTTON
+    {
+      NAME = "prev"
+      X = 96
+      Y = 1
+      WIDTH = 20
+      HEIGHT = 20
+
+      IMAGE         = "interface\verbbar\prev_normal.bmp"
+      IMAGE_HOVER   = "interface\verbbar\prev_hover.bmp"
+      IMAGE_PRESS   = "interface\verbbar\prev_press.bmp"
+      IMAGE_DISABLE = "interface\verbbar\prev_disable.bmp"
+      IMAGE_FOCUS   = "interface\verbbar\prev_focus.bmp"
+    }
+
+    BUTTON
+    {
+      NAME = "next"
+      X = 96
+      Y = 20
+      WIDTH = 20
+      HEIGHT = 20
+
+      IMAGE         = "interface\verbbar\next_normal.bmp"
+      IMAGE_HOVER   = "interface\verbbar\next_hover.bmp"
+      IMAGE_PRESS   = "interface\verbbar\next_press.bmp"
+      IMAGE_DISABLE = "interface\verbbar\next_disable.bmp"
+      IMAGE_FOCUS   = "interface\verbbar\next_focus.bmp"
+    }
+  }
+}

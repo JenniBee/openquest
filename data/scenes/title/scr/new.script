@@ -1,0 +1,10 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+on "LeftClick" 
+{ 
+  Game.ChangeScene("scenes\opening\opening.scene");
+} 

@@ -1,0 +1,41 @@
+#include "scripts\base.inc"
+
+////////////////////////////////////////////////////////////////////////////////
+actor = Game.LoadActor("entities\spaceship\ship.actor");
+Game.MainObject = actor;
+
+Game.PlayMusic("music\music3.wav", true);
+
+actor.SkipTo(-50,80);
+actor.Direction = DI_RIGHT;
+
+actor.SubtitlesPosX = -9; //position of subtitles for your actor
+actor.SubtitlesPosY = -20;
+
+Game.Interactive=false;
+
+actor.GoTo(170, 80);
+actor.Direction = DI_RIGHT;
+
+Sleep(300);
+actor.Talk("These are the coordinates.");
+Sleep(300);
+actor.Talk("Ensign, bring the teleportation device online.");
+
+Sleep(1000);
+Game.ChangeScene("scenes\room\room.scene");
+
+////////////////////////////////////////////////////////////////////////////////
+// scene state
+global StateRoom;
+
+// default values
+if(StateRoom==null)
+{
+  StateRoom.Visited = false;
+}
+
+on "LeftClick"
+{
+Game.ChangeScene("scenes\room\room.scene");
+}

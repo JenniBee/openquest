@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="TalkTo"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\talkto_off.bmp"
+  SCRIPT="interface\verbbar\talkto.script"
+}

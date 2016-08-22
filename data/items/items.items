@@ -1,0 +1,54 @@
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Hand scanner"
+   NAME = "scanner"
+   IMAGE = "items\scanner.bmp"
+   CURSOR = "items\scanner.bmp"
+   CURSOR_HOVER = "items\scanner.bmp"
+   SCRIPT = "items\scanner.script"
+}
+
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Batteries"
+   NAME = "batteries"
+   IMAGE = "items\batteries.bmp"
+   CURSOR = "items\batteries.bmp"
+   CURSOR_HOVER = "items\batteries.bmp"
+   SCRIPT = "items\batteries.script"
+}
+
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Hand Scanner"
+   NAME = "deadscanner"
+   IMAGE = "items\deadscanner.bmp"
+   CURSOR = "items\deadscanner.bmp"
+   CURSOR_HOVER = "items\deadscanner.bmp"
+   SCRIPT = "items\deadscanner.script"
+}
+
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Sidearm"
+   NAME = "gun"
+   IMAGE = "items\gun.bmp"
+   CURSOR = "items\gun.bmp"
+   CURSOR_HOVER = "items\gun.bmp"
+   SCRIPT = "items\gun.script"
+}
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Keycard"
+   NAME = "keycard"
+   IMAGE = "items\keycard.bmp"
+   CURSOR = "items\keycard.bmp"
+   CURSOR_HOVER = "items\keycard.bmp"
+   SCRIPT = "items\keycard.script"
+}
+

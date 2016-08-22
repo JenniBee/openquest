@@ -1,0 +1,21 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+////////////////////////////////////////////////////////////////////////////////
+
+actor.SkipTo(400,400);
+
+verb_changeMode(2);
+
+on "new" 
+{ 
+  Game.ChangeScene("scenes\room\room.scene");
+} 
+
+on "quit" 
+{ 
+  Game.QuitGame(); 
+} 

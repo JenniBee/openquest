@@ -1,3 +1,4 @@
 # Created by the Winermute Engine
 packages/
 *.log
+saves/

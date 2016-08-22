@@ -1,0 +1,37 @@
+#include "scripts\base.inc"
+#include "scripts\keys.inc"
+
+self.xResult = false;
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "close"
+{
+  self.Close();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "yes"
+{
+  self.xResult = true;
+  self.Close();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "Keypress"
+{
+  var button;
+
+  if(Keyboard.KeyCode==VK_ESCAPE)
+  {
+    button = self.GetWidget("close");
+    button.Press();
+  }
+  else if(Keyboard.KeyCode==VK_RETURN)
+  {
+    button = self.GetWidget("yes");
+    button.Press();
+  }
+}

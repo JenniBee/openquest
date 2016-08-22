@@ -1,0 +1,39 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+on "MouseEntry"
+{
+  if(lookat_over == false)
+  {
+    button_lookat.SetSprite("interface\verbbar\lookat_on.bmp");
+    lookat_over=true;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  if(Command.Verb != "Examine")
+  {
+    button_lookat.SetSprite("interface\verbbar\lookat_off.bmp");
+    lookat_over=false;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  verb_cleanBar();
+  Command.Verb = "Examine";
+  button_lookat.SetSprite("interface\verbbar\lookat_on.bmp");
+  button_talkto.SetSprite("interface\verbbar\talkto_off.bmp");
+  button_pickup.SetSprite("interface\verbbar\pickup_off.bmp");
+  button_use.SetSprite("interface\verbbar\use_off.bmp");
+  button_give.SetSprite("interface\verbbar\give_off.bmp");
+  button_move.SetSprite("interface\verbbar\move_off.bmp");
+  button_open.SetSprite("interface\verbbar\open_off.bmp");
+  button_smell.SetSprite("interface\verbbar\smell_off.bmp");
+}

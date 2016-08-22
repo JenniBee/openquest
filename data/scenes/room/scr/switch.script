@@ -1,0 +1,124 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Look at";
+
+var dimmed;
+
+var Switch = Scene.GetNode("switch");
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Give"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+  
+  verb_cleanBar();
+
+  if (dimmed==true)
+    {  
+    actor.Talk("I'll turn this back on.");
+    Game.PlaySound("sound\sound5.wav");
+    actor.PlayAnim("actors\zob\ll\take.sprite");
+    Game.FadeIn(200, 102, 51, 0, 100);
+    dimmed=false; 
+    }
+
+  else
+    {  
+    actor.Talk("I'll turn this off.");
+    Game.PlaySound("sound\sound5.wav");
+    actor.PlayAnim("actors\zob\ll\take.sprite");
+    Game.FadeOut(200, 102, 51, 0, 100);
+    dimmed=true;
+    }
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+  
+  verb_cleanBar();
+
+  if (dimmed==true)
+    {  
+    actor.Talk("I'll turn this back on.");
+    actor.PlayAnim("actors\zob\ll\take.sprite");
+    Game.FadeIn(200, 102, 51, 0, 100);
+    dimmed=false; 
+    }
+
+  else
+    {  
+    actor.Talk("I'll turn this off.");
+    actor.PlayAnim("actors\zob\ll\take.sprite");
+    Game.FadeOut(200, 102, 51, 0, 100);
+    dimmed=true;
+    }
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  if(Command.Verb == "")
+  {
+    GoToObject();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover("Look at");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}
+
+function GoToObject()
+{
+var GoToSwitchX = Switch.X + 4;
+var GoToSwitchY = Switch.Y - 45;
+
+  actor.GoTo(GoToSwitchX, GoToSwitchY);
+  actor.TurnTo(DI_LEFT);
+}
+

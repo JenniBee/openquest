@@ -1,0 +1,15 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var ActObj = Game.ActiveObject;
+
+on "RightClick"
+{
+  if(ActObj==null || ActObj.Name == "verbbar")
+  {
+    verb_cleanBar();
+  }
+}

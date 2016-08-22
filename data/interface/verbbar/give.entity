@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="Give"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\give_off.bmp"
+  SCRIPT="interface\verbbar\give.script"
+}

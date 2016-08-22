@@ -1,0 +1,20 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+#include "scripts\keys.inc"
+
+on "LeftClick"
+{
+  var WinLoad = Game.LoadWindow("interface\system\load.window");
+  WinLoad.Center();
+  WinLoad.GoSystemExclusive();
+  if(WinLoad.xResult==true)
+  {
+    Game.UnloadObject(WinLoad);
+  }
+  else
+    Game.UnloadObject(WinLoad);
+}

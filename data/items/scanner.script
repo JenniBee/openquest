@@ -1,0 +1,81 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Look at";
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("Standard issue scanner.");
+  actor.Talk("Detects most of the EM spectrum.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Pickup"
+{
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+on "Use"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("I'll scan the area.");
+  actor.PlayAnim("actors\zob\rr\scan.sprite");
+  actor.Talk("I'm detecting the artifact near this location.");
+
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+on "Open"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("I'll open the housing.");
+  Game.DropItem("scanner");
+  Game.TakeItem("deadscanner");
+  Game.TakeItem("batteries");
+  actor.Talk("The batteries have fallen out.");
+
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover("Look at");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}

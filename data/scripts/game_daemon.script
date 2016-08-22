@@ -1,0 +1,75 @@
+#include "scripts\base.inc"
+
+global Command;
+global WinCaption;
+global WinMenu;
+global Object1;
+global Object2;
+
+WinCaption.X = 0;
+WinCaption.Y = 128;
+WinCaption.Width = Game.ScreenWidth;
+WinCaption.Height = 20;
+WinCaption.TextAlign = TAL_CENTER;
+
+// infinite loop
+while(true){
+
+  // save the active object for later
+  var ActObj = Game.ActiveObject;
+
+  // handle the standard foating caption
+  if(Command.Running == "")
+  {
+    if(Game.Interactive && ActObj!=null)
+    {
+      if (Game.SelectedItem==null)
+      {
+        if((ActObj.Caption != null && ActObj.Caption != "") || Command.Object1_name != "")
+        {
+          if(Command.Object1_name != "")
+          {
+            if(Object1 != ActObj && Command.Verb == "Use")
+            {
+              WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " with " + ActObj.Caption;
+            }
+            else if(Object1 != ActObj && Command.Verb == "Give")
+            {
+              WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " to " + ActObj.Caption;
+            }
+            else if(Command.Verb == "Give")
+            {
+              WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " to ";
+            }
+            else
+            {
+              WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " with ";
+            }
+          }
+          else
+          {
+            WinCaption.Text = Command.Verb + " " + ActObj.Caption;
+          }
+        }
+        else
+        {
+          WinCaption.Text = Command.Verb;
+        }
+  	  }
+      WinCaption.Visible = true;
+      WinCaption.Focus();
+    }
+    else if(Command.Object1_name != "" && Command.Verb == "Use")
+    {
+      WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " with ";
+    }
+    else if(Command.Object1_name != "" && Command.Verb == "Give")
+    {
+      WinCaption.Text = Command.Verb + " " + Command.Object1_caption + " to ";
+    }
+    else WinCaption.Text = Command.Verb;
+  }
+  else WinCaption.Text = Command.Running;
+
+  Sleep(20);
+}

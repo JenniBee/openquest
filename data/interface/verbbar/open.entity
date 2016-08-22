@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="Open"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\open_off.bmp"
+  SCRIPT="interface\verbbar\open.script"
+}

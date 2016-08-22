@@ -1,0 +1,40 @@
+; $EDITOR_PROJECT_ROOT_DIR$ ..\..\..\
+
+ACTOR
+{
+  NAME = "ship"
+  CAPTION=""
+  SCALABLE = TRUE
+  REGISTRABLE = FALSE
+  X = 100
+  Y = 100
+  SCRIPT="entities\spaceship\ship.script"
+
+  FONT = "fonts\outline_yellow.font"
+;-------------------------------------------------------------------------------
+  WALK
+  {
+    SPRITESET
+    {
+      RIGHT      = "entities\spaceship\sprites\shipmoving.sprite"
+    }
+  }
+
+;-------------------------------------------------------------------------------
+  STAND
+  {
+    SPRITESET
+    {
+      RIGHT      = "entities\spaceship\sprites\ship.sprite"
+    }
+  }
+
+;-------------------------------------------------------------------------------
+  TALK
+  {
+    SPRITESET
+    {
+      RIGHT      = "entities\spaceship\sprites\ship.sprite"
+    }
+  }
+}

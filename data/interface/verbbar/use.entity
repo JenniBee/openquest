@@ -1,0 +1,11 @@
+ENTITY
+{
+  NAME="Use"
+  CAPTION=""
+  ACTIVE=TRUE
+  SCALABLE=FALSE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="interface\verbbar\use_off.bmp"
+  SCRIPT="interface\verbbar\use.script"
+}

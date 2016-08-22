@@ -1,0 +1,133 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "LookAt";
+
+var CabClosed = Scene.GetNode("cabinet_closed");
+var CabOpen = Scene.GetNode("cabinet_open");
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("It looks really nice.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("I can't rip it out of the wall!");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Hey! This is just a painting!");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+  actor.TurnTo(DI_UP);
+  actor.Talk("I'll look in here, I think.");
+  actor.PlayAnim("actors\zob\uu\take.sprite");
+  Game.PlaySound("sound\sound4.wav");
+  CabClosed.SkipTo(400, 114);
+  CabOpen.SkipTo(127, 50);
+  actor.Talk("There appears to be a small sidearm in this container");
+  actor.PlayAnim("actors\zob\uu\take.sprite");
+  Game.TakeItem("gun");
+  actor.Talk("and a plastic card containing some kind of circuitry.");
+  actor.PlayAnim("actors\zob\uu\take.sprite");
+  Game.TakeItem("keycard");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("It's pointless. No one can hear me.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "letter"
+{
+  if(Command.Verb == "Give")
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("I wish I could cram this letter in there.");
+  actor.Talk("But I can't.");
+
+  	verb_cleanBar();
+	}
+  else
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("I wish I could cram this letter in there.");
+  actor.Talk("But I can't.");
+
+  	verb_cleanBar();
+	}
+
+  Game.Interactive=true;
+}
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  GoToObject();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+function GoToObject()
+{
+  actor.GoTo(128, 67);
+  actor.TurnTo(DI_UP);
+}

@@ -1,0 +1,170 @@
+WINDOW
+{
+  WIDTH = 270
+  HEIGHT = 205
+  NAME = "save"
+
+  TITLE = "Save game"
+  TITLE_RECT { 5,5,395,25 }  
+  TITLE_ALIGN = left
+  DRAG_RECT { 0,0,395,25 }
+  BACK = "ui_elements\win.image"
+  BACK_INACTIVE = "ui_elements\win_inactive.image"
+  FONT = "fonts\outline_white.font"
+  SCRIPT = "interface\system\save.script"
+
+;----- window close button -----
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but_cls.button"
+    X = 246
+    Y = 3
+  }
+
+  
+;----- save slot buttons -----
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "1"
+    TEXT = ""
+    X = 10
+    Y = 30
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "2"
+    TEXT = ""
+    X = 10
+    Y = 55
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "3"
+    TEXT = ""
+    X = 10
+    Y = 80
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "4"
+    TEXT = ""
+    X = 10
+    Y = 105
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "5"
+    TEXT = ""
+    X = 10
+    Y = 130
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "6"
+    TEXT = ""
+    X = 110
+    Y = 30
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "7"
+    TEXT = ""
+    X = 110
+    Y = 55
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "8"
+    TEXT = ""
+    X = 110
+    Y = 80
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "9"
+    TEXT = ""
+    X = 110
+    Y = 105
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "10"
+    TEXT = ""
+    X = 110
+    Y = 130
+    WIDTH = 100
+    HEIGHT = 20
+  }
+
+;----- scroll buttons -----
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "up"
+    IMAGE = "ui_elements\arrow_up.bmp"
+    X = 220
+    Y = 30
+    WIDTH = 30
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "down"
+    IMAGE = "ui_elements\arrow_down.bmp"
+    X = 220
+    Y = 155
+    WIDTH = 30
+    HEIGHT = 20
+  }
+
+;----- save/cancel buttons -----
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "save"
+    TEXT = "Save"
+    X = 10
+    Y = 155
+    WIDTH = 100
+    HEIGHT = 20
+  }
+  BUTTON
+  {
+    TEMPLATE = "ui_elements\template\but.button"
+    NAME = "close"
+    TEXT = "Cancel"
+    X = 110
+    Y = 155
+    WIDTH = 100
+    HEIGHT = 20
+  }
+}
