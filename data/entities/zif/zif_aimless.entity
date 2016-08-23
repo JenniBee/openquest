@@ -1,0 +1,18 @@
+; $EDITOR_PROJECT_ROOT_DIR$ ..\..\..\
+
+ENTITY
+{
+  NAME="zif"
+  CAPTION="Commander Zif"
+  ACTIVE=TRUE
+  X=277
+  Y=313
+  SCALABLE=TRUE
+  REGISTRABLE=TRUE
+  SHADOWABLE=TRUE
+  SPRITE="entities\zif\aimless.sprite"
+  TALK="entities\zif\dd\talk.sprite"
+
+  SCRIPT="entities\zif\zif.script"
+  FONT = "fonts\outline_yellow.font"
+}

@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 0
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
     EDITOR_SELECTED=TRUE
   }
 

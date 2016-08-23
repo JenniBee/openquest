@@ -8,7 +8,7 @@ GAME {
   LOCAL_SAVE_DIR="saves"
   INDICATOR_HEIGHT=8
   INDICATOR_COLOR { 255, 0, 0, 128 }
-  SYSTEM_FONT="fonts\outline_yellow.font"
+  SYSTEM_FONT="fonts\outline_green.font"
   CURSOR="sprites\system\cur_arrow.sprite"
   ACTIVE_CURSOR="sprites\system\cur_arrow_h.sprite"
   NONINTERACTIVE_CURSOR="sprites\system\cur_wait.sprite"

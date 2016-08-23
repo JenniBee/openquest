@@ -30,6 +30,19 @@ on "Smell"
 
 ////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////////////////////////////////////////
+on "ammunition"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  Game.PlaySound("sound\sound12.wav");
+  actor.Talk("The weapon has been loaded.");
+  Game.DropItem("ammunition");
+  LoadedWeapon = true;
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
 
 on "PickUp"
 {

@@ -16,7 +16,7 @@ SPRITE {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\vacuum\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
     EDITOR_SELECTED=TRUE
   }
 
@@ -24,21 +24,21 @@ SPRITE {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\vacuum\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\vacuum\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\vacuum\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
 }

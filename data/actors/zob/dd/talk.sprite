@@ -11,28 +11,28 @@ SPRITE {
     DELAY = 180
     KEYFRAME=FALSE
     IMAGE = "actors\zob\dd\talk\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
     IMAGE = "actors\zob\dd\talk\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
     IMAGE = "actors\zob\dd\talk\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
     IMAGE = "actors\zob\dd\talk\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
 }

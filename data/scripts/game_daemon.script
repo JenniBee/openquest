@@ -18,7 +18,7 @@ while(true){
   // save the active object for later
   var ActObj = Game.ActiveObject;
 
-  // handle the standard foating caption
+  // handle the standard floating caption
   if(Command.Running == "")
   {
     if(Game.Interactive && ActObj!=null)
@@ -69,7 +69,10 @@ while(true){
     }
     else WinCaption.Text = Command.Verb;
   }
-  else WinCaption.Text = Command.Running;
+  else 
+    {
+    WinCaption.Text = Command.Running;
+    }
 
   Sleep(20);
 }

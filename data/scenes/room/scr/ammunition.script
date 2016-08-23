@@ -1,0 +1,200 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Look at";
+
+var Ammunition = Scene.GetNode("ammunition");
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+
+  Game.Interactive=false;
+
+  actor.Talk("A small box of projectiles.");
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know how to communicate with that.");
+
+  verb_cleanBar();
+
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  Game.Interactive=false;
+  actor.PlayAnim("actors\zob\rr\take.sprite");
+  Game.TakeItem("ammunition");
+  Ammunition.Active = false;
+  Game.Interactive=true;
+  }
+
+  verb_cleanBar();
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  if(!Game.IsItemTaken("ammunition"))
+  {
+    verb_setBar(Command.Verb + " "+self.Caption);
+
+    GoToObject();
+
+    Game.Interactive=false;
+
+    actor.Talk("I don't know how to operate that.");
+  
+    verb_cleanBar();
+
+    Game.Interactive=true;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Give"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  
+  verb_cleanBar();
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+
+  Game.Interactive=false;
+
+  actor.Talk("That has no odour.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+
+  Game.Interactive=false;
+
+  actor.Talk("That doesn't seem to open.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+
+  Game.Interactive=false;
+
+  actor.Talk("Moving that would accomplish nothing.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+////////////////////////////////////////////////////////////////////////////////
+on "ammunition"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  Game.PlaySound("sound\sound12.wav");
+  actor.Talk("The weapon has been loaded.");
+  Game.DropItem("ammunition");
+  LoadedWeapon = true;
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  if(Command.Verb == "")
+  {
+if(!Game.IsItemTaken("ammunition"))
+  {
+  GoToObject();
+  }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover("Look at");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}
+
+function GoToObject()
+{
+actor.GoTo(83, 90);
+actor.TurnTo(DI_RIGHT);
+}
+

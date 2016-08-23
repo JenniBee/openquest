@@ -11,42 +11,43 @@ SPRITE {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\04.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
   }
 
   FRAME {
     DELAY = 300
     KEYFRAME=FALSE
     IMAGE = "entities\carol\rr\walk\05.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
   }
 
 }

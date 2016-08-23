@@ -3,6 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 on "LeftClick"
 {
+var ZobMouseX = Scene.MouseX + 12;
+var ZobMouseY = Scene.MouseY + 45;
+
   // when the scene is left-clicked, just send the actor to the specified point
-  actor.GoTo(Scene.MouseX, Scene.MouseY);
+  actor.GoTo(ZobMouseX, ZobMouseY);
 }

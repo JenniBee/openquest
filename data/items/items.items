@@ -41,6 +41,7 @@ ITEM
    CURSOR_HOVER = "items\gun.bmp"
    SCRIPT = "items\gun.script"
 }
+
 ITEM
 {
    CURSOR_COMBINED = TRUE
@@ -52,3 +53,13 @@ ITEM
    SCRIPT = "items\keycard.script"
 }
 
+ITEM
+{
+   CURSOR_COMBINED = TRUE
+   CAPTION = "Ammunition"
+   NAME = "ammunition"
+   IMAGE = "items\ammunition.bmp"
+   CURSOR = "items\ammunition.bmp"
+   CURSOR_HOVER = "items\ammunition.bmp"
+   SCRIPT = "scenes\room\scr\ammunition.script"
+}

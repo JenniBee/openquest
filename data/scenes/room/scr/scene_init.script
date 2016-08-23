@@ -6,8 +6,11 @@ global WinMenu;
 
 ////////////////////////////////////////////////////////////////////////////////
 
+var Zif_Aimless = Scene.GetNode("zif_aimless");
+var Zif_Phone_Left = Scene.GetNode("zif_phone_left");
 var Zif_Phone = Scene.GetNode("zif_phone");
 var Zif = Scene.GetNode("zif");
+var Zif_Left = Scene.GetNode("zif_left");
 
 var Cabinet = Scene.GetNode("cabinet");
 var Carol = Scene.GetNode("carol");
@@ -21,59 +24,98 @@ Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(400, 114);
 Carol.SkipTo(400, 114);
 
+Scene.SkipTo(actor);
+
 actor.Active=true;
 Game.Interactive=false;
 
 Sleep(500);
-Zif_Phone.SkipTo(169, 59);
+Zif.SkipTo(183, 110);
 Game.PlaySound("sound\sound2.wav");
-Zif_Phone.PlayAnim("entities\zif\dd\doublebeam.sprite");
-Zif_Phone.DetachScript("entities\zif\dd\doublebeam.sprite");
-Zif_Phone.SkipTo(188, 66);
-actor.SkipTo(168, 58);
+Zif.PlayAnim("entities\zif\dd\doublebeam.sprite");
+Zif.DetachScript("entities\zif\dd\doublebeam.sprite");
+Zif.SkipTo(202, 117);
+actor.SkipTo(180, 103);
 actor.TurnTo(DI_DOWN);
 
-actor.SubtitlesPosX = 15; //position of subtitles for your 
+actor.SubtitlesPosX = 0; //position of subtitles for your 
 actor.SubtitlesPosY = -20;
 
-Zif.SubtitlesPosX = 15; //position of subtitles for your 
+Zif_Aimless.SubtitlesPosX = 0; //position of subtitles for your 
+Zif_Aimless.SubtitlesPosY = -20;
+
+Zif.SubtitlesPosX = 0; //position of subtitles for your 
 Zif.SubtitlesPosY = -20;
 
-Zif_Phone.SubtitlesPosX = 15; //position of subtitles for your 
+Zif_Phone.SubtitlesPosX = 0; //position of subtitles for your 
 Zif_Phone.SubtitlesPosY = -20;
 
-Carol.SubtitlesPosX = 15; //position of subtitles for your 
+Zif_Phone_Left.SubtitlesPosX = 0; //position of subtitles for your 
+Zif_Phone_Left.SubtitlesPosY = -20;
+
+Zif_Left.SubtitlesPosX = 0; //position of subtitles for your 
+Zif_Left.SubtitlesPosY = -20;
+
+Carol.SubtitlesPosX = 0; //position of subtitles for your 
 Carol.SubtitlesPosY = -20;
 
-Zif_Phone.Talk("Hmm.");
+Zif.Talk("Hmm.");
+Zif.SkipTo(602, 617);
+Zif_Phone.SkipTo(202, 117);
+Game.PlaySound("sound\sound6.wav");
 Zif_Phone.PlayAnim("entities\zif\dd\phone_look.sprite");
 Zif_Phone.DetachScript("entities\zif\dd\phone_look.sprite");
-Zif_Phone.ForceTalkAnim("entities\zif\dd\phone_talk.sprite");
 Zif_Phone.Talk("Commander's log, stardate 432.1.");
-Zif_Phone.DetachScript("entities\zif\dd\phone_talk.sprite");
-Zif_Phone.ForceTalkAnim("entities\zif\dd\phone_talk.sprite");
 Zif_Phone.Talk("Arrival complete on the planet of mostly water.");
-Zif_Phone.DetachScript("entities\zif\dd\phone_talk.sprite");
 Zif_Phone.SkipTo(400, 114);
-Zif.SkipTo(188, 66);
+Zif.SkipTo(202, 117);
 
-Carol.SkipTo(36, 45);
+Carol.SkipTo(69, 102);
 Carol.PlayAnim("entities\carol\rr\walk.sprite");
 Carol.DetachScript("entities\carol\rr\walk.sprite");
+Game.PlayMusicChannel(2, "sound\sound1.wav", true);
 Carol.Talk("Are You Done In Here?");
 
-var GoToCarolX = Carol.X + 50;
-var GoToCarolY = Carol.Y + 12;
+var GoToCarolX = Carol.X + 10;
 
-actor.GoToObject(Cabinet);
-actor.GoTo(GoToCarolX, GoToCarolY);
+actor.GoTo(100, 106);
 actor.TurnTo(DI_LEFT);
+
+Zif.SkipTo(400, 114);
+Zif_Phone_Left.SkipTo(202, 117);
+Zif_Phone_Left.Talk("An indigenous lifeform.");
+Zif_Phone_Left.Talk("Ensign Zob and I shall proceed to locate the artifact.");
+Zif_Phone_Left.Talk("We shall eliminate any resistance we encounter.");
+
+Zif_Phone_Left.PlayAnim("entities\zif\ll\walk.sprite");
+Zif_Phone_Left.DetachScript("entities\zif\ll\walk.sprite");
+Zif_Phone_Left.PlayAnim("entities\zif\dd\phone_look.sprite");
+Zif_Phone_Left.DetachScript("entities\zif\dd\phone_look.sprite");
+Zif_Phone_Left.Talk("This appears to be a crude society.");
+Zif_Phone_Left.Talk("The defenses of the compound were negligible.");
+Zif_Phone_Left.Talk("I expect the relic to be in our possession shortly.");
+Zif_Left.SkipTo(Zif_Phone_Left.X, Zif_Phone_Left.Y);
+Zif_Phone_Left.SkipTo(600, 600);
+actor.Talk("What of this lifeform, sir?");
+Zif_Left.Talk("Proceed with caution.");
+Zif_Left.Talk("That may be some kind of weapon.");
+
+actor.GoTo(98, 123);
+actor.TurnTo(DI_DOWN);
+actor.Talk("I'll begin my search.");
+Zif_Left.Talk("Keep me informed, ensign.");
+
+Game.PlayMusicChannel(1, "music\music1.wav", true);
+Game.MusicCrossfade(0, 1, 3000);
 
 Game.Interactive=true;
 verb_changeMode(0);
 
-// point the "camera" at the actor
-Scene.SkipTo(actor);
+Sleep(2000);
+
+Zif_Aimless.SkipTo(Zif_Left.X, Zif_Left.Y);
+Zif_Left.SkipTo(600, 600);
+
 ////////////////////////////////////////////////////////////////////////////////
 // scene state
 global StateRoom;

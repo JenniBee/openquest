@@ -10,29 +10,29 @@ SPRITE {
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\rr\talk\00.bmp"
-    HOTSPOT {80, 50}
+    IMAGE = "entities\zif\rr\talk\00.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\rr\talk\01.bmp"
-    HOTSPOT {80, 50}
+    IMAGE = "entities\zif\rr\talk\01.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\rr\talk\02.bmp"
-    HOTSPOT {80, 50}
+    IMAGE = "entities\zif\rr\talk\02.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 180
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\rr\talk\03.bmp"
-    HOTSPOT {80, 50}
+    IMAGE = "entities\zif\rr\talk\03.bmp"
+    HOTSPOT {14, 51}
     EDITOR_SELECTED=TRUE
   }
 

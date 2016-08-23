@@ -13,6 +13,6 @@ ENTITY
   SPRITE="entities\zif\dd\stand.sprite"
   TALK="entities\zif\dd\talk.sprite"
 
-  SCRIPT="entities\zif\zif.script"
+  SCRIPT="entities\zif\zif_phone.script"
   FONT = "fonts\outline_yellow.font"
 }

@@ -87,6 +87,54 @@ on "Move"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't need to shoot that.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("Doesn't look like that takes keycards.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know what to do with those.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 on "LeftClick"
 {
   if(Command.Verb == "")
@@ -115,10 +163,7 @@ on "MouseLeave"
 
 function GoToObject()
 {
-var GoToSwitchX = Switch.X + 4;
-var GoToSwitchY = Switch.Y - 45;
-
-  actor.GoTo(GoToSwitchX, GoToSwitchY);
+  actor.GoTo(47, 111);
   actor.TurnTo(DI_LEFT);
 }
 

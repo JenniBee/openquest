@@ -5,6 +5,8 @@ global WinMenu;
 #include "interface\verbbar\verbbar_functions.inc"
 
 var verb_default = "Look at";
+var Zif_Plate = Scene.GetNode("zif_plate");
+var Zif = Scene.GetNode("zif_aimless");
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -15,7 +17,7 @@ on "LookAt"
 
   Game.Interactive=false;
 
-  actor.Talk("It's my way out. But it's locked.");
+  actor.Talk("It appears to be connected to the door mechanism.");
 
   verb_cleanBar();
 
@@ -31,9 +33,7 @@ on "TalkTo"
 
   Game.Interactive=false;
 
-  actor.Talk("Hello! Is anyone out there?");
-  Sleep(100);
-  actor.Talk("Looks like I have to find a way out myself!");
+  actor.Talk("I don't know how to communicate with that.");
 
   verb_cleanBar();
 
@@ -49,8 +49,7 @@ on "PickUp"
   
   Game.Interactive=false;
 
-  actor.Talk("Sure, I'd pick that up.");
-  actor.Talk("If only I had a chainsaw!");
+  actor.Talk("I don't need that.");
 
   verb_cleanBar();
 
@@ -66,15 +65,39 @@ on "Use"
 
   Game.Interactive=false;
 
-  actor.Talk("Yep, just as I thought. Locked.");
-  
+  if(SmelledPlate != true) actor.Talk("I don't know how to use that device.");
+
+  else if(SmelledPlate == true && ZifPlate != true)
+    {
+    actor.PlayAnim("actors\zob\rr\take.sprite");
+    actor.DetachScript("actors\zob\rr\take.sprite");
+
+    actor.Talk("Nothing happened.");  
+    actor.Talk("The two plates appear to be connected.");  
+    CanAskZif = true;
+    }
+
+  else if(ZifPlate == true)
+    {
+    Zif.Talk("I'll use the one over here.");
+    }
+
   verb_cleanBar();
 
   Game.Interactive=true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "Sniff"
+on "Give"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  
+  verb_cleanBar();
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
 
@@ -82,7 +105,24 @@ on "Sniff"
 
   Game.Interactive=false;
 
-  actor.Talk("It smells like cedar.");
+  actor.Talk("I can smell the residue left by the indigenous lifeforms.");
+  actor.Talk("It must be some kind of pressure plate.");
+  SmelledPlate = true;
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("That doesn't seem to open.");
   
   verb_cleanBar();
 
@@ -90,32 +130,17 @@ on "Sniff"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "book1"
+on "Move"
 {
-  if(Command.Verb == "Give")
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+  verb_setBar(Command.Verb + " "+self.Caption);
 
-  	GoToObject();
+  GoToObject();
 
-  	Game.Interactive=false;
+  Game.Interactive=false;
 
-  actor.Talk("I'm not giving anything to that door.");
-
-  	verb_cleanBar();
-	}
-  else
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
-
-  	GoToObject();
-
-  	Game.Interactive=false;
-
-  actor.Talk("It won't open, but throwing the letter at it won't help.");
-
-  	verb_cleanBar();
-	}
+  actor.Talk("Moving that would accomplish nothing.");
+  
+  verb_cleanBar();
 
   Game.Interactive=true;
 }
@@ -149,7 +174,7 @@ on "MouseLeave"
 
 function GoToObject()
 {
-  actor.GoTo(80, 120);
-  actor.TurnTo(DI_LEFT);
+actor.GoTo(239, 102);
+actor.TurnTo(DI_RIGHT);
 }
 

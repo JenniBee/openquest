@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
     EDITOR_SELECTED=TRUE
   }
 
@@ -19,21 +19,21 @@ SPRITE {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
 }

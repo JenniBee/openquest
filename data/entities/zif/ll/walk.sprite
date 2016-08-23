@@ -4,40 +4,135 @@
 
 SPRITE {
   NAME=""
-  LOOPING=TRUE
+  LOOPING=FALSE
   CONTINUOUS=FALSE
   PRECISE=TRUE
   FRAME {
     DELAY = 90
     MOVE {-4, 0}
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\ll\walk\00.bmp"
-    HOTSPOT {1, 1}
+    IMAGE = "entities\zif\ll\walk\00.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 90
     MOVE {-4, 0}
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\ll\walk\01.bmp"
-    HOTSPOT {1, 1}
+    IMAGE = "entities\zif\ll\walk\01.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 90
     MOVE {-4, 0}
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\ll\walk\02.bmp"
-    HOTSPOT {1, 1}
+    IMAGE = "entities\zif\ll\walk\02.bmp"
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 90
     MOVE {-4, 0}
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\ll\walk\03.bmp"
-    HOTSPOT {1, 1}
+    IMAGE = "entities\zif\ll\walk\03.bmp"
+    HOTSPOT {14, 51}
   }
 
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\00.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\01.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\02.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\03.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\01.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\02.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\03.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\01.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\02.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\03.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\01.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {-4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\ll\walk\02.bmp"
+    HOTSPOT {14, 51}
+  }
 }
 

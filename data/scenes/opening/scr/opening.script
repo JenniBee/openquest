@@ -4,7 +4,7 @@
 actor = Game.LoadActor("entities\spaceship\ship.actor");
 Game.MainObject = actor;
 
-Game.PlayMusic("music\music3.wav", true);
+Game.PlayMusicChannel(0, "music\music3.wav", true);
 
 actor.SkipTo(-50,80);
 actor.Direction = DI_RIGHT;

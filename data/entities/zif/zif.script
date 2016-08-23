@@ -6,13 +6,7 @@ global WinMenu;
 
 var verb_default = "Talk to";
 
-var Zif = Scene.GetNode("zif");
-
-Zif.SubtitlesPosX = 168; //position of subtitles for your 
-Zif.SubtitlesPosY = -20;
-
-actor.SubtitlesPosX = 168; //position of subtitles for your 
-actor.SubtitlesPosY = -20;
+var Zif = Scene.GetNode("zif_aimless");
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -28,15 +22,26 @@ on "LookAt"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Errm, no.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 on "scanner"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
   GoToObject();
   Game.Interactive=false;
 
-  Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
   Zif.Talk("You're the scientist on this team. You use it.");
-  Zif.DetachScript("entities\zif\dd\talk.sprite");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -50,9 +55,7 @@ on "Smell"
   Game.Interactive=false;
 
   actor.Talk("Is that a new cologne, sir?");
-  Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
   Zif.Talk("I thought we got past these... feelings.");
-  Zif.DetachScript("entities\zif\dd\talk.sprite");
   actor.Talk("Sorry sir.");
 
   verb_cleanBar();
@@ -66,7 +69,7 @@ on "Open"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("They don't seem to open.");
+  actor.Talk("He doesn't seem to open.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -79,7 +82,7 @@ on "Move"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("Moving them would accomplish nothing.");
+  actor.Talk("Moving him would accomplish nothing.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -92,7 +95,41 @@ on "Use"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("I don't know how to operate them.");
+  actor.Talk("I don't know how to operate him.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+if(Command.Verb == "Use")
+  {
+  actor.Talk("I don't need to shoot him.");
+  } 
+if(Command.Verb == "Give")
+  {
+  actor.Talk("And lose my advantage?");
+  }
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "keycard"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  Zif.Talk("Excellent work, Zob, a key.");
+  Zif.Talk("Keep this. Use it to infiltrate the mainframe.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -109,19 +146,22 @@ on "TalkTo"
 
   Game.Interactive = false;
 
-  Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
   Zif.Talk("Yes, ensign?");
-  Zif.DetachScript("entities\zif\dd\talk.sprite");
   
   verb_changeMode(1);
+  verb_cleanBar();
 
   var EndBranch = false;
 
   while(!EndBranch) // loop until the player ends this dialogue
   {  
     Game.AddResponse(0, "What are your orders?");
-    Game.AddResponse(1, "I'll continue my search.");
-    
+    if(CanAskZif == true)
+    {
+    Game.AddResponse(1, "I require your assistance with this opening mechanism.");
+    }
+    Game.AddResponse(2, "I'll continue my search.");
+
     var Res = Game.GetResponse(true); // automatically select last response
     
     actor.Talk(Game.LastResponse);
@@ -130,28 +170,23 @@ on "TalkTo"
     switch(Res)
     {
       case 0:
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
         Zif.Talk("Locate the stolen artifact.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
         actor.Talk("Any ideas where?");
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
         Zif.Talk("Study your surroundings.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
         Zif.Talk("Use all the cunning and guile at your disposal.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
         Zif.Talk("If you do this, you shall surely be successful.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
         actor.Talk("Guile. Right. Aye, sir.");
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
         Zif.Talk("Also, get a gun with which to shoot things.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
         break;
       case 1:
-        Zif.ForceTalkAnim("entities\zif\dd\talk.sprite");
+        Zif.Talk("Did you decipher its secrets?");
+        actor.Talk("Yes, I believe two people are required.");
+        Zif.Talk("In which case, I will follow you ensign.");
+        ZifPlate = true;
+        EndBranch = true;
+        break;        
+      case 2:
         Zif.Talk("Very good.");
-        Zif.DetachScript("entities\zif\dd\talk.sprite");
         EndBranch = true;
         break;        
     }

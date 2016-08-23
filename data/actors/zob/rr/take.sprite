@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 70
     KEYFRAME=FALSE
     IMAGE = "actors\zob\rr\take\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
     EDITOR_SELECTED=TRUE
   }
 
@@ -19,28 +19,28 @@ SPRITE {
     DELAY = 70
     KEYFRAME=FALSE
     IMAGE = "actors\zob\rr\take\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 70
     KEYFRAME=FALSE
     IMAGE = "actors\zob\rr\take\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 70
     KEYFRAME=FALSE
     IMAGE = "actors\zob\rr\take\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
     DELAY = 70
     KEYFRAME=FALSE
     IMAGE = "actors\zob\rr\take\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
 }

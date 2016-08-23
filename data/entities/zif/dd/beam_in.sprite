@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
     EDITOR_SELECTED=TRUE
   }
 
@@ -19,77 +19,77 @@ SPRITE {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\04.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\05.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\06.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\07.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\08.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\09.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\10.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 100
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\beam\11.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 }
 

@@ -8,11 +8,21 @@ var verb_default = "Talk to";
 
 var Carol = Scene.GetNode("carol");
 
-Carol.SubtitlesPosX = 168; //position of subtitles for your 
-Carol.SubtitlesPosY = -20;
+if(KnowCarol != true) self.Caption = "Lifeform";
+else if(KnowCarol == true) self.Caption = "Carol";
 
-actor.SubtitlesPosX = 168; //position of subtitles for your 
-actor.SubtitlesPosY = -20;
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("I don't need this creature.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -21,7 +31,7 @@ on "LookAt"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("My commanding officer, Commander Carol.");
+  actor.Talk("A large carbon based mammal, it seems.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -31,12 +41,36 @@ on "LookAt"
 on "scanner"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
+
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "keycard"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
   GoToObject();
   Game.Interactive=false;
 
-  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-  Carol.Talk("You're the scientist on this team. You use it.");
-  Carol.DetachScript("entities\Carol\dd\talk.sprite");
+  Carol.Talk("I see you've got mainframe clearance.");
+  Carol.Talk("I'm going to be dusting in there soon.");
+  Carol.Talk("Try and keep it tidy.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -49,11 +83,21 @@ on "Smell"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("Is that a new cologne, sir?");
-  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-  Carol.Talk("I thought we got past these... feelings.");
-  Carol.DetachScript("entities\Carol\dd\talk.sprite");
-  actor.Talk("Sorry sir.");
+  actor.Talk("This creature has an overwhelming pungent smell.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Terminating this lifeform could attract unwarranted attention.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -66,7 +110,7 @@ on "Open"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("They don't seem to open.");
+  actor.Talk("The lifeform doesn't seem to open.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -79,7 +123,7 @@ on "Move"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("Moving them would accomplish nothing.");
+  actor.Talk("The lifeform is surprisingly sturdy. I don't believe I can use force.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -92,7 +136,7 @@ on "Use"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("I don't know how to operate them.");
+  actor.Talk("I don't know how to operate this lifeform.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -109,18 +153,36 @@ on "TalkTo"
 
   Game.Interactive = false;
 
-  Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-  Carol.Talk("Yes, ensign?");
-  Carol.DetachScript("entities\Carol\dd\talk.sprite");
-  
+if(KnowCarol != true)
+  {
+  actor.Talk("Speak lifeform!");
+  actor.Talk("Is this translation matrix working?");
+  Carol.Talk("You're that guy from accounts right?");
+  }
+else
+  {
+  actor.Talk("Greetings Carol.");
+  Carol.Talk("You again?");
+  }
+
+  verb_cleanBar();
   verb_changeMode(1);
 
   var EndBranch = false;
 
   while(!EndBranch) // loop until the player ends this dialogue
   {  
-    Game.AddResponse(0, "What are your orders?");
-    Game.AddResponse(1, "I'll continue my search.");
+    Game.AddResponseOnce(0, "What is your designation?");
+    Game.AddResponse(1, "Stand aside, I need to pass.");
+    if(KnowCarol == true)
+    {
+    Game.AddResponseOnce(2, "What is located through that passageway?");
+    }
+    if(PlantAsk == true)
+    {
+    Game.AddResponseOnce(4, "May I move this plant?");
+    }
+    Game.AddResponse(5, "As you were.");
     
     var Res = Game.GetResponse(true); // automatically select last response
     
@@ -130,28 +192,35 @@ on "TalkTo"
     switch(Res)
     {
       case 0:
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("Locate the stolen artifact.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
-        actor.Talk("Any ideas where?");
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("Study your surroundings.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("Use all the cunning and guile at your disposal.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("If you do this, you shall surely be successful.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
-        actor.Talk("Guile. Right. Aye, sir.");
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("Also, get a gun with which to shoot things.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        Carol.Talk("What are you on about?");
+        actor.Talk("How are you addressed by a superior officer?");
+        Carol.Talk("Carol.");
+        actor.Talk("Greetings Carol.");
+        KnowCarol = true;
         break;
       case 1:
-        Carol.ForceTalkAnim("entities\Carol\dd\talk.sprite");
-        Carol.Talk("Very good.");
-        Carol.DetachScript("entities\Carol\dd\talk.sprite");
+        Carol.Talk("I just cleaned down there. You'll get the floor dirty.");
+        actor.Talk("In which case, I shall remain here.");
+        break;
+      case 2:
+        Carol.Talk("Err.. reception, canteen...");
+        actor.Talk("Any stolen relics within those realms?");
+        Carol.Talk("Do you mean that tea maker they installed?");
+        actor.Talk("No.");
+        Carol.Talk("Dunno then.");
+        Game.AddResponse(3, "Look behind you, a three headed monkey!");
+        break;
+      case 3:
+        Carol.Talk("Yeah, that's Terry.");
+        Carol.Talk("He works in HR.");
+        break;
+      case 4:
+        Carol.Talk("I haven't cleaned down there yet.");
+        actor.Talk("Then by moving the plant, I am providing assistance.");
+        Carol.Talk("Oh, yeah. Go on then.");
+        PlantPermission = true; 
+        break;
+      case 5:
         EndBranch = true;
         break;        
     }

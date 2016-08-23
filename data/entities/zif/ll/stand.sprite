@@ -8,10 +8,10 @@ SPRITE {
   CONTINUOUS=FALSE
   PRECISE=TRUE
   FRAME {
-    DELAY = 0
+    DELAY = 2000
     KEYFRAME=FALSE
-    IMAGE = "actors\zob\ll\talk\00.bmp"
-    HOTSPOT {80, 50}
+    IMAGE = "entities\zif\ll\talk\00.bmp"
+    HOTSPOT {14, 51}
     EDITOR_SELECTED=TRUE
   }
 

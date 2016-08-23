@@ -30,6 +30,17 @@ SCENE {
   EDITOR_SHOW_SCALE=TRUE
   
   ; ----- waypoints
+  WAYPOINTS {
+    NAME="aroundcarol"
+    EDITOR_SELECTED=FALSE
+    EDITOR_SELECTED_POINT=-1
+    POINT {146,106}
+    POINT {105,106}
+    POINT {109,86}
+    POINT {83,84}
+    POINT {77,89}
+    POINT {105,93}
+  }
   
   ; ----- layers
   LAYER {
@@ -56,19 +67,51 @@ SCENE {
     }
 
     ENTITY {
-      NAME="carol"
-      CAPTION="Carol"
+      NAME="plant"
+      CAPTION="Plant"
       ACTIVE=TRUE
-      X=680
-      Y=124
+      X=107
+      Y=58
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
       EDITOR_SELECTED=FALSE
       WALK_TO_X=0
       WALK_TO_Y=0
-      SCRIPT="entities\carol\carol.script"
-      SPRITE="entities\carol\rr\vacuum.sprite"
+      SCRIPT="scenes\room\scr\plant.script"
+      SPRITE="scenes\room\sprites\plant.bmp"
+    }
+
+    ENTITY {
+      NAME="plant_moved"
+      CAPTION="Plant"
+      ACTIVE=TRUE
+      X=722
+      Y=191
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\plant.script"
+      SPRITE="scenes\room\sprites\plant_moved.bmp"
+    }
+
+    ENTITY {
+      NAME="ammunition"
+      CAPTION="Ammunition"
+      ACTIVE=TRUE
+      X=803
+      Y=275
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\ammunition.script"
+      SPRITE="scenes\room\sprites\ammunition.bmp"
     }
 
   }
@@ -80,7 +123,22 @@ SCENE {
     WIDTH=320
     HEIGHT=170
     ACTIVE=TRUE
-    EDITOR_SELECTED=TRUE
+    EDITOR_SELECTED=FALSE
+    ENTITY {
+      NAME="door"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=260
+      Y=44
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="scenes\room\sprites\door.bmp"
+    }
+
     ENTITY {
       NAME="switch"
       CAPTION="Light switch"
@@ -175,59 +233,107 @@ SCENE {
       ALPHA_COLOR { 255,255,255 }
       ALPHA = 255
       EDITOR_SELECTED=FALSE
-      POINT {76,38}
-      POINT {116,39}
-      POINT {109,58}
-      POINT {228,54}
-      POINT {272,85}
-      POINT {18,84}
+      POINT {80,80}
+      POINT {118,81}
+      POINT {113,100}
+      POINT {169,99}
+      POINT {242,97}
+      POINT {289,127}
+      POINT {23,126}
     }
 
-    ENTITY {
-      NAME="zif"
-      CAPTION="Commander Zif"
-      ACTIVE=TRUE
-      X=628
-      Y=83
-      SCALABLE=FALSE
-      INTERACTIVE=TRUE
-      COLORABLE=FALSE
-      EDITOR_SELECTED=FALSE
-      WALK_TO_X=0
-      WALK_TO_Y=0
-      SCRIPT="entities\zif\zif.script"
-      SPRITE="entities\zif\dd\stand.sprite"
-    }
-
-    ENTITY {
-      NAME="zif_phone"
-      CAPTION="Commander Zif"
-      ACTIVE=TRUE
-      X=627
-      Y=341
-      SCALABLE=FALSE
-      INTERACTIVE=TRUE
-      COLORABLE=FALSE
-      EDITOR_SELECTED=TRUE
-      WALK_TO_X=0
-      WALK_TO_Y=0
-      SCRIPT="entities\zif\zif_phone.script"
-      SPRITE="entities\zif\dd\phone_stand.sprite"
-    }
-
-    ENTITY {
-      NAME="door"
+    REGION {
+      NAME="blockedcarol"
       CAPTION=""
+      BLOCKED=TRUE
+      DECORATION=FALSE
       ACTIVE=TRUE
-      X=260
-      Y=44
-      SCALABLE=FALSE
+      SCALE=0
+      ALPHA_COLOR { 255,255,255 }
+      ALPHA = 255
+      EDITOR_SELECTED=FALSE
+      POINT {65,92}
+      POINT {96,97}
+      POINT {88,107}
+      POINT {54,104}
+    }
+
+    ENTITY {
+      NAME="board"
+      CAPTION="Bulletin Board"
+      ACTIVE=TRUE
+      X=72
+      Y=63
+      SCALABLE=TRUE
       INTERACTIVE=TRUE
-      COLORABLE=FALSE
+      COLORABLE=TRUE
       EDITOR_SELECTED=FALSE
       WALK_TO_X=0
       WALK_TO_Y=0
-      SPRITE="scenes\room\sprites\door.bmp"
+      SCRIPT="scenes\room\scr\board.script"
+      REGION {
+        NAME="<unnamed>"
+        CAPTION=""
+        ACTIVE=TRUE
+        EDITOR_SELECTED_POINT=-1
+        POINT {67,42}
+        POINT {78,44}
+        POINT {76,60}
+        POINT {66,63}
+      }
+
+    }
+
+    ENTITY {
+      NAME="plate"
+      CAPTION="Plate"
+      ACTIVE=TRUE
+      X=250
+      Y=79
+      SCALABLE=TRUE
+      INTERACTIVE=TRUE
+      COLORABLE=TRUE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\plate.script"
+      REGION {
+        NAME="<unnamed>"
+        CAPTION=""
+        ACTIVE=TRUE
+        EDITOR_SELECTED_POINT=-1
+        POINT {245,62}
+        POINT {254,64}
+        POINT {255,79}
+        POINT {248,79}
+      }
+
+    }
+
+    ENTITY {
+      NAME="outlet"
+      CAPTION="Power socket"
+      ACTIVE=TRUE
+      X=222
+      Y=90
+      SCALABLE=TRUE
+      INTERACTIVE=TRUE
+      COLORABLE=TRUE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\outlet.script"
+      REGION {
+        NAME="<unnamed>"
+        CAPTION=""
+        ACTIVE=TRUE
+        EDITOR_SELECTED_POINT=-1
+        POINT {215,81}
+        POINT {229,82}
+        POINT {229,90}
+        POINT {217,89}
+      }
+
     }
 
   }
@@ -236,4 +342,130 @@ SCENE {
   ; ----- rotation levels
   
   ; ----- free entities
+  ENTITY {
+    NAME="carol"
+    CAPTION="Carol"
+    ACTIVE=TRUE
+    X=668
+    Y=159
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\carol\carol.script"
+    SPRITE="entities\carol\rr\vacuum.sprite"
+    FONT="fonts\outline_blue.font"
+  }
+
+  ENTITY {
+    NAME="zif_aimless"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=792
+    Y=83
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif.script"
+    SCRIPT="scenes\room\scr\checkzif.script"
+    SPRITE="entities\zif\aimless.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\dd\talk.sprite"
+  }
+
+  ENTITY {
+    NAME="zif"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=628
+    Y=83
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif.script"
+    SPRITE="entities\zif\dd\stand.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\dd\talk.sprite"
+  }
+
+  ENTITY {
+    NAME="zif_left"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=677
+    Y=341
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif_phone.script"
+    SPRITE="entities\zif\ll\stand.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\ll\talk.sprite"
+  }
+
+  ENTITY {
+    NAME="zif_phone"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=627
+    Y=341
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif_phone.script"
+    SPRITE="entities\zif\dd\phone_stand.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\dd\phone_talk.sprite"
+  }
+
+  ENTITY {
+    NAME="zif_phone_left"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=723
+    Y=340
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif_phone.script"
+    SPRITE="entities\zif\ll\phone_stand.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\ll\phone_talk.sprite"
+  }
+
+  ENTITY {
+    NAME="zif_plate"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=971
+    Y=341
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=TRUE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif_phone.script"
+    SPRITE="entities\zif\rr\loopwalk.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\dd\talk.sprite"
+  }
+
 }

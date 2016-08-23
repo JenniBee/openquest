@@ -3,16 +3,16 @@ RESPONSE_BOX
   FONT = "fonts\outline_white.font"
   FONT_HOVER = "fonts\outline_white.font"
   HORIZONTAL = FALSE
-  SPACING = 2
+  SPACING = 1
 
   AREA {16, 0, 300, 68}
 
   WINDOW
   {    
     X = 0
-    Y = 114
+    Y = 130
     WIDTH = 310
-    HEIGHT = 42
+    HEIGHT = 70
 
     BUTTON
     {

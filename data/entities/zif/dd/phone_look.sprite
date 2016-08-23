@@ -11,35 +11,35 @@ SPRITE {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\04.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\05.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
   FRAME {
     DELAY = 400
     KEYFRAME=FALSE
     IMAGE = "entities\zif\dd\phone\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {14, 51}
   }
 
 }

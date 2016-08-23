@@ -16,7 +16,7 @@ on "LookAt"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("It looks really nice.");
+  actor.Talk("Some kind of containing vessel for multiple instances of parchment.");
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -29,10 +29,17 @@ on "PickUp"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("I can't rip it out of the wall!");
+  actor.Talk("I don't need that.");
 
   verb_cleanBar();
   Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Give"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  verb_cleanBar();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,8 +48,44 @@ on "Use"
   verb_setBar(Command.Verb + " "+self.Caption);
   GoToObject();
   Game.Interactive=false;
+  actor.TurnTo(DI_UP);
 
-  actor.Talk("Hey! This is just a painting!");
+  if(CabinetChecked == true && CabinetOpen != true)
+    {
+    actor.Talk("I'll look in here, I think.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound4.wav");
+    CabClosed.SkipTo(400, 114);
+    CabOpen.SkipTo(127, 50);
+    actor.Talk("Nothing else in here.");
+    CabinetOpen = true;
+    }
+
+  else if(CabinetChecked == true && CabinetOpen == true)
+    {
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound3.wav");
+    CabOpen.SkipTo(400, 114);
+    CabClosed.SkipTo(127, 50);
+    CabinetOpen = false;
+    }
+
+  else
+    {
+    actor.Talk("I'll look in here, I think.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound4.wav");
+    CabClosed.SkipTo(400, 114);
+    CabOpen.SkipTo(127, 50);
+    actor.Talk("There appears to be a small sidearm in this container");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.TakeItem("gun");
+    actor.Talk("and a plastic card containing some kind of circuitry.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.TakeItem("keycard");
+    CabinetChecked = true;
+    CabinetOpen = true;
+    }
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -55,17 +98,41 @@ on "Open"
   GoToObject();
   Game.Interactive=false;
   actor.TurnTo(DI_UP);
-  actor.Talk("I'll look in here, I think.");
-  actor.PlayAnim("actors\zob\uu\take.sprite");
-  Game.PlaySound("sound\sound4.wav");
-  CabClosed.SkipTo(400, 114);
-  CabOpen.SkipTo(127, 50);
-  actor.Talk("There appears to be a small sidearm in this container");
-  actor.PlayAnim("actors\zob\uu\take.sprite");
-  Game.TakeItem("gun");
-  actor.Talk("and a plastic card containing some kind of circuitry.");
-  actor.PlayAnim("actors\zob\uu\take.sprite");
-  Game.TakeItem("keycard");
+
+  if(CabinetChecked == true && CabinetOpen != true)
+    {
+    actor.Talk("I'll look in here, I think.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound4.wav");
+    CabClosed.SkipTo(400, 114);
+    CabOpen.SkipTo(127, 50);
+    actor.Talk("Nothing else in here.");
+    CabinetOpen = true;
+    }
+  else if(CabinetChecked == true && CabinetOpen == true)
+    {
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound3.wav");
+    CabOpen.SkipTo(400, 114);
+    CabClosed.SkipTo(127, 50);
+    CabinetOpen = false;
+    }
+  else
+    {
+    actor.Talk("I'll look in here, I think.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.PlaySound("sound\sound4.wav");
+    CabClosed.SkipTo(400, 114);
+    CabOpen.SkipTo(127, 50);
+    actor.Talk("There appears to be a small sidearm in this container");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.TakeItem("gun");
+    actor.Talk("and a plastic card containing some kind of circuitry.");
+    actor.PlayAnim("actors\zob\uu\take.sprite");
+    Game.TakeItem("keycard");
+    CabinetChecked = true;
+    CabinetOpen = true;
+    }
 
   verb_cleanBar();
   Game.Interactive=true;
@@ -78,46 +145,86 @@ on "TalkTo"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("It's pointless. No one can hear me.");
+  actor.Talk("I don't know how to communicate with that.");
 
   verb_cleanBar();
   Game.Interactive=true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "letter"
+on "Smell"
 {
-  if(Command.Verb == "Give")
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
 
-  	GoToObject();
+  actor.Talk("That has no odour.");
 
-  	Game.Interactive=false;
+  verb_cleanBar();
+  Game.Interactive=true;
+}
 
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("I wish I could cram this letter in there.");
-  actor.Talk("But I can't.");
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
 
-  	verb_cleanBar();
-	}
-  else
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+  actor.Talk("Moving that would accomplish nothing.");
 
-  	GoToObject();
+  verb_cleanBar();
+  Game.Interactive=true;
+}
 
-  	Game.Interactive=false;
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
 
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("I wish I could cram this letter in there.");
-  actor.Talk("But I can't.");
+  GoToObject();
 
-  	verb_cleanBar();
-	}
+  Game.Interactive=false;
+
+  actor.Talk("I don't need to shoot that.");
+  
+  verb_cleanBar();
 
   Game.Interactive=true;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("Doesn't look like that takes keycards.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know what to do with those.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 on "LeftClick"
 {
@@ -128,6 +235,6 @@ on "LeftClick"
 ////////////////////////////////////////////////////////////////////////////////
 function GoToObject()
 {
-  actor.GoTo(128, 67);
+  actor.GoTo(141, 107);
   actor.TurnTo(DI_UP);
 }

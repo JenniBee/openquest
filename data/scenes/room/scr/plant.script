@@ -1,0 +1,247 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Look at";
+
+var Carol = Scene.GetNode("carol");
+var Plant = Scene.GetNode("plant");
+var PlantMoved = Scene.GetNode("plant_moved");
+var Ammunition = Scene.GetNode("ammunition");
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  if(PlantPermission == true && PlantAsk != true)
+  {
+    actor.Talk("This plant appears to be undergoing photosynthesis.");
+  }
+
+  else
+  {
+    actor.Talk("There is a small object behind this plant beyond reach.");
+    PlantChecked = true;
+  }
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know how to communicate with that.");
+
+  verb_cleanBar();
+
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+  
+  Game.Interactive=false;
+
+  actor.Talk("I don't need that.");
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know how to operate that.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Give"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  
+  verb_cleanBar();
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("That has no odour.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("That doesn't seem to open.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Move"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  if(PlantChecked != true && PlantPermission != true)
+  {
+  actor.Talk("Moving that would accomplish nothing.");
+  }
+  else if(PlantChecked == true && PlantPermission != true)
+  {
+  Carol.Talk("Hey, I haven't cleaned there yet!");
+  PlantAsk = true;
+  }
+  else if(PlantPermission == true && PlantAsk == true)
+  {
+  actor.PlayAnim("actors\zob\rr\take.sprite");
+  actor.DetachScript("actors\zob\rr\take.sprite");
+  Game.PlaySound("sound\sound7.wav");
+  Plant.SkipTo(600, 600);
+  PlantMoved.SkipTo(114, 54);
+  Ammunition.SkipTo(111, 86);
+  actor.Talk("There seems to be a small box down there.");
+  PlantAsk = false;
+  }
+  else if(PlantPermission == true && PlantAsk != true)
+  {
+  actor.Talk("It's fine over there.");
+  }
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't need to shoot that.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("Doesn't look like that takes keycards.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("I don't know what to do with those.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  if(Command.Verb == "")
+  {
+    GoToObject();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover("Look at");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}
+
+function GoToObject()
+{
+actor.GoTo(96, 95);
+actor.TurnTo(DI_RIGHT);
+}
+

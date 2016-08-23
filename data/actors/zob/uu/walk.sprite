@@ -12,7 +12,7 @@ SPRITE {
     MOVE {0, -6}
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\walk\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
     EDITOR_SELECTED=TRUE
   }
 
@@ -21,7 +21,7 @@ SPRITE {
     MOVE {0, -6}
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\walk\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
@@ -29,7 +29,7 @@ SPRITE {
     MOVE {0, -6}
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\walk\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
@@ -37,7 +37,7 @@ SPRITE {
     MOVE {0, -6}
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\walk\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
   FRAME {
@@ -45,7 +45,7 @@ SPRITE {
     MOVE {0, -6}
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\walk\04.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
   }
 
 }

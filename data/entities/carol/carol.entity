@@ -14,5 +14,5 @@ ENTITY
   TALK="entities\carol\rr\talk.sprite"
 
   SCRIPT="entities\carol\carol.script"
-  FONT = "fonts\outline_yellow.font"
+  FONT = "fonts\outline_blue.font"
 }

@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 180
     KEYFRAME=FALSE
     IMAGE = "actors\zob\uu\talk\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {12, 45}
     EDITOR_SELECTED=TRUE
   }
 
