@@ -1,0 +1,160 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "Look at";
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("It's my way out. But it's locked.");
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.Talk("Hello! Is anyone out there?");
+  Sleep(100);
+  actor.Talk("Looks like I have to find a way out myself!");
+
+  verb_cleanBar();
+
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+  
+  Game.Interactive=false;
+
+  actor.TurnTo(DI_DOWN);
+  actor.Talk("Sure, I'd pick that up.");
+  actor.Talk("If only I had a chainsaw!");
+
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.TurnTo(DI_DOWN);
+  actor.Talk("Yep, just as I thought. Locked.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Sniff"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+
+  GoToObject();
+
+  Game.Interactive=false;
+
+  actor.TurnTo(DI_DOWN);
+  actor.Talk("It smells like cedar.");
+  
+  verb_cleanBar();
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "book1"
+{
+  if(Command.Verb == "Give")
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("I'm not giving anything to that door.");
+
+  	verb_cleanBar();
+	}
+  else
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("It won't open, but throwing the letter at it won't help.");
+
+  	verb_cleanBar();
+	}
+
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  if(Command.Verb == "")
+  {
+    GoToObject();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
+{
+  verb_apply(verb_default);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
+{
+  verb_hover("Look at");
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}
+
+function GoToObject()
+{
+  actor.GoTo(80, 120);
+  actor.TurnTo(DI_UPLEFT);
+}
+

@@ -4,9 +4,9 @@ global WinMenu;
 
 #include "interface\verbbar\verbbar_functions.inc"
 
-var verb_default = "Talk to";
-
 var Zif = Scene.GetNode("zif_aimless");
+
+var verb_default = "Talk to";
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -19,6 +19,7 @@ on "LookAt"
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -32,6 +33,7 @@ on "batteries"
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,6 +75,7 @@ on "Open"
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,6 +89,7 @@ on "Move"
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +103,7 @@ on "Use"
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -119,6 +124,7 @@ if(Command.Verb == "Give")
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,7 +164,7 @@ on "TalkTo"
     Game.AddResponse(0, "What are your orders?");
     if(CanAskZif == true)
     {
-    Game.AddResponse(1, "I require your assistance with this opening mechanism.");
+    Game.AddResponseOnce(1, "I require your assistance with this opening mechanism.");
     }
     Game.AddResponse(2, "I'll continue my search.");
 
@@ -203,6 +209,7 @@ on "LeftClick"
   if(Command.Verb == "")
   {
     GoToObject();
+
   }
 }
 
@@ -226,7 +233,7 @@ on "MouseLeave"
 
 function GoToObject()
 {
-var GoToZifX = Zif.X - 20;
+var GoToZifX = Zif.X - 30;
 
   actor.GoTo(GoToZifX, Zif.Y);
   actor.TurnTo(DI_RIGHT);

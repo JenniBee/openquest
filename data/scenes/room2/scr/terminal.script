@@ -1,0 +1,105 @@
+#include "scripts\base.inc"
+
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
+var verb_default = "LookAt";
+
+////////////////////////////////////////////////////////////////////////////////
+on "LookAt"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("It's the way back.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "PickUp"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("I don't think carrying around a door is going to help.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+on "Use"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Yep. Locked from this side too.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Hey! Noname! Can you hear me?");
+  actor.Talk("Guess not.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+on "letter"
+{
+  if(Command.Verb == "Give")
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("I wish I could cram this letter in there.");
+  actor.Talk("But I can't.");
+
+  	verb_cleanBar();
+	}
+  else
+	{
+	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+
+  	GoToObject();
+
+  	Game.Interactive=false;
+
+  	actor.TurnTo(DI_DOWN);
+  actor.Talk("I wish I could cram this letter in there.");
+  actor.Talk("But I can't.");
+
+  	verb_cleanBar();
+	}
+
+  Game.Interactive=true;
+}
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+  GoToObject();
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+function GoToObject()
+{
+  actor.GoTo(300, 120);
+  actor.TurnTo(DI_UPRIGHT);
+}

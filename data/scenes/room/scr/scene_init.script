@@ -7,6 +7,7 @@ global WinMenu;
 ////////////////////////////////////////////////////////////////////////////////
 
 var Zif_Aimless = Scene.GetNode("zif_aimless");
+
 var Zif_Phone_Left = Scene.GetNode("zif_phone_left");
 var Zif_Phone = Scene.GetNode("zif_phone");
 var Zif = Scene.GetNode("zif");
@@ -15,8 +16,34 @@ var Zif_Left = Scene.GetNode("zif_left");
 var Cabinet = Scene.GetNode("cabinet");
 var Carol = Scene.GetNode("carol");
 
-actor.Active=false;
+var Door = Scene.GetNode("door");
+var DoorClosed = Scene.GetNode("closed_door");
+var GreenLight = Scene.GetNode("greenlight");
 
+actor.SubtitlesPosX = 0; 
+actor.SubtitlesPosY = -20;
+
+Zif_Aimless.SubtitlesPosX = 0;  
+Zif_Aimless.SubtitlesPosY = -20;
+
+Zif.SubtitlesPosX = 0; 
+Zif.SubtitlesPosY = -20;
+
+Zif_Phone.SubtitlesPosX = 0; 
+Zif_Phone.SubtitlesPosY = -20;
+
+Zif_Phone_Left.SubtitlesPosX = 0; 
+Zif_Phone_Left.SubtitlesPosY = -20;
+
+Zif_Left.SubtitlesPosX = 0; 
+Zif_Left.SubtitlesPosY = -20;
+
+Carol.SubtitlesPosX = 0; 
+Carol.SubtitlesPosY = -20;
+
+if(PlatePressed != true)
+{
+actor.Active=false;
 actor = Game.LoadActor("actors\zob\zob.actor");
 Game.MainObject = actor;
 actor.SkipTo(400, 114);
@@ -27,6 +54,10 @@ Carol.SkipTo(400, 114);
 Scene.SkipTo(actor);
 
 actor.Active=true;
+
+actor.SubtitlesPosX = 0; 
+actor.SubtitlesPosY = -20;
+
 Game.Interactive=false;
 
 Sleep(500);
@@ -37,27 +68,6 @@ Zif.DetachScript("entities\zif\dd\doublebeam.sprite");
 Zif.SkipTo(202, 117);
 actor.SkipTo(180, 103);
 actor.TurnTo(DI_DOWN);
-
-actor.SubtitlesPosX = 0; //position of subtitles for your 
-actor.SubtitlesPosY = -20;
-
-Zif_Aimless.SubtitlesPosX = 0; //position of subtitles for your 
-Zif_Aimless.SubtitlesPosY = -20;
-
-Zif.SubtitlesPosX = 0; //position of subtitles for your 
-Zif.SubtitlesPosY = -20;
-
-Zif_Phone.SubtitlesPosX = 0; //position of subtitles for your 
-Zif_Phone.SubtitlesPosY = -20;
-
-Zif_Phone_Left.SubtitlesPosX = 0; //position of subtitles for your 
-Zif_Phone_Left.SubtitlesPosY = -20;
-
-Zif_Left.SubtitlesPosX = 0; //position of subtitles for your 
-Zif_Left.SubtitlesPosY = -20;
-
-Carol.SubtitlesPosX = 0; //position of subtitles for your 
-Carol.SubtitlesPosY = -20;
 
 Zif.Talk("Hmm.");
 Zif.SkipTo(602, 617);
@@ -108,13 +118,29 @@ Zif_Left.Talk("Keep me informed, ensign.");
 Game.PlayMusicChannel(1, "music\music1.wav", true);
 Game.MusicCrossfade(0, 1, 3000);
 
-Game.Interactive=true;
-verb_changeMode(0);
-
-Sleep(2000);
-
 Zif_Aimless.SkipTo(Zif_Left.X, Zif_Left.Y);
 Zif_Left.SkipTo(600, 600);
+Sleep(500);
+
+verb_changeMode(0);
+Game.Interactive=true;
+
+Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
+}
+
+if(PlatePressed == true)
+{
+Game.PlayMusicChannel(2, "sound\sound1.wav", true);
+actor.SkipTo(259, 110);
+actor.TurnTo(DI_LEFT);
+Carol.SkipTo(69, 102);
+GreenLight.SkipTo(268, 38);
+DoorClosed.SkipTo(600, 600); 
+Door.SkipTo(260, 44);
+Zif_Aimless.DetachScript("entities\zif\aimless.sprite");
+Zif_Aimless.SkipTo(144, 117);
+Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // scene state

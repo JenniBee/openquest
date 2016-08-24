@@ -1,0 +1,20 @@
+#include "scripts\base.inc"
+
+////////////////////////////////////////////////////////////////////////////////
+actor.SkipTo(87, 100);
+actor.Direction = DI_RIGHT;
+actor.SubtitlesPosX = 0; //position of subtitles for your actor
+actor.SubtitlesPosY = -20;
+
+// point the "camera" at the actor
+Scene.SkipTo(actor);
+
+Game.StopMusicChannel(2);
+
+if(StateRoom2 != true)
+{
+Game.StopMusicChannel(0);
+Game.PlayMusicChannel(0, "music\music2.wav", true);
+Game.MusicCrossfade(1, 0, 3000);
+StateRoom2 = true;
+}

@@ -86,8 +86,8 @@ SCENE {
       NAME="plant_moved"
       CAPTION="Plant"
       ACTIVE=TRUE
-      X=722
-      Y=191
+      X=122
+      Y=257
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
@@ -102,8 +102,8 @@ SCENE {
       NAME="ammunition"
       CAPTION="Ammunition"
       ACTIVE=TRUE
-      X=803
-      Y=275
+      X=152
+      Y=261
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
@@ -125,7 +125,7 @@ SCENE {
     ACTIVE=TRUE
     EDITOR_SELECTED=FALSE
     ENTITY {
-      NAME="door"
+      NAME="closed_door"
       CAPTION=""
       ACTIVE=TRUE
       X=260
@@ -136,7 +136,38 @@ SCENE {
       EDITOR_SELECTED=FALSE
       WALK_TO_X=0
       WALK_TO_Y=0
-      SPRITE="scenes\room\sprites\door.bmp"
+      SPRITE="entities\door\sprites\00.bmp"
+    }
+
+    ENTITY {
+      NAME="greenlight"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=159
+      Y=232
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="scenes\room\sprites\greenlight.bmp"
+    }
+
+    ENTITY {
+      NAME="door"
+      CAPTION="Secret Room"
+      ACTIVE=TRUE
+      X=77
+      Y=288
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\door.script"
+      SPRITE="entities\door\sprites\05.bmp"
     }
 
     ENTITY {
@@ -211,8 +242,8 @@ SCENE {
       NAME="cabinet_open"
       CAPTION="Cabinet"
       ACTIVE=TRUE
-      X=632
-      Y=207
+      X=109
+      Y=302
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
@@ -346,12 +377,12 @@ SCENE {
     NAME="carol"
     CAPTION="Carol"
     ACTIVE=TRUE
-    X=668
-    Y=159
+    X=80
+    Y=259
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
-    EDITOR_SELECTED=FALSE
+    EDITOR_SELECTED=TRUE
     WALK_TO_X=0
     WALK_TO_Y=0
     SCRIPT="entities\carol\carol.script"
@@ -363,8 +394,8 @@ SCENE {
     NAME="zif_aimless"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=792
-    Y=83
+    X=185
+    Y=357
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -373,7 +404,7 @@ SCENE {
     WALK_TO_Y=0
     SCRIPT="entities\zif\zif.script"
     SCRIPT="scenes\room\scr\checkzif.script"
-    SPRITE="entities\zif\aimless.sprite"
+    SPRITE="entities\zif\ll\stand.sprite"
     FONT="fonts\outline_yellow.font"
       TALK="entities\zif\dd\talk.sprite"
   }
@@ -382,8 +413,8 @@ SCENE {
     NAME="zif"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=628
-    Y=83
+    X=226
+    Y=356
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -400,8 +431,8 @@ SCENE {
     NAME="zif_left"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=677
-    Y=341
+    X=176
+    Y=354
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -418,8 +449,8 @@ SCENE {
     NAME="zif_phone"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=627
-    Y=341
+    X=211
+    Y=359
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -436,8 +467,8 @@ SCENE {
     NAME="zif_phone_left"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=723
-    Y=340
+    X=199
+    Y=356
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -454,16 +485,16 @@ SCENE {
     NAME="zif_plate"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=971
-    Y=341
+    X=168
+    Y=356
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
-    EDITOR_SELECTED=TRUE
+    EDITOR_SELECTED=FALSE
     WALK_TO_X=0
     WALK_TO_Y=0
-    SCRIPT="entities\zif\zif_phone.script"
-    SPRITE="entities\zif\rr\loopwalk.sprite"
+    SCRIPT="scenes\room\scr\gotopanel.script"
+    SPRITE="entities\zif\rr\stand.sprite"
     FONT="fonts\outline_yellow.font"
       TALK="entities\zif\dd\talk.sprite"
   }

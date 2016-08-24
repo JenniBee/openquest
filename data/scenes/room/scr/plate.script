@@ -80,6 +80,9 @@ on "Use"
   else if(ZifPlate == true)
     {
     Zif.Talk("I'll use the one over here.");
+    Zif_Plate.SkipTo(Zif.X, Zif.Y);
+    Zif.SkipTo(600, 600);
+    Zif_Plate.PlayAnim("entities\zif\rr\longwalk.sprite");
     }
 
   verb_cleanBar();

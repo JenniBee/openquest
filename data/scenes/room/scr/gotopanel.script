@@ -1,0 +1,42 @@
+#include "scripts\base.inc"
+ 
+while(true)
+{
+  if(this.X >= 270 && PlatePressed != true)
+  {
+     var Door = Scene.GetNode("door");
+     var DoorClosed = Scene.GetNode("closed_door");
+     var GreenLight = Scene.GetNode("greenlight");
+     var Zif = Scene.GetNode("zif_aimless");
+
+     this.SubtitlesPosX = 0; 
+     this.SubtitlesPosY = -20;
+
+     Game.Interactive=false;
+     var moveback = this.Y;
+     this.SkipTo(269, moveback);
+     this.PlayAnim("entities\zif\dd\shortwalk.sprite");
+     this.SkipTo(239, 81);
+
+     actor.Active = false;
+     Game.PlaySound("sound\sound9.wav");
+     this.PlayAnim("actors\zob\rr\doublepress.sprite");
+     actor.Active = true;
+     Game.PlaySound("sound\sound10.wav");
+     this.SkipTo(269, moveback + 4);
+     GreenLight.SkipTo(268, 38);
+     DoorClosed.SkipTo(600, 600); 
+     Door.SkipTo(260, 44);
+     this.Talk("Continue your investigation.");
+     Zif.SkipTo(this.X, this.Y);
+     this.SkipTo(600, 600);
+     Game.Interactive=true;
+     PlatePressed = true;
+     Zif.PlayAnim("entities\zif\ll\stand.sprite");
+     Zif.PlayAnim("entities\zif\ll\walk.sprite");
+     Zif.PlayAnim("entities\zif\ll\walk.sprite");
+     Zif.PlayAnim("entities\zif\aimless.sprite");
+  }
+
+Sleep(20);
+}

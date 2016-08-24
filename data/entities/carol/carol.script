@@ -260,9 +260,6 @@ on "MouseLeave"
 
 function GoToObject()
 {
-var GoToCarolX = Carol.X + 50;
-var GoToCarolY = Carol.Y + 12;
-
-  actor.GoTo(GoToCarolX, GoToCarolY);
+  actor.GoTo(100, 106);
   actor.TurnTo(DI_LEFT);
 }

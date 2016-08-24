@@ -25,3 +25,5 @@ global LoadedWeapon; // Check if gun is loaded
 global SmelledPlate; // Check if Zob smelled the plate
 global CanAskZif; // Check if Zob knows the plates are connected
 global ZifPlate; // Check if Zif uses the plate
+global PlatePressed; // Check if the plate has been pressed
+global StateRoom2; // Check whether Room2 has been visited
