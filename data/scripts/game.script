@@ -20,7 +20,7 @@ verb_initBar();
 verb_cleanBar();
 
 // load our main actor
-actor = Game.LoadActor("entities\spaceship\ship.actor");
+actor = Game.LoadActor("actors\zob\zob.actor");
 Game.MainObject = actor;
 
 // run the "daemon" script

@@ -1,39 +1,25 @@
 #include "scripts\base.inc"
 
 ////////////////////////////////////////////////////////////////////////////////
-actor = Game.LoadActor("entities\spaceship\ship.actor");
-Game.MainObject = actor;
-
 Game.PlayMusicChannel(0, "music\music3.wav", true);
 
-actor.SkipTo(-50,80);
-actor.Direction = DI_RIGHT;
+var ship = Scene.GetNode("ship");
 
-actor.SubtitlesPosX = -9; //position of subtitles for your actor
-actor.SubtitlesPosY = -20;
+actor.SkipTo(457, 310);
+ship.PlayAnim("entities\spaceship\shipmoving.sprite");
 
-Game.Interactive=false;
+ship.SubtitlesPosX = -9; //position of subtitles for your ship
+ship.SubtitlesPosY = -20;
 
-actor.GoTo(170, 80);
-actor.Direction = DI_RIGHT;
-
+Sleep(200);
+ship.Talk("These are the coordinates.");
 Sleep(300);
-actor.Talk("These are the coordinates.");
-Sleep(300);
-actor.Talk("Ensign, bring the teleportation device online.");
+ship.Talk("Ensign, bring the teleportation device online.");
 
-Sleep(1000);
+Sleep(600);
 Game.ChangeScene("scenes\room\room.scene");
 
 ////////////////////////////////////////////////////////////////////////////////
-// scene state
-global StateRoom;
-
-// default values
-if(StateRoom==null)
-{
-  StateRoom.Visited = false;
-}
 
 on "LeftClick"
 {

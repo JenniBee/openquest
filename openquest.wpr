@@ -22,7 +22,7 @@ ShowFPS=0
 DebugConsole=1
 
 [Resource]
-CustomPaths=data;
+CustomPaths=data
 
 [Packager]
 OutputFolder=packages

@@ -64,11 +64,27 @@ SCENE {
       SCALE=0
       ALPHA_COLOR { 255,255,255 }
       ALPHA = 255
-      EDITOR_SELECTED=TRUE
+      EDITOR_SELECTED=FALSE
       POINT {-73,-43}
       POINT {648,-42}
       POINT {645,436}
       POINT {-76,444}
+    }
+
+    ENTITY {
+      NAME="ship"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=-36
+      Y=80
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=TRUE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="entities\spaceship\ship.sprite"
+      FONT="fonts\outline_yellow.font"
     }
 
   }

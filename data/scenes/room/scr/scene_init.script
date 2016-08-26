@@ -1,59 +1,15 @@
-#include "scripts\base.inc"
-
-global WinMenu;
-
-#include "interface\verbbar\verbbar_functions.inc"
+#include "scenes\room\scr\scene_revisited.script"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-var Zif_Aimless = Scene.GetNode("zif_aimless");
-
-var Zif_Phone_Left = Scene.GetNode("zif_phone_left");
-var Zif_Phone = Scene.GetNode("zif_phone");
-var Zif = Scene.GetNode("zif");
-var Zif_Left = Scene.GetNode("zif_left");
-
-var Cabinet = Scene.GetNode("cabinet");
-var Carol = Scene.GetNode("carol");
-
-var Door = Scene.GetNode("door");
-var DoorClosed = Scene.GetNode("closed_door");
-var GreenLight = Scene.GetNode("greenlight");
-
-actor.SubtitlesPosX = 0; 
-actor.SubtitlesPosY = -20;
-
-Zif_Aimless.SubtitlesPosX = 0;  
-Zif_Aimless.SubtitlesPosY = -20;
-
-Zif.SubtitlesPosX = 0; 
-Zif.SubtitlesPosY = -20;
-
-Zif_Phone.SubtitlesPosX = 0; 
-Zif_Phone.SubtitlesPosY = -20;
-
-Zif_Phone_Left.SubtitlesPosX = 0; 
-Zif_Phone_Left.SubtitlesPosY = -20;
-
-Zif_Left.SubtitlesPosX = 0; 
-Zif_Left.SubtitlesPosY = -20;
-
-Carol.SubtitlesPosX = 0; 
-Carol.SubtitlesPosY = -20;
-
 if(PlatePressed != true)
 {
-actor.Active=false;
-actor = Game.LoadActor("actors\zob\zob.actor");
-Game.MainObject = actor;
 actor.SkipTo(400, 114);
 Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(400, 114);
 Carol.SkipTo(400, 114);
 
 Scene.SkipTo(actor);
-
-actor.Active=true;
 
 actor.SubtitlesPosX = 0; 
 actor.SubtitlesPosY = -20;
@@ -125,20 +81,6 @@ Sleep(500);
 verb_changeMode(0);
 Game.Interactive=true;
 
-Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
-}
-
-if(PlatePressed == true)
-{
-Game.PlayMusicChannel(2, "sound\sound1.wav", true);
-actor.SkipTo(259, 110);
-actor.TurnTo(DI_LEFT);
-Carol.SkipTo(69, 102);
-GreenLight.SkipTo(268, 38);
-DoorClosed.SkipTo(600, 600); 
-Door.SkipTo(260, 44);
-Zif_Aimless.DetachScript("entities\zif\aimless.sprite");
-Zif_Aimless.SkipTo(144, 117);
 Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
 }
 

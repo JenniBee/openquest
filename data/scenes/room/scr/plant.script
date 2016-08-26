@@ -20,7 +20,7 @@ on "LookAt"
 
   Game.Interactive=false;
 
-  if(PlantPermission == true && PlantAsk != true)
+  if(PlantWasMoved == true)
   {
     actor.Talk("This plant appears to be undergoing photosynthesis.");
   }
@@ -152,9 +152,9 @@ on "Move"
   PlantMoved.SkipTo(114, 54);
   Ammunition.SkipTo(111, 86);
   actor.Talk("There seems to be a small box down there.");
-  PlantAsk = false;
+  PlantWasMoved = true;
   }
-  else if(PlantPermission == true && PlantAsk != true)
+  else if(PlantWasMoved == true)
   {
   actor.Talk("It's fine over there.");
   }
@@ -181,7 +181,7 @@ on "gun"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "gun"
+on "keycard"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
 
