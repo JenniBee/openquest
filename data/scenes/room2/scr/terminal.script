@@ -4,102 +4,191 @@ global WinMenu;
 
 #include "interface\verbbar\verbbar_functions.inc"
 
-var verb_default = "LookAt";
+var verb_default = "Look at";
+
+var Zif = Scene.GetNode("zif");
+var Forcefield = Scene.GetNode("forcefield");
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
 {
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+
+  if(EncryptionBroken == true) actor.Talk("The terminal has shut down.");
+  else actor.Talk("Looks pretty ordinary.");
+
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+
+  actor.Talk("I don't know how to communicate with that.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+
+  actor.Talk("That has no odour.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+
+  actor.Talk("That doesn't seem to open.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "ammunition"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("That doesn't take ammo.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("I don't need to shoot that.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("I don't know what to do with those.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "keycard"
+{
   verb_setBar(Command.Verb + " "+self.Caption);
   GoToObject();
   Game.Interactive=false;
+  GoToObject();
 
-  actor.Talk("It's the way back.");
-
+  actor.Talk("Doesn't look like that takes keycards.");
   verb_cleanBar();
   Game.Interactive=true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+
 on "PickUp"
 {
-  verb_setBar(Command.Verb + " "+self.Caption);
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
   GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("I don't think carrying around a door is going to help.");
-
+  actor.Talk("I don't need that.");
   verb_cleanBar();
-  Game.Interactive=true;
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+on "Give"
+{
+  GoToObject();
+  verb_cleanBar();
+}
+
+on "Move"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("Moving that would accomplish nothing.");
+  verb_cleanBar();
+  Game.Interactive = true;
 }
 
 on "Use"
 {
-  verb_setBar(Command.Verb + " "+self.Caption);
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
   GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("Yep. Locked from this side too.");
-
+  if(KeySlotActive == true) 
+    {
+    Forcefield.PlayAnim("/entities/cup/forcefield_break.sprite");
+    Sleep(200);
+    Forcefield.SkipTo("400, 400");
+    actor.Talk("Looks like I broke the encryption.");
+    EncryptionBroken == true;
+    Zif.SkipTo(47, 102);
+    Zif.PlayAnim("entities/zif/rr/walk.sprite");
+    Zif.Talk("Well done Ensign. Now release the relic.");
+    actor.Talk("Small problem, sir.");
+    Zif.Talk("What's that?");
+    actor.Talk("It's still held in place.");
+    Zif.Talk("Then find a way to bring it down!");
+    actor.Talk("Aye, sir.");
+    }
+  else actor.Talk("The terminal is offline.");
   verb_cleanBar();
-  Game.Interactive=true;
+  Game.Interactive = true;
 }
 
-on "TalkTo"
+////////////////////////////////////////////////////////////////////////////////
+on "RightClick"
 {
-  verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("Hey! Noname! Can you hear me?");
-  actor.Talk("Guess not.");
-
-  verb_cleanBar();
-  Game.Interactive=true;
+  verb_apply(verb_default);
 }
 
-on "letter"
+////////////////////////////////////////////////////////////////////////////////
+on "MouseEntry"
 {
-  if(Command.Verb == "Give")
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
-
-  	GoToObject();
-
-  	Game.Interactive=false;
-
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("I wish I could cram this letter in there.");
-  actor.Talk("But I can't.");
-
-  	verb_cleanBar();
-	}
-  else
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
-
-  	GoToObject();
-
-  	Game.Interactive=false;
-
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("I wish I could cram this letter in there.");
-  actor.Talk("But I can't.");
-
-  	verb_cleanBar();
-	}
-
-  Game.Interactive=true;
+  verb_hover("Look at");
 }
+
+////////////////////////////////////////////////////////////////////////////////
+on "MouseLeave"
+{
+  verb_unhover("Look at");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 on "LeftClick"
 {
   GoToObject();
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 function GoToObject()
 {
-  actor.GoTo(300, 120);
-  actor.TurnTo(DI_UPRIGHT);
+actor.GoTo(200, 102);
+actor.TurnTo(DI_LEFT);
 }

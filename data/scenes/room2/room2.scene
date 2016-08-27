@@ -32,7 +32,7 @@ SCENE {
   ; ----- waypoints
   WAYPOINTS {
     NAME="new waypoints"
-    EDITOR_SELECTED=TRUE
+    EDITOR_SELECTED=FALSE
     EDITOR_SELECTED_POINT=-1
     POINT {121,75}
     POINT {96,102}
@@ -54,7 +54,7 @@ SCENE {
     WIDTH=320
     HEIGHT=170
     ACTIVE=TRUE
-    EDITOR_SELECTED=FALSE
+    EDITOR_SELECTED=TRUE
     ENTITY {
       NAME="background"
       CAPTION=""
@@ -239,6 +239,47 @@ SCENE {
       SPRITE="entities\cup\cup_spin.sprite"
     }
 
+    ENTITY {
+      NAME="key_slot"
+      CAPTION="Key Slot"
+      ACTIVE=TRUE
+      X=180
+      Y=96
+      SCALABLE=TRUE
+      INTERACTIVE=TRUE
+      COLORABLE=TRUE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room2\scr\keyslot.script"
+      REGION {
+        NAME="<unnamed>"
+        CAPTION=""
+        ACTIVE=TRUE
+        EDITOR_SELECTED_POINT=-1
+        POINT {171,85}
+        POINT {188,77}
+        POINT {190,87}
+        POINT {175,96}
+      }
+
+    }
+
+    ENTITY {
+      NAME="forcefield"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=143
+      Y=29
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=TRUE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="entities\cup\forcefield.sprite"
+    }
+
   }
 
   ; ----- scale levels
@@ -247,7 +288,7 @@ SCENE {
   ; ----- free entities
   ENTITY {
     NAME="console"
-    CAPTION="Pool"
+    CAPTION=""
     ACTIVE=TRUE
     X=155
     Y=114
@@ -258,6 +299,37 @@ SCENE {
     WALK_TO_X=0
     WALK_TO_Y=0
     SPRITE="scenes\room2\sprites\console.sprite"
+  }
+
+  ENTITY {
+    NAME="zif"
+    CAPTION="Commander Zif"
+    ACTIVE=TRUE
+    X=450
+    Y=197
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\zif\zif_room2.script"
+    SPRITE="entities\zif\rr\stand.sprite"
+  }
+
+  ENTITY {
+    NAME="doorway"
+    CAPTION=""
+    ACTIVE=TRUE
+    X=62
+    Y=120
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SPRITE="scenes\room2\sprites\doorway.sprite"
   }
 
 }

@@ -6,13 +6,27 @@ global WinMenu;
 
 var verb_default = "Look at";
 
+var Zif = Scene.GetNode("zif_aimless");
+var Carol = Scene.GetNode("carol");
+
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
 {
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
   Game.Interactive = false;
 
-  actor.Talk("They used to power the hand scanner.");
+  actor.Talk("This device could be used to interact with some form of hardware.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("I don't know how to communicate with that.");
   verb_cleanBar();
   Game.Interactive = true;
 }
@@ -23,9 +37,98 @@ on "Smell"
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
   Game.Interactive = false;
 
-  actor.Talk("Mmm, acidy.");
+  actor.Talk("That has no odour.");
   verb_cleanBar();
   Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("That doesn't seem to open.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+on "ammunition"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  actor.Talk("Doesn't look like that takes keycards.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  actor.Talk("Doesn't look like that takes keycards.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "scanner"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  actor.Talk("The key isn't compatible with this model.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  actor.Talk("The key isn't compatible with this model.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "deadscanner"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  actor.Talk("The key isn't compatible with this model.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "carol"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  Carol.Talk("I see you've got mainframe clearance.");
+  Carol.Talk("I'm gonna be dusting in there soon.");
+  Carol.Talk("Try and keep it tidy.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "zif_aimless"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  Game.Interactive=false;
+
+  Zif.Talk("Excellent work, Zob, a key.");
+  Zif.Talk("Keep this. Use it to infiltrate the mainframe.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////

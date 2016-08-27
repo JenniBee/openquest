@@ -33,6 +33,7 @@ on "PickUp"
 ////////////////////////////////////////////////////////////////////////////////
 on "Use"
 {
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
   GoToObject();
   Game.ChangeScene("scenes\room\room.scene");
   verb_cleanBar();
@@ -41,6 +42,7 @@ on "Use"
 ////////////////////////////////////////////////////////////////////////////////
 on "Give"
 {
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
   GoToObject();
   Game.ChangeScene("scenes\room\room.scene");
   verb_cleanBar();

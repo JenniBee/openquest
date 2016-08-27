@@ -8,12 +8,11 @@ SPRITE {
   CONTINUOUS=FALSE
   PRECISE=TRUE
   FRAME {
-    DELAY = 0
+    DELAY = 150
     KEYFRAME=FALSE
-    IMAGE = "scenes\room2\sprites\console.bmp"
-    HOTSPOT {35, 37}
+    IMAGE = "entities\cup\sprites\08.bmp"
+    HOTSPOT {0, 0}
     EDITOR_SELECTED=TRUE
   }
-
 }
 

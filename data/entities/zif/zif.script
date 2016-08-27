@@ -20,6 +20,17 @@ on "LookAt"
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,6 +45,17 @@ on "batteries"
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +69,18 @@ on "scanner"
 
   verb_cleanBar();
   Game.Interactive=true;
+
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +96,18 @@ on "Smell"
 
   verb_cleanBar();
   Game.Interactive=true;
+
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -76,6 +122,17 @@ on "Open"
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +147,17 @@ on "Move"
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +172,17 @@ on "Use"
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -125,6 +204,17 @@ if(Command.Verb == "Give")
   verb_cleanBar();
   Game.Interactive=true;
 
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -139,6 +229,18 @@ on "keycard"
 
   verb_cleanBar();
   Game.Interactive=true;
+
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -200,7 +302,19 @@ on "TalkTo"
   verb_cleanBar();
   verb_changeMode(0);
 
-  Game.Interactive = true;
+  Game.Interactive=true;
+
+  if(Zif.X <= 195)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -209,7 +323,6 @@ on "LeftClick"
   if(Command.Verb == "")
   {
     GoToObject();
-
   }
 }
 

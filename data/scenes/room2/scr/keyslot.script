@@ -13,7 +13,9 @@ on "LookAt"
   Game.Interactive = false;
   GoToObject();
 
-  actor.Talk("The holy artifact!");
+  if(KeySlotActive == true) actor.Talk("There is a keycard in this slot.");
+  else actor.Talk("This looks like the recepticle for some kind of electronic key.");
+
   verb_cleanBar();
   Game.Interactive = true;
 }
@@ -58,7 +60,6 @@ on "Open"
 on "ammunition"
 {
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
-  Game.Interactive = false;
   GoToObject();
   actor.Talk("That doesn't take ammo.");
   verb_cleanBar();
@@ -91,11 +92,12 @@ on "batteries"
 on "keycard"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
+  Game.Interactive = false;
   GoToObject();
 
-  actor.Talk("Doesn't look like that takes keycards.");
+  actor.Talk("This should activate the terminal.");
+  Game.DropItem("keycard");
+  KeySlotActive = true;
   verb_cleanBar();
   Game.Interactive=true;
 }
@@ -108,9 +110,7 @@ on "PickUp"
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
   Game.Interactive = false;
   GoToObject();
-  if(EncryptionBroken != true) actor.Talk("The artifact is protected by some kind of forcefield container.");
-  else actor.Talk("The artifact is still being held in place.");
-  
+  actor.Talk("I don't need that.");
   verb_cleanBar();
   Game.Interactive = true;
 }
@@ -119,7 +119,6 @@ on "PickUp"
 
 on "Give"
 {
-  GoToObject();
   verb_cleanBar();
 }
 
@@ -167,9 +166,11 @@ on "LeftClick"
   GoToObject();
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 function GoToObject()
 {
-actor.GoTo(152, 104);
-actor.TurnTo(DI_DOWN);
+actor.GoTo(192, 118);
+actor.TurnTo(DI_LEFT);
 }
+

@@ -12,7 +12,18 @@ on "LookAt"
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
   Game.Interactive = false;
 
-  actor.Talk("They used to power the hand scanner.");
+  actor.Talk("A crude ballistic firearm fashioned from a primitive alloy.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "TalkTo"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("I don't know how to communicate with that.");
   verb_cleanBar();
   Game.Interactive = true;
 }
@@ -23,12 +34,21 @@ on "Smell"
   verb_setBar(Command.Verb + " " + Command.Object1_caption);
   Game.Interactive = false;
 
-  actor.Talk("Mmm, acidy.");
+  actor.Talk("That has no odour.");
   verb_cleanBar();
   Game.Interactive = true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+on "Open"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("That doesn't seem to open.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 on "ammunition"
@@ -43,6 +63,37 @@ on "ammunition"
   Game.Interactive = true;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+on "carol"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+
+  actor.Talk("Terminating this lifeform could attract unwarranted attention.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "zif_aimless"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  Game.Interactive=false;
+
+if(Command.Verb == "Use")
+  {
+  actor.Talk("I don't need to shoot him.");
+  } 
+if(Command.Verb == "Give")
+  {
+  actor.Talk("And lose my advantage?");
+  }
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 on "PickUp"
 {
@@ -50,7 +101,6 @@ on "PickUp"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
 
 on "Move"
 {

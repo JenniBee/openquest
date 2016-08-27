@@ -15,6 +15,8 @@ global TAL_LEFT  =0;
 global TAL_RIGHT =1;
 global TAL_CENTER=2;
 
+global EncryptionBroken; // Check if the encryption was broken
+global KeySlotActive; // Check if the keycard was put in the slot
 global PlantWasMoved; // Check if the plant was moved
 global KnowCarol; // Check if Carol said her name.
 global PlantChecked; // Check if the plant has been searched

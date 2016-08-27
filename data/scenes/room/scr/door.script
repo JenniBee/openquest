@@ -33,6 +33,7 @@ on "PickUp"
 ////////////////////////////////////////////////////////////////////////////////
 on "Use"
 {
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
   GoToObject();
   Game.ChangeScene("scenes\room2\room2.scene");
   verb_cleanBar();
@@ -41,6 +42,7 @@ on "Use"
 ////////////////////////////////////////////////////////////////////////////////
 on "Give"
 {
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
   GoToObject();
   Game.ChangeScene("scenes\room2\room2.scene");
   verb_cleanBar();
@@ -99,6 +101,6 @@ on "MouseLeave"
 function GoToObject()
 {
 actor.GoTo(255, 110);
-actor.TurnTo(DI_LEFT);
+actor.TurnTo(DI_RIGHT);
 }
 

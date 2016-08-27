@@ -1,36 +1,34 @@
-#include "scenes\room\scr\scene_revisited.script"
+#include "scenes/room/scr/variables.script"
 
 ////////////////////////////////////////////////////////////////////////////////
 
+var Zob = Game.LoadActor("actors\zob\zob.actor");
+var CutsceneOver;
+
 if(PlatePressed != true)
 {
-actor.SkipTo(400, 114);
+while(CutsceneOver != true)
+{
+Zob.SkipTo(400, 114);
 Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(400, 114);
 Carol.SkipTo(400, 114);
 
-Scene.SkipTo(actor);
-
-actor.SubtitlesPosX = 0; 
-actor.SubtitlesPosY = -20;
-
-Game.Interactive=false;
+Scene.SkipTo(Zob);
 
 Sleep(500);
 Zif.SkipTo(183, 110);
 Game.PlaySound("sound\sound2.wav");
 Zif.PlayAnim("entities\zif\dd\doublebeam.sprite");
-Zif.DetachScript("entities\zif\dd\doublebeam.sprite");
 Zif.SkipTo(202, 117);
-actor.SkipTo(180, 103);
-actor.TurnTo(DI_DOWN);
+Zob.SkipTo(180, 103);
+Zob.TurnTo(DI_DOWN);
 
 Zif.Talk("Hmm.");
 Zif.SkipTo(602, 617);
 Zif_Phone.SkipTo(202, 117);
 Game.PlaySound("sound\sound6.wav");
 Zif_Phone.PlayAnim("entities\zif\dd\phone_look.sprite");
-Zif_Phone.DetachScript("entities\zif\dd\phone_look.sprite");
 Zif_Phone.Talk("Commander's log, stardate 432.1.");
 Zif_Phone.Talk("Arrival complete on the planet of mostly water.");
 Zif_Phone.SkipTo(400, 114);
@@ -38,14 +36,13 @@ Zif.SkipTo(202, 117);
 
 Carol.SkipTo(69, 102);
 Carol.PlayAnim("entities\carol\rr\walk.sprite");
-Carol.DetachScript("entities\carol\rr\walk.sprite");
 Game.PlayMusicChannel(2, "sound\sound1.wav", true);
 Carol.Talk("Are You Done In Here?");
 
 var GoToCarolX = Carol.X + 10;
 
-actor.GoTo(100, 106);
-actor.TurnTo(DI_LEFT);
+Zob.GoTo(100, 106);
+Zob.TurnTo(DI_LEFT);
 
 Zif.SkipTo(400, 114);
 Zif_Phone_Left.SkipTo(202, 117);
@@ -54,34 +51,29 @@ Zif_Phone_Left.Talk("Ensign Zob and I shall proceed to locate the artifact.");
 Zif_Phone_Left.Talk("We shall eliminate any resistance we encounter.");
 
 Zif_Phone_Left.PlayAnim("entities\zif\ll\walk.sprite");
-Zif_Phone_Left.DetachScript("entities\zif\ll\walk.sprite");
 Zif_Phone_Left.PlayAnim("entities\zif\dd\phone_look.sprite");
-Zif_Phone_Left.DetachScript("entities\zif\dd\phone_look.sprite");
-Zif_Phone_Left.Talk("This appears to be a crude society.");
 Zif_Phone_Left.Talk("The defenses of the compound were negligible.");
 Zif_Phone_Left.Talk("I expect the relic to be in our possession shortly.");
 Zif_Left.SkipTo(Zif_Phone_Left.X, Zif_Phone_Left.Y);
 Zif_Phone_Left.SkipTo(600, 600);
-actor.Talk("What of this lifeform, sir?");
+Zob.Talk("What of this lifeform, sir?");
 Zif_Left.Talk("Proceed with caution.");
 Zif_Left.Talk("That may be some kind of weapon.");
 
-actor.GoTo(98, 123);
-actor.TurnTo(DI_DOWN);
-actor.Talk("I'll begin my search.");
+Zob.GoTo(98, 123);
+Zob.TurnTo(DI_DOWN);
+Zob.Talk("I'll begin my search.");
 Zif_Left.Talk("Keep me informed, ensign.");
+actor.SkipTo(98, 123);
+Zob.TurnTo(DI_DOWN);
+Zob.SkipTo(600, 600);
 
-Game.PlayMusicChannel(1, "music\music1.wav", true);
-Game.MusicCrossfade(0, 1, 3000);
+CutsceneOver = true;
+RegularGameplay();
 
-Zif_Aimless.SkipTo(Zif_Left.X, Zif_Left.Y);
-Zif_Left.SkipTo(600, 600);
-Sleep(500);
+Sleep(20);
+}
 
-verb_changeMode(0);
-Game.Interactive=true;
-
-Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -93,3 +85,40 @@ if(StateRoom==null)
 {
   StateRoom.Visited = false;
 }
+
+function RegularGameplay()
+{
+CutsceneOver = true;
+
+Game.Interactive=false;
+
+actor.SkipTo(98, 123);
+actor.TurnTo(DI_DOWN);
+
+Zob.Active = false;
+Zif.Active = false;
+Zif_Left.Active = false;
+Zif_Phone_Left.Active = false;
+Zif_Phone.Active = false;
+
+
+Game.PlayMusicChannel(1, "music\music1.wav", true);
+Game.MusicCrossfade(0, 1, 3000);
+
+Game.Interactive=true;
+
+Zif_Aimless.SkipTo(134, 114);
+Carol.SkipTo(69, 102);
+
+Sleep(500);
+
+verb_changeMode(0);
+
+Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
+}
+
+on "LeftClick"
+{
+if(CutsceneOver != true) RegularGameplay();
+}
+

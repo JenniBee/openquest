@@ -10,8 +10,8 @@ SPRITE {
   FRAME {
     DELAY = 0
     KEYFRAME=FALSE
-    IMAGE = "scenes\room2\sprites\console.bmp"
-    HOTSPOT {35, 37}
+    IMAGE = "scenes\room2\sprites\doorway.bmp"
+    HOTSPOT {32, 73}
     EDITOR_SELECTED=TRUE
   }
 

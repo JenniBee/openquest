@@ -49,9 +49,7 @@ on "PickUp"
   
   Game.Interactive=false;
 
-  actor.TurnTo(DI_DOWN);
-  actor.Talk("Sure, I'd pick that up.");
-  actor.Talk("If only I had a chainsaw!");
+  actor.Talk("I don't need that.");
 
   verb_cleanBar();
 
@@ -67,8 +65,7 @@ on "Use"
 
   Game.Interactive=false;
 
-  actor.TurnTo(DI_DOWN);
-  actor.Talk("Yep, just as I thought. Locked.");
+  actor.Talk("I can't reach it.");
   
   verb_cleanBar();
 
@@ -76,7 +73,7 @@ on "Use"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "Sniff"
+on "Open"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
 
@@ -84,8 +81,7 @@ on "Sniff"
 
   Game.Interactive=false;
 
-  actor.TurnTo(DI_DOWN);
-  actor.Talk("It smells like cedar.");
+  actor.Talk("I can't reach it.");
   
   verb_cleanBar();
 
@@ -93,35 +89,86 @@ on "Sniff"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "book1"
+on "Move"
 {
-  if(Command.Verb == "Give")
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+  verb_setBar(Command.Verb + " "+self.Caption);
 
-  	GoToObject();
+  GoToObject();
 
-  	Game.Interactive=false;
+  Game.Interactive=false;
 
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("I'm not giving anything to that door.");
+  actor.Talk("I can't reach it.");
+  
+  verb_cleanBar();
 
-  	verb_cleanBar();
-	}
-  else
-	{
-	verb_setBar(Command.Verb + " " + Command.Object1_caption + " with " + Command.Object2_caption);
+  Game.Interactive=true;
+}
 
-  	GoToObject();
+////////////////////////////////////////////////////////////////////////////////
+on "Smell"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
 
-  	Game.Interactive=false;
+  GoToObject();
 
-  	actor.TurnTo(DI_DOWN);
-  actor.Talk("It won't open, but throwing the letter at it won't help.");
+  Game.Interactive=false;
 
-  	verb_cleanBar();
-	}
+  actor.Talk("I can't reach it.");
+  
+  verb_cleanBar();
 
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "Give"
+{  
+  verb_cleanBar();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "ammunition"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("That doesn't take ammo.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  if(EncryptionBroken != true) actor.Talk("The suspension cage prevents a clear shot of the node.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "batteries"
+{
+  verb_setBar(Command.Verb + " " + Command.Object1_caption);
+  Game.Interactive = false;
+  GoToObject();
+  actor.Talk("I don't know what to do with those.");
+  verb_cleanBar();
+  Game.Interactive = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "keycard"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+  GoToObject();
+
+  actor.Talk("Doesn't look like that takes keycards.");
+  verb_cleanBar();
   Game.Interactive=true;
 }
 
@@ -154,7 +201,7 @@ on "MouseLeave"
 
 function GoToObject()
 {
-  actor.GoTo(80, 120);
-  actor.TurnTo(DI_UPLEFT);
+actor.GoTo(101, 94);
+actor.TurnTo(DI_RIGHT);
 }
 

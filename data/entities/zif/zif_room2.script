@@ -4,25 +4,12 @@ global WinMenu;
 
 #include "interface\verbbar\verbbar_functions.inc"
 
+var Zif = Scene.GetNode("zif");
+
 var verb_default = "Talk to";
 
-var Carol = Scene.GetNode("carol");
-
-if(KnowCarol != true) self.Caption = "Lifeform";
-else if(KnowCarol == true) self.Caption = "Carol";
-
-////////////////////////////////////////////////////////////////////////////////
-on "PickUp"
-{
-  verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("I don't need this creature.");
-
-  verb_cleanBar();
-  Game.Interactive=true;
-}
+Zif.SubtitlesPosX = 0;  
+Zif.SubtitlesPosY = -20;
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -31,55 +18,38 @@ on "LookAt"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("A large carbon based mammal, it seems.");
+  actor.Talk("My commanding officer, Commander Zif.");
 
   verb_cleanBar();
   Game.Interactive=true;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-on "scanner"
-{
-  verb_setBar(Command.Verb + " "+self.Caption);
-
-  verb_cleanBar();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-on "gun"
-{
-  verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("Terminating this lifeform could attract unwarranted attention.");
-
-  verb_cleanBar();
-  Game.Interactive=true;
-  verb_setBar(Command.Verb + " "+self.Caption);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 on "batteries"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  actor.Talk("Errm, no.");
 
   verb_cleanBar();
+  Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-on "keycard"
+on "scanner"
 {
   verb_setBar(Command.Verb + " "+self.Caption);
   GoToObject();
   Game.Interactive=false;
 
-  Carol.Talk("I see you've got mainframe clearance.");
-  Carol.Talk("I'm going to be dusting in there soon.");
-  Carol.Talk("Try and keep it tidy.");
+  Zif.Talk("You're the scientist on this team. You use it.");
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,24 +59,13 @@ on "Smell"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("This creature has an overwhelming pungent smell.");
+  actor.Talk("Is that a new cologne, sir?");
+  Zif.Talk("I thought we got past these... feelings.");
+  actor.Talk("Sorry sir.");
 
   verb_cleanBar();
   Game.Interactive=true;
-}
 
-
-////////////////////////////////////////////////////////////////////////////////
-on "gun"
-{
-  verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
-
-  actor.Talk("Terminating this lifeform could attract unwarranted attention.");
-
-  verb_cleanBar();
-  Game.Interactive=true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,10 +75,11 @@ on "Open"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("The lifeform doesn't seem to open.");
+  actor.Talk("He doesn't seem to open.");
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,10 +89,11 @@ on "Move"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("The lifeform is surprisingly sturdy. I don't believe I can use force.");
+  actor.Talk("Moving him would accomplish nothing.");
 
   verb_cleanBar();
   Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -142,10 +103,46 @@ on "Use"
   GoToObject();
   Game.Interactive=false;
 
-  actor.Talk("I don't know how to operate this lifeform.");
+  actor.Talk("I don't know how to operate him.");
 
   verb_cleanBar();
   Game.Interactive=true;
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+if(Command.Verb == "Use")
+  {
+  actor.Talk("I don't need to shoot him.");
+  } 
+if(Command.Verb == "Give")
+  {
+  actor.Talk("And lose my advantage?");
+  }
+
+  verb_cleanBar();
+  Game.Interactive=true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "keycard"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+  Game.Interactive=false;
+
+  Zif.Talk("Excellent work, Zob, a key.");
+  Zif.Talk("Keep this. Use it to infiltrate the mainframe.");
+
+  verb_cleanBar();
+  Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -159,37 +156,18 @@ on "TalkTo"
 
   Game.Interactive = false;
 
-if(KnowCarol != true)
-  {
-  actor.Talk("Speak lifeform!");
-  actor.Talk("Is this translation matrix working?");
-  Carol.Talk("You're that guy from accounts right?");
-  }
-else
-  {
-  actor.Talk("Greetings Carol.");
-  Carol.Talk("You again?");
-  }
-
-  verb_cleanBar();
+  Zif.Talk("Yes, ensign?");
+  
   verb_changeMode(1);
+  verb_cleanBar();
 
   var EndBranch = false;
 
   while(!EndBranch) // loop until the player ends this dialogue
   {  
-    Game.AddResponseOnce(0, "What is your designation?");
-    Game.AddResponse(1, "Stand aside, I need to pass.");
-    if(KnowCarol == true)
-    {
-    Game.AddResponseOnce(2, "What is located through that passageway?");
-    }
-    if(PlantAsk == true)
-    {
-    Game.AddResponseOnce(4, "May I move this plant?");
-    }
-    Game.AddResponse(5, "As you were.");
-    
+    Game.AddResponse(0, "What now, sir?");
+    Game.AddResponse(1, "I'll continue my search.");
+
     var Res = Game.GetResponse(true); // automatically select last response
     
     actor.Talk(Game.LastResponse);
@@ -198,35 +176,11 @@ else
     switch(Res)
     {
       case 0:
-        Carol.Talk("What are you on about?");
-        actor.Talk("How are you addressed by a superior officer?");
-        Carol.Talk("Carol.");
-        actor.Talk("Greetings Carol.");
-        KnowCarol = true;
-        break;
+        Zif.Talk("Get the artifact!");
+        Zif.Talk("We need to leave orbit quickly.");
+        actor.Talk("I'll see what I can do.");
       case 1:
-        Carol.Talk("I just cleaned down there. You'll get the floor dirty.");
-        actor.Talk("In which case, I shall remain here.");
-        break;
-      case 2:
-        Carol.Talk("Err.. reception, canteen...");
-        actor.Talk("Any stolen relics within those realms?");
-        Carol.Talk("Do you mean that tea maker they installed?");
-        actor.Talk("No.");
-        Carol.Talk("Dunno then.");
-        Game.AddResponse(3, "Look behind you, a three headed monkey!");
-        break;
-      case 3:
-        Carol.Talk("Yeah, that's Terry.");
-        Carol.Talk("He works in HR.");
-        break;
-      case 4:
-        Carol.Talk("I haven't cleaned down there yet.");
-        actor.Talk("Then by moving the plant, I am providing assistance.");
-        Carol.Talk("Oh, yeah. Go on then.");
-        PlantPermission = true; 
-        break;
-      case 5:
+        Zif.Talk("Very good.");
         EndBranch = true;
         break;        
     }
@@ -234,7 +188,8 @@ else
   verb_cleanBar();
   verb_changeMode(0);
 
-  Game.Interactive = true;
+  Game.Interactive=true;
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -266,6 +221,6 @@ on "MouseLeave"
 
 function GoToObject()
 {
-  actor.GoTo(100, 106);
-  actor.TurnTo(DI_LEFT);
+actor.GoTo(106, 111);
+actor.TurnTo(DI_LEFT);
 }
