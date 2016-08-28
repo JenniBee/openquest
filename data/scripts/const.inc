@@ -15,6 +15,8 @@ global TAL_LEFT  =0;
 global TAL_RIGHT =1;
 global TAL_CENTER=2;
 
+global ResetZif; // Reset Zif's Responses
+global ResetCarol; // Reset Carol's Responses
 global ShotAtNode; // Check if Zob shot at the node
 global InRoom2; // Check if Zob is in room 2
 global CutsceneOver; // Check if the opening cutscene is over

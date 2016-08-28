@@ -95,6 +95,7 @@ on "keycard"
   Game.Interactive = false;
   GoToObject();
 
+  actor.PlayAnim("actors/zob/ll/lowtake.sprite");
   actor.Talk("This should activate the terminal.");
   Game.DropItem("keycard");
   KeySlotActive = true;

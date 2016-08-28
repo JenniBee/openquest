@@ -231,8 +231,15 @@ on "TalkTo"
 
   while(!EndBranch) // loop until the player ends this dialogue
   {  
+
+    if(ResetZif == true)
+    {
+    Game.ResetResponse(1);
+    ResetZif = false;
+    }
+
     Game.AddResponse(0, "What are your orders?");
-    if(CanAskZif == true)
+    if(CanAskZif == true && ZifPlate != true)
     {
     Game.AddResponseOnce(1, "I require your assistance with this opening mechanism.");
     }

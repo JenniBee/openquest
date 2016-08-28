@@ -440,7 +440,7 @@ SCENE {
     SCRIPT="entities\zif\zif.script"
     SPRITE="entities\zif\ll\stand.sprite"
     FONT="fonts\outline_yellow.font"
-      TALK="entities\zif\dd\talk.sprite"
+      TALK="entities\zif\ll\talk.sprite"
   }
 
   ENTITY {

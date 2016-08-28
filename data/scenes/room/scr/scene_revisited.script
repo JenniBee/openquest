@@ -41,8 +41,11 @@ Door.SkipTo(260, 44);
   Ammunition.SkipTo(111, 86);
   }
   
+if(EncryptionBroken == true)
+{
 Zif_Aimless.DetachScript("entities\zif\aimless.sprite");
 Zif_Aimless.SkipTo(144, 117);
 Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
+}
 
 }

@@ -177,14 +177,22 @@ else
   var EndBranch = false;
 
   while(!EndBranch) // loop until the player ends this dialogue
-  {  
+  {
+    if(ResetCarol == true)
+    {
+    Game.ResetResponse(4);
+    Game.ResetResponse(2);
+    Game.ResetResponse(0);
+    ResetCarol = false;
+    }
+
     Game.AddResponseOnce(0, "What is your designation?");
     Game.AddResponse(1, "Stand aside, I need to pass.");
     if(KnowCarol == true)
     {
     Game.AddResponseOnce(2, "What is located through that passageway?");
     }
-    if(PlantAsk == true)
+    if(PlantPermission != true)
     {
     Game.AddResponseOnce(4, "May I move this plant?");
     }

@@ -191,10 +191,11 @@ if(ShotAtNode == true)
   Zif_Phone.Talk("I have obtained the stolen artifact.");
   Zif_Phone.Talk("In a slight contradiction to my orders, I have decided to enslave this planet.");
   Game.PlayMusicChannel(3, "sound/sound11.wav", false);
-  Zif_Phone.SkipTo(500, 500);
-  Zif.SkipTo(157, 117);
-  Zif.Talk("Mwwwah huh huh huh huh huh huh...");
+  Zif_Phone.ForceTalkAnim("entities\zif\dd\talk.sprite");
+  Zif_Phone.Talk("Mwwwah huh huh huh huh huh huh...");
   TheEnd.SkipTo(103, 52);
+  ResetZif = true;
+  ResetCarol = true;
   Sleep(1000);
   Game.StopMusicChannel(1);
   Sleep(1000);

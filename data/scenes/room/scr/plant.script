@@ -134,16 +134,12 @@ on "Move"
 
   Game.Interactive=false;
 
-  if(PlantChecked != true && PlantPermission != true)
-  {
-  actor.Talk("Moving that would accomplish nothing.");
-  }
-  else if(PlantChecked == true && PlantPermission != true)
+  if(PlantChecked == true && PlantPermission != true)
   {
   Carol.Talk("Hey, I haven't cleaned there yet!");
   PlantAsk = true;
   }
-  else if(PlantPermission == true && PlantAsk == true)
+  else if(PlantPermission == true && PlantWasMoved != true)
   {
   actor.PlayAnim("actors\zob\rr\take.sprite");
   actor.DetachScript("actors\zob\rr\take.sprite");
@@ -158,6 +154,7 @@ on "Move"
   {
   actor.Talk("It's fine over there.");
   }
+  else actor.Talk("Moving that would accomplish nothing.");
 
   verb_cleanBar();
 
