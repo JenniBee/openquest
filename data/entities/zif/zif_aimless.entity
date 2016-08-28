@@ -11,7 +11,7 @@ ENTITY
   REGISTRABLE=TRUE
   SHADOWABLE=TRUE
   SPRITE="entities\zif\aimless.sprite"
-  TALK="entities\zif\dd\talk.sprite"
+  TALK="entities\zif\ll\talk.sprite"
 
   SCRIPT="entities\zif\zif.script"
   FONT = "fonts\outline_yellow.font"

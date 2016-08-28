@@ -11,7 +11,7 @@ SPRITE {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\00.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
     EDITOR_SELECTED=TRUE
   }
 
@@ -19,49 +19,49 @@ SPRITE {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\01.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\02.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\03.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\04.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\05.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\06.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
   FRAME {
     DELAY = 150
     KEYFRAME=FALSE
     IMAGE = "entities\cup\sprites\07.bmp"
-    HOTSPOT {0, 0}
+    HOTSPOT {16, 27}
   }
 
 }

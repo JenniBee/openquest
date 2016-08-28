@@ -6,5 +6,33 @@ global WinMenu;
 
 on "LeftClick" 
 { 
+  // Reset Globals
+  ShotAtNode = false;
+  InRoom2 = false;
+  CutsceneOver = false;
+  EncryptionBroken = false;
+  KeySlotActive = false;
+  PlantWasMoved = false;
+  KnowCarol = false;
+  PlantChecked = false;
+  PlantAsk = false;
+  PlantPermission = false;
+  LoadedWeapon = false;
+  SmelledPlate = false;
+  CanAskZif = false;
+  ZifPlate = false;
+  PlatePressed = false;
+  StateRoom2 = false;
+  CabinetOpen = false;
+  CabinetChecked = false;
+
+  // Reset Items
+
+  if(Game.HasItem("gun") == true) Game.DropItem("gun");
+  if(Game.HasItem("batteries") == true) Game.DropItem("batteries");
+  if(Game.HasItem("deadscanner") == true) Game.DropItem("deadscanner");
+  if(Game.HasItem("keycard") == true) Game.DropItem("keycard");
+  if(Game.HasItem("ammunition") == true) Game.DropItem("ammunition");
+
   Game.ChangeScene("scenes\opening\opening.scene");
 } 

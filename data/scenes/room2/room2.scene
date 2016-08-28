@@ -227,8 +227,8 @@ SCENE {
       NAME="cup"
       CAPTION="Blue Cup"
       ACTIVE=TRUE
-      X=143
-      Y=29
+      X=159
+      Y=56
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
@@ -274,10 +274,73 @@ SCENE {
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
-      EDITOR_SELECTED=TRUE
+      EDITOR_SELECTED=FALSE
       WALK_TO_X=0
       WALK_TO_Y=0
       SPRITE="entities\cup\forcefield.sprite"
+    }
+
+    ENTITY {
+      NAME="fatalshot"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=225
+      Y=306
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="entities\zif\rr\fatalshot.sprite"
+    }
+
+    ENTITY {
+      NAME="hes_dead_jim"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=425
+      Y=322
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="entities\zif\rr\dead.sprite"
+    }
+
+    ENTITY {
+      NAME="the_end"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=86
+      Y=208
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="scenes\room2\sprites\theend.bmp"
+    }
+
+    ENTITY {
+      NAME="zif_phone"
+      CAPTION=""
+      ACTIVE=TRUE
+      X=381
+      Y=315
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=TRUE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SPRITE="entities\zif\dd\phone_stand.sprite"
+      TALK="entities\zif\dd\talk.sprite"
+      SCRIPT="entities\zif\zif_phone.script"
+      FONT = "fonts\outline_yellow.font"
     }
 
   }
@@ -302,11 +365,27 @@ SCENE {
   }
 
   ENTITY {
+    NAME="cup_dropped"
+    CAPTION=""
+    ACTIVE=TRUE
+    X=424
+    Y=148
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="scenes\room2\scr\cup.script"
+    SPRITE="entities\cup\cup_still.sprite"
+  }
+
+  ENTITY {
     NAME="zif"
     CAPTION="Commander Zif"
     ACTIVE=TRUE
-    X=450
-    Y=197
+    X=412
+    Y=242
     SCALABLE=FALSE
     INTERACTIVE=TRUE
     COLORABLE=FALSE
@@ -315,6 +394,8 @@ SCENE {
     WALK_TO_Y=0
     SCRIPT="entities\zif\zif_room2.script"
     SPRITE="entities\zif\rr\stand.sprite"
+    FONT="fonts\outline_yellow.font"
+      TALK="entities\zif\rr\talk.sprite"
   }
 
   ENTITY {

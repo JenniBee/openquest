@@ -10,9 +10,8 @@ ENTITY
   SCALABLE=TRUE
   REGISTRABLE=TRUE
   SHADOWABLE=TRUE
-  SPRITE="entities\carol\rr\stand.sprite"
-  TALK="entities\carol\rr\talk.sprite"
-
   SCRIPT="entities\carol\carol.script"
-  FONT = "fonts\outline_blue.font"
+  SPRITE="entities\carol\rr\vacuum.sprite"
+  FONT="fonts\outline_blue.font"
+  TALK="entities\carol\rr\talk.sprite"
 }

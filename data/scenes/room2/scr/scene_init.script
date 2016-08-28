@@ -1,13 +1,23 @@
 #include "scripts\base.inc"
 
 ////////////////////////////////////////////////////////////////////////////////
-actor.SkipTo(87, 100);
+InRoom2 = true;
+
+actor.SkipTo(87, 105);
 actor.Direction = DI_RIGHT;
 actor.SubtitlesPosX = 0; //position of subtitles for your actor
 actor.SubtitlesPosY = -20;
+var Zif = Scene.GetNode("zif");
+var Forcefield = Scene.GetNode("forcefield");
 
 // point the "camera" at the actor
 Scene.SkipTo(actor);
+
+if(EncryptionBroken == true)
+{
+Zif.SkipTo(95, 102);
+Forcefield.Active = false;
+}
 
 Game.StopMusicChannel(2);
 

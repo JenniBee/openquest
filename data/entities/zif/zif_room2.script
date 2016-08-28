@@ -5,11 +5,19 @@ global WinMenu;
 #include "interface\verbbar\verbbar_functions.inc"
 
 var Zif = Scene.GetNode("zif");
-
+var Cup = Scene.GetNode("cup");
+var CupDropped = Scene.GetNode("cup_dropped");
+var Dead = Scene.GetNode("hes_dead_jim");
+var TheEnd = Scene.GetNode("the_end");
+var Zif_Phone = Scene.GetNode("zif_phone");
+ 
 var verb_default = "Talk to";
 
 Zif.SubtitlesPosX = 0;  
 Zif.SubtitlesPosY = -20;
+
+Zif_Phone.SubtitlesPosX = 0; 
+Zif_Phone.SubtitlesPosY = -20;
 
 ////////////////////////////////////////////////////////////////////////////////
 on "LookAt"
@@ -117,13 +125,86 @@ on "gun"
   GoToObject();
   Game.Interactive=false;
 
-if(Command.Verb == "Use")
+if(Command.Verb == "Use" && ShotAtNode != true)
   {
   actor.Talk("I don't need to shoot him.");
   } 
-if(Command.Verb == "Give")
+if(Command.Verb == "Give" && ShotAtNode != true)
   {
   actor.Talk("And lose my advantage?");
+  }
+if(ShotAtNode == true)
+  {
+  verb_cleanBar();
+  CupDropped.Active = true;
+  actor.Talk("I'm having trouble hitting the target, sir.");
+  Zif.Talk("You're not a soldier. Give it here.");
+  Zif.Talk("Right. Stand back.");
+  actor.GoTo(200, 102);
+  actor.TurnTo(DI_LEFT);
+  Zif.Talk("I shall disable the suspension field thusly.");
+  Zif.SkipTo(98, 88);
+  Game.PlayMusicChannel(3, "sound/sound13.wav", false);
+  Zif.PlayAnim("entities/zif/rr/shoot.sprite");
+  Cup.Active = false;
+  Game.StopMusicChannel(3);
+  Zif.SkipTo(95, 102);
+  CupDropped.SkipTo(159, 56);
+  CupDropped.PlayAnim("entities/cup/cup_drop.sprite");
+  CupDropped.SkipTo(159, 88);
+  Game.StopMusicChannel(1);
+  verb_changeMode(2);
+  Game.PlayMusicChannel(1, "music\music4.wav", true);
+  Game.MusicCrossfade(0, 1, 3000);
+
+  Zif.PlayAnim("entities/zif/rr/walk.sprite");
+  Zif.Talk("At last the power of the relic is mine.");
+  CupDropped.Active = false; 
+  actor.GoTo(192, 118);
+  actor.TurnTo(DI_DOWN);
+  Zif.PlayAnim("entities/zif/walkleftanddown.sprite");
+  actor.TurnTo(DI_LEFT);
+  actor.Talk("Expertly done, sir.");
+  actor.Talk("Pass over the relic and I shall place it in the containment vessel.");
+  Zif.Talk("Never!");
+  Zif.Talk("The relic shall never leave my side!");
+  actor.Talk("But Commander, the power is too much for one man!");
+  actor.Talk("Yield it before it destroys you.");
+  Zif.Talk("Error, number one.");
+  Zif.Talk("Never give up the gun.");
+  actor.Active = false;
+  Game.PlayMusicChannel(3, "sound/sound14.wav", false);
+  Zif.SkipTo(117, 115);
+  Game.PlayMusicChannel(4, "sound/sound15.wav", false);
+  Zif.PlayAnim("entities/zif/rr/fatalshot.sprite");
+  Game.StopMusicChannel(3);
+  Dead.SkipTo(117, 115);
+  Zif.PlayAnim("entities/zif/rr/shortwalk.sprite");
+  Game.StopMusicChannel(2);
+  Zif.Talk("What a shame.");
+  Zif.Talk("We could have ruled the cosmos together.");
+  Zif.SkipTo(500, 500);
+  Zif_Phone.SkipTo(157, 117);
+  Zif_Phone.PlayAnim("entities\zif\dd\phone_look.sprite");
+  Zif_Phone.Talk("Commander's log, stardate 432.2.");
+  Game.StopMusicChannel(4);
+  Zif_Phone.Talk("I have obtained the stolen artifact.");
+  Zif_Phone.Talk("In a slight contradiction to my orders, I have decided to enslave this planet.");
+  Game.PlayMusicChannel(3, "sound/sound11.wav", false);
+  Zif_Phone.SkipTo(500, 500);
+  Zif.SkipTo(157, 117);
+  Zif.Talk("Mwwwah huh huh huh huh huh huh...");
+  TheEnd.SkipTo(103, 52);
+  Sleep(1000);
+  Game.StopMusicChannel(1);
+  Sleep(1000);
+  Game.StopMusicChannel(3);
+  Sleep(1000);
+  Game.StopMusicChannel(2);
+  Sleep(1000);
+  Game.StopMusicChannel(0);
+  Sleep(1000);
+  Game.ChangeScene("scenes\title\title.scene");
   }
 
   verb_cleanBar();

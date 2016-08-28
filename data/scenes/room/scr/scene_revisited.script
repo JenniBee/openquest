@@ -1,21 +1,27 @@
 #include "scenes/room/scr/variables.script"
 
-if(PlantPermission == true && PlantChecked != true)
-{
-Plant.SkipTo(600, 600);
-PlantMoved.SkipTo(114, 54);
-PlantWasMoved = true;
-}
-
 if(PlatePressed == true)
 {
+Game.Interactive=true;
+Scene.DeleteEntity("carol");
+
 Game.PlayMusicChannel(2, "sound\sound1.wav", true);
+CabinetCutscene.SkipTo(600, 600);
+CabClosed.SkipTo(127, 50);
+Scene.CreateEntity("carol");
 actor.SkipTo(259, 110);
 actor.TurnTo(DI_LEFT);
 Carol.SkipTo(69, 102);
 GreenLight.SkipTo(268, 38);
 DoorClosed.SkipTo(600, 600); 
 Door.SkipTo(260, 44);
+
+  if(PlantPermission == true && PlantChecked != true)
+  {
+  Plant.SkipTo(600, 600);
+  PlantMoved.SkipTo(114, 54);
+  PlantWasMoved = true;
+  }
 
   if(CabinetOpen == true)
   {

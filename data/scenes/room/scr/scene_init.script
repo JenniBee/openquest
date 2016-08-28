@@ -1,18 +1,28 @@
-#include "scenes/room/scr/variables.script"
+#include "scenes/room/scr/scene_revisited.script"
 
 ////////////////////////////////////////////////////////////////////////////////
 
 var Zob = Game.LoadActor("actors\zob\zob.actor");
-var CutsceneOver;
+Zob.SkipTo(400, 400);
+actor.Active = true;
+actor.SkipTo(400, 400);
+
+Zob.SubtitlesPosX = 0; 
+Zob.SubtitlesPosY = -20;
+
+InRoom2 = false;
 
 if(PlatePressed != true)
 {
 while(CutsceneOver != true)
 {
+
 Zob.SkipTo(400, 114);
 Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(400, 114);
-Carol.SkipTo(400, 114);
+CarolCutscene.SkipTo(400, 114);
+CabClosed.SkipTo(400, 114);
+CabinetCutscene.SkipTo(127, 50);
 
 Scene.SkipTo(Zob);
 
@@ -34,12 +44,12 @@ Zif_Phone.Talk("Arrival complete on the planet of mostly water.");
 Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(202, 117);
 
-Carol.SkipTo(69, 102);
-Carol.PlayAnim("entities\carol\rr\walk.sprite");
+CarolCutscene.SkipTo(69, 102);
+CarolCutscene.PlayAnim("entities\carol\rr\walk.sprite");
 Game.PlayMusicChannel(2, "sound\sound1.wav", true);
-Carol.Talk("Are You Done In Here?");
+CarolCutscene.Talk("Are you done in here?");
 
-var GoToCarolX = Carol.X + 10;
+var GoToCarolX = CarolCutscene.X + 10;
 
 Zob.GoTo(100, 106);
 Zob.TurnTo(DI_LEFT);
@@ -88,12 +98,15 @@ if(StateRoom==null)
 
 function RegularGameplay()
 {
+CarolCutscene.Active = false;
 CutsceneOver = true;
 
-Game.Interactive=false;
+Carol.SkipTo(69, 102);
 
 actor.SkipTo(98, 123);
 actor.TurnTo(DI_DOWN);
+CabClosed.SkipTo(127, 50);
+CabinetCutscene.Active = false;
 
 Zob.Active = false;
 Zif.Active = false;
@@ -101,18 +114,18 @@ Zif_Left.Active = false;
 Zif_Phone_Left.Active = false;
 Zif_Phone.Active = false;
 
+verb_changeMode(0);
+Zif_Aimless.SkipTo(134, 114);
+
+Game.Interactive=true;
+
+Game.StopMusicChannel(2);
+Game.PlayMusicChannel(2, "sound\sound1.wav", true);
 
 Game.PlayMusicChannel(1, "music\music1.wav", true);
 Game.MusicCrossfade(0, 1, 3000);
 
 Game.Interactive=true;
-
-Zif_Aimless.SkipTo(134, 114);
-Carol.SkipTo(69, 102);
-
-Sleep(500);
-
-verb_changeMode(0);
 
 Zif_Aimless.PlayAnim("entities\zif\aimless.sprite");
 }

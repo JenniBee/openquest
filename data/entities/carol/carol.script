@@ -203,6 +203,7 @@ else
         Carol.Talk("Carol.");
         actor.Talk("Greetings Carol.");
         KnowCarol = true;
+        self.Caption = "Carol";
         break;
       case 1:
         Carol.Talk("I just cleaned down there. You'll get the floor dirty.");

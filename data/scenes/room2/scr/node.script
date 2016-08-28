@@ -144,6 +144,19 @@ on "gun"
   Game.Interactive = false;
   GoToObject();
   if(EncryptionBroken != true) actor.Talk("The suspension cage prevents a clear shot of the node.");
+  if(EncryptionBroken == true && LoadedWeapon != true) actor.Talk("The weapon is not loaded.");
+  if(EncryptionBroken == true && LoadedWeapon == true)
+  {
+  Game.PlayMusicChannel(3, "sound/sound13.wav", false);
+  actor.SkipTo(114, 83);
+  actor.PlayAnim("actors/zob/rr/shoot.sprite");
+  actor.SkipTo(105, 90);
+  Game.StopMusicChannel(3);
+
+  actor.Talk("Missed.");
+  actor.Talk("I'm not familiar with the aiming reticule.");
+  ShotAtNode = true;
+  }
   verb_cleanBar();
   Game.Interactive = true;
 }
@@ -201,7 +214,7 @@ on "MouseLeave"
 
 function GoToObject()
 {
-actor.GoTo(101, 94);
+actor.GoTo(105, 90);
 actor.TurnTo(DI_RIGHT);
 }
 

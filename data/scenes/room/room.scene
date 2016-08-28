@@ -198,7 +198,7 @@ SCENE {
 
     ENTITY {
       NAME="cabinet"
-      CAPTION="Cabinet"
+      CAPTION=""
       ACTIVE=TRUE
       X=143
       Y=102
@@ -223,11 +223,27 @@ SCENE {
     }
 
     ENTITY {
-      NAME="cabinet_closed"
-      CAPTION="Cabinet"
+      NAME="cabinet_cutscene"
+      CAPTION=""
       ACTIVE=TRUE
       X=127
       Y=50
+      SCALABLE=FALSE
+      INTERACTIVE=TRUE
+      COLORABLE=FALSE
+      EDITOR_SELECTED=FALSE
+      WALK_TO_X=0
+      WALK_TO_Y=0
+      SCRIPT="scenes\room\scr\cabinet.script"
+      SPRITE="scenes\room\sprites\cabinet_closed.bmp"
+    }
+
+    ENTITY {
+      NAME="cabinet_closed"
+      CAPTION="Cabinet"
+      ACTIVE=TRUE
+      X=257
+      Y=306
       SCALABLE=FALSE
       INTERACTIVE=TRUE
       COLORABLE=FALSE
@@ -388,6 +404,25 @@ SCENE {
     SCRIPT="entities\carol\carol.script"
     SPRITE="entities\carol\rr\vacuum.sprite"
     FONT="fonts\outline_blue.font"
+      TALK="entities\carol\rr\talk.sprite"
+  }
+
+  ENTITY {
+    NAME="carol_cutscene"
+    CAPTION=""
+    ACTIVE=TRUE
+    X=204
+    Y=259
+    SCALABLE=FALSE
+    INTERACTIVE=TRUE
+    COLORABLE=FALSE
+    EDITOR_SELECTED=FALSE
+    WALK_TO_X=0
+    WALK_TO_Y=0
+    SCRIPT="entities\carol\carol.script"
+    SPRITE="entities\carol\rr\vacuum.sprite"
+    FONT="fonts\outline_blue.font"
+      TALK="entities\carol\rr\talk.sprite"
   }
 
   ENTITY {
@@ -410,7 +445,7 @@ SCENE {
 
   ENTITY {
     NAME="zif"
-    CAPTION="Commander Zif"
+    CAPTION=""
     ACTIVE=TRUE
     X=226
     Y=356
@@ -428,7 +463,7 @@ SCENE {
 
   ENTITY {
     NAME="zif_left"
-    CAPTION="Commander Zif"
+    CAPTION=""
     ACTIVE=TRUE
     X=176
     Y=354
@@ -446,7 +481,7 @@ SCENE {
 
   ENTITY {
     NAME="zif_phone"
-    CAPTION="Commander Zif"
+    CAPTION=""
     ACTIVE=TRUE
     X=211
     Y=359
@@ -464,7 +499,7 @@ SCENE {
 
   ENTITY {
     NAME="zif_phone_left"
-    CAPTION="Commander Zif"
+    CAPTION=""
     ACTIVE=TRUE
     X=199
     Y=356

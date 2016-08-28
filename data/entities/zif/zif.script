@@ -20,7 +20,7 @@ on "LookAt"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -45,7 +45,7 @@ on "batteries"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -70,7 +70,7 @@ on "scanner"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -97,7 +97,7 @@ on "Smell"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -122,7 +122,7 @@ on "Open"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -147,7 +147,7 @@ on "Move"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -172,39 +172,7 @@ on "Use"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
-    {
-    Zif.PlayAnim("entities\Zif\aimless.sprite");
-    }
-  else   
-    {
-    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
-    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
-    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
-    Zif.PlayAnim("entities\Zif\aimless.sprite");
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-on "gun"
-{
-  verb_setBar(Command.Verb + " "+self.Caption);
-  GoToObject();
-  Game.Interactive=false;
-
-if(Command.Verb == "Use")
-  {
-  actor.Talk("I don't need to shoot him.");
-  } 
-if(Command.Verb == "Give")
-  {
-  actor.Talk("And lose my advantage?");
-  }
-
-  verb_cleanBar();
-  Game.Interactive=true;
-
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -230,7 +198,7 @@ on "keycard"
   verb_cleanBar();
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }
@@ -304,7 +272,40 @@ on "TalkTo"
 
   Game.Interactive=true;
 
-  if(Zif.X <= 195)
+  if(Zif.X <= 185)
+    {
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+  else   
+    {
+    Zif.PlayAnim("entities\Zif\rr\stand.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\ll\walk.sprite");
+    Zif.PlayAnim("entities\Zif\aimless.sprite");
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+on "gun"
+{
+  verb_setBar(Command.Verb + " "+self.Caption);
+  GoToObject();
+
+  Game.Interactive = false;
+
+if(Command.Verb == "Use")
+  {
+  actor.Talk("I don't need to shoot him.");
+  } 
+if(Command.Verb == "Give")
+  {
+  actor.Talk("And lose my advantage?");
+  }
+
+  verb_cleanBar();
+  Game.Interactive=true;
+
+  if(Zif.X <= 185)
     {
     Zif.PlayAnim("entities\Zif\aimless.sprite");
     }

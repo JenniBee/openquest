@@ -16,8 +16,10 @@ var Plant = Scene.GetNode("plant");
 var CabOpen = Scene.GetNode("cabinet_open");
 var CabClosed = Scene.GetNode("cabinet_closed");
 
+var CabinetCutscene = Scene.GetNode("cabinet_cutscene");
 var Cabinet = Scene.GetNode("cabinet");
 var Carol = Scene.GetNode("carol");
+var CarolCutscene = Scene.GetNode("carol_cutscene");
 
 var Door = Scene.GetNode("door");
 var DoorClosed = Scene.GetNode("closed_door");

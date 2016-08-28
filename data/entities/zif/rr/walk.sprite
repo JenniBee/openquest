@@ -73,6 +73,22 @@ SPRITE {
     DELAY = 90
     MOVE {4, 0}
     KEYFRAME=FALSE
+    IMAGE = "entities\zif\rr\walk\00.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {4, 0}
+    KEYFRAME=FALSE
+    IMAGE = "entities\zif\rr\walk\01.bmp"
+    HOTSPOT {14, 51}
+  }
+
+  FRAME {
+    DELAY = 90
+    MOVE {4, 0}
+    KEYFRAME=FALSE
     IMAGE = "entities\zif\rr\walk\02.bmp"
     HOTSPOT {14, 51}
   }
