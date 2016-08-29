@@ -1,14 +1,14 @@
 #include "scenes/room/scr/variables.script"
 
-if(PlatePressed == true)
+if(InRoom2 == true || SolvedPuzzle == true)
 {
 Game.Interactive=true;
-Scene.DeleteEntity("carol");
+InRoom2 = false;
+actor.Active = true;
 
 Game.PlayMusicChannel(2, "sound\sound1.wav", true);
 CabinetCutscene.SkipTo(600, 600);
 CabClosed.SkipTo(127, 50);
-Scene.CreateEntity("carol");
 actor.SkipTo(259, 110);
 actor.TurnTo(DI_LEFT);
 Carol.SkipTo(69, 102);
@@ -36,12 +36,12 @@ Door.SkipTo(260, 44);
   PlantWasMoved = true;
   }
 
-  if(Game.IsItemTaken("ammunition") != true && PlantWasMoved == true)
+  if(Game.IsItemTaken("ammunition") != true && PlantWasMoved == true && LoadedWeapon != true)
   {
   Ammunition.SkipTo(111, 86);
   }
   
-if(EncryptionBroken == true)
+if(EncryptionBroken != true)
 {
 Zif_Aimless.DetachScript("entities\zif\aimless.sprite");
 Zif_Aimless.SkipTo(144, 117);

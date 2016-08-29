@@ -1,0 +1,38 @@
+#include "scripts\base.inc"
+
+var TrianglePiece = Scene.GetNode("piece6");
+var IsLeftClicked;
+
+////////////////////////////////////////////////////////////////////////////////
+on "LeftClick"
+{
+IsLeftClicked = true;
+
+  while(IsLeftClicked==true)
+    {
+       TrianglePiece.X = Game.MouseX;
+       TrianglePiece.Y = Game.MouseY;
+       Sleep(50);
+    }
+}
+
+on "LeftRelease"
+{
+
+  if(TrianglePiece.X > 276 && TrianglePiece.X < 286 && TrianglePiece.Y > 118 && TrianglePiece.Y < 128) 
+  {
+  Piece6 = true;
+  IsLeftClicked = false;
+  TrianglePiece.X = 282;
+  TrianglePiece.Y = 122;
+  }
+
+  else
+  {
+  Piece6 = false;
+  IsLeftClicked = false;
+  TrianglePiece.X = TrianglePiece.X;
+  TrianglePiece.Y = TrianglePiece.Y;
+  }
+}
+

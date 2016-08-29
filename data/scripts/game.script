@@ -142,9 +142,8 @@ on "LeftClick"
     Command.Running = "";
     Scene.ApplyEvent("LeftClick");
   }
+
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////////
 on "RightClick"

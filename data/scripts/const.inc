@@ -35,3 +35,20 @@ global PlatePressed; // Check if the plate has been pressed
 global StateRoom2; // Check whether Room2 has been visited
 global CabinetOpen; // Check if the cabinet in room 1 is open
 global CabinetChecked; // Check if the cabinet has been searched
+global Triangle; // Check whether coming from the triangle puzzle
+global SolvedPuzzle; // If the triangle puzzle is solved
+
+// Triangle Pieces
+global Piece1;
+global Piece2;
+global Piece3;
+global Piece4;
+global Piece5;
+global Piece6;
+global Piece7;
+global Piece8;
+global Piece9;
+global Piece10;
+global Piece11;
+global Piece12;
+global AllPieces; // Check if all pieces are correctly placed

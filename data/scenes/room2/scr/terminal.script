@@ -143,18 +143,7 @@ on "Use"
   GoToObject();
   if(KeySlotActive == true && EncryptionBroken != true) 
     {
-    Forcefield.PlayAnim("entities/cup/forcefield_break.sprite");
-    Forcefield.SkipTo("400, 400");
-    actor.Talk("Looks like I broke the encryption.");
-    EncryptionBroken = true;
-    Zif.SkipTo(47, 102);
-    Zif.PlayAnim("entities/zif/rr/walk.sprite");
-    Zif.Talk("Well done Ensign. Now release the relic.");
-    actor.Talk("Small problem, sir.");
-    Zif.Talk("What's that?");
-    actor.Talk("It's still held in place.");
-    Zif.Talk("Then find a way to bring it down!");
-    actor.Talk("Aye, sir.");
+    Game.ChangeScene("scenes\triangle\triangle.scene");
     }
   else actor.Talk("The terminal is offline.");
   verb_cleanBar();

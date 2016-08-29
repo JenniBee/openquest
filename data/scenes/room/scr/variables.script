@@ -47,3 +47,6 @@ Zif_Left.SubtitlesPosY = -20;
 
 Carol.SubtitlesPosX = 0; 
 Carol.SubtitlesPosY = -20;
+
+CarolCutscene.SubtitlesPosX = 0; 
+CarolCutscene.SubtitlesPosY = -20;

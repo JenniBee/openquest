@@ -8,32 +8,67 @@ SPRITE {
   CONTINUOUS=FALSE
   PRECISE=TRUE
   FRAME {
-    DELAY = 400
+    DELAY = 150
     KEYFRAME=FALSE
-    IMAGE = "entities\carol\rr\vacuum\00.bmp"
+    IMAGE = "entities\carol\rr\talk\00.bmp"
     HOTSPOT {33, 57}
     EDITOR_SELECTED=TRUE
   }
-
   FRAME {
-    DELAY = 400
+    DELAY = 150
     KEYFRAME=FALSE
-    IMAGE = "entities\carol\rr\vacuum\01.bmp"
+    IMAGE = "entities\carol\rr\talk\02.bmp"
     HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
   }
-
   FRAME {
-    DELAY = 400
+    DELAY = 150
     KEYFRAME=FALSE
-    IMAGE = "entities\carol\rr\vacuum\02.bmp"
+    IMAGE = "entities\carol\rr\talk\03.bmp"
     HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
   }
-
   FRAME {
-    DELAY = 400
+    DELAY = 150
     KEYFRAME=FALSE
-    IMAGE = "entities\carol\rr\vacuum\01.bmp"
+    IMAGE = "entities\carol\rr\talk\05.bmp"
     HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
+  }
+  FRAME {
+    DELAY = 150
+    KEYFRAME=FALSE
+    IMAGE = "entities\carol\rr\talk\06.bmp"
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
+  }
+  FRAME {
+    DELAY = 150
+    KEYFRAME=FALSE
+    IMAGE = "entities\carol\rr\talk\08.bmp"
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
+  }
+  FRAME {
+    DELAY = 150
+    KEYFRAME=FALSE
+    IMAGE = "entities\carol\rr\talk\09.bmp"
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
+  }
+  FRAME {
+    DELAY = 150
+    KEYFRAME=FALSE
+    IMAGE = "entities\carol\rr\talk\05.bmp"
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
+  }
+  FRAME {
+    DELAY = 150
+    KEYFRAME=FALSE
+    IMAGE = "entities\carol\rr\talk\06.bmp"
+    HOTSPOT {33, 57}
+    EDITOR_SELECTED=TRUE
   }
 
 }

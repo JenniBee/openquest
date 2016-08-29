@@ -1,30 +1,79 @@
 #include "scripts\base.inc"
 
+global WinMenu;
+
+#include "interface\verbbar\verbbar_functions.inc"
+
 ////////////////////////////////////////////////////////////////////////////////
 InRoom2 = true;
 
-actor.SkipTo(87, 105);
-actor.Direction = DI_RIGHT;
-actor.SubtitlesPosX = 0; //position of subtitles for your actor
-actor.SubtitlesPosY = -20;
 var Zif = Scene.GetNode("zif");
 var Forcefield = Scene.GetNode("forcefield");
+verb_changeMode(0);
 
-// point the "camera" at the actor
-Scene.SkipTo(actor);
+actor.SkipTo(87, 105);
+actor.Direction = DI_RIGHT;
 
-if(EncryptionBroken == true)
+if(Piece1 === true && Piece2 == true && Piece3 == true && Piece4 == true && Piece5 == true && Piece6 == true && Piece7 == true && Piece8 == true && Piece9 == true && Piece10 == true && Piece11 == true && Piece12 == true) AllPieces = true;
+
+if(Triangle == true && AllPieces != true)
 {
+    Triangle = false;
+    actor.SkipTo(200, 102);
+    actor.TurnTo(DI_LEFT);
+}
+
+if(EncryptionBroken == true && AllPieces != true)
+{
+actor.SkipTo(87, 105);
+actor.Direction = DI_RIGHT;
+
 Zif.SkipTo(95, 102);
 Forcefield.Active = false;
 }
 
-Game.StopMusicChannel(2);
+if(EncryptionBroken == true && SolvedPuzzle = true)
+{
+actor.SkipTo(87, 105);
+actor.Direction = DI_RIGHT;
+
+Zif.SkipTo(95, 102);
+Forcefield.Active = false;
+}
+
+if(AllPieces == true && SolvedPuzzle != true)
+{
+    verb_changeMode(2);
+    Game.Interactive=false;
+    Triangle = false;
+    SolvedPuzzle = true;
+    actor.SkipTo(200, 102);
+    actor.TurnTo(DI_LEFT);
+    Forcefield.PlayAnim("entities/cup/forcefield_break.sprite");
+    Forcefield.SkipTo("400, 400");
+    actor.Talk("Looks like I broke the encryption.");
+    EncryptionBroken = true;
+    Zif.SkipTo(47, 102);
+    Zif.PlayAnim("entities/zif/rr/walk.sprite");
+    Zif.Talk("Well done Ensign. Now release the relic.");
+    actor.Talk("Small problem, sir.");
+    Zif.Talk("What's that?");
+    actor.Talk("It's still held in place.");
+    Zif.Talk("Then find a way to bring it down!");
+    actor.Talk("Aye, sir.");
+    verb_changeMode(0);
+    Game.Interactive=true;
+}
 
 if(StateRoom2 != true)
 {
+actor.SkipTo(87, 105);
+actor.Direction = DI_RIGHT;
+
 Game.StopMusicChannel(0);
 Game.PlayMusicChannel(0, "music\music2.wav", true);
 Game.MusicCrossfade(1, 0, 3000);
 StateRoom2 = true;
 }
+
+Game.StopMusicChannel(2);

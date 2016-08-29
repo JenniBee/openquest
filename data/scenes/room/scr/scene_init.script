@@ -10,8 +10,6 @@ actor.SkipTo(400, 400);
 Zob.SubtitlesPosX = 0; 
 Zob.SubtitlesPosY = -20;
 
-InRoom2 = false;
-
 if(PlatePressed != true)
 {
 while(CutsceneOver != true)

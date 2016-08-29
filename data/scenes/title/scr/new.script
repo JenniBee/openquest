@@ -25,6 +25,20 @@ on "LeftClick"
   StateRoom2 = false;
   CabinetOpen = false;
   CabinetChecked = false;
+  Triangle = false;
+  Piece1 = false;
+  Piece2 = false;
+  Piece3 = false;
+  Piece4 = false;
+  Piece5 = false;
+  Piece6 = false;
+  Piece7 = false;
+  Piece8 = false;
+  Piece9 = false;
+  Piece10 = false;
+  Piece11 = false;
+  Piece12 = false;
+  AllPieces = false;
 
   // Reset Items
 
