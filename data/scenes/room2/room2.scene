@@ -72,7 +72,7 @@ SCENE {
 
     ENTITY {
       NAME="door"
-      CAPTION="Door"
+      CAPTION="Main Room"
       ACTIVE=TRUE
       X=71
       Y=107

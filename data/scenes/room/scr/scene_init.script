@@ -5,7 +5,6 @@
 var Zob = Game.LoadActor("actors\zob\zob.actor");
 Zob.SkipTo(400, 400);
 actor.Active = true;
-actor.SkipTo(400, 400);
 
 Zob.SubtitlesPosX = 0; 
 Zob.SubtitlesPosY = -20;
@@ -14,7 +13,7 @@ if(PlatePressed != true)
 {
 while(CutsceneOver != true)
 {
-
+actor.SkipTo(400, 400);
 Zob.SkipTo(400, 114);
 Zif_Phone.SkipTo(400, 114);
 Zif.SkipTo(400, 114);

@@ -39,6 +39,7 @@ on "LeftClick"
   Piece11 = false;
   Piece12 = false;
   AllPieces = false;
+  SolvedPuzzle = false; 
 
   // Reset Items
 

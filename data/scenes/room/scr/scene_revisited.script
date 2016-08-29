@@ -1,5 +1,7 @@
 #include "scenes/room/scr/variables.script"
 
+actor.SkipTo(259, 110);
+
 if(InRoom2 == true || SolvedPuzzle == true)
 {
 Game.Interactive=true;
@@ -9,7 +11,6 @@ actor.Active = true;
 Game.PlayMusicChannel(2, "sound\sound1.wav", true);
 CabinetCutscene.SkipTo(600, 600);
 CabClosed.SkipTo(127, 50);
-actor.SkipTo(259, 110);
 actor.TurnTo(DI_LEFT);
 Carol.SkipTo(69, 102);
 GreenLight.SkipTo(268, 38);

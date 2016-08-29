@@ -6,6 +6,9 @@ global WinMenu;
 
 on "LeftClick"
 {
+
+  if(Piece1 === true && Piece2 == true && Piece3 == true && Piece4 == true && Piece5 == true && Piece6 == true && Piece7 == true && Piece8 == true && Piece9 == true && Piece10 == true && Piece11 == true && Piece12 == true) AllPieces = true;
+
   Triangle = true;
 
   Game.ChangeScene("scenes\room2\room2.scene");
