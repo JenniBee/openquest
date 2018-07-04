@@ -1,0 +1,13 @@
+# OpenQuest
+
+This game was originally created by Michael Sheail in October 2007 for the Adventure Game Studio engine. 
+
+It is a short two room demo that demonstrates a number of the basic and intermediate features available in the engine.
+
+Because it was a released with full source code and game assets available, it acted as a useful too for learning the engine.
+
+The code and all assets are free to modify and distribute, so as a result, it has been converted to other engines. 
+
+Source code and binaries are now available for the following engines: Adventure Game Studio, SCUMM compiled with ScummC, and Wintermute.
+
+For more information on the game, refer to README.AGS
