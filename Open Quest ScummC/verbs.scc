@@ -1,0 +1,258 @@
+/* ScummC
+ * Copyright (C) 2007  Alban Bedel
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "verbs.sch"
+
+verb backgroundVerb;
+
+
+room Verbs {
+
+    object background {
+        states = {
+            { 0, 0, "graphics/verbs/verb_background.bmp" }
+        };
+    }
+
+    chset verbChset = "verbs.char";
+
+    // setup all the verbs
+    script setupVerbs() {
+        int color,backColor,hiColor,dimColor,l,c,vrb;
+
+        color = VERB_COLOR;
+        hiColor = VERB_HI_COLOR;
+        dimColor = VERB_DIM_COLOR;
+        backColor = VERB_BACK_COLOR;
+
+        initCharset(verbChset);
+
+        setCurrentVerb(backgroundVerb);
+        initVerb();
+        setVerbObject(background,Verbs);
+        setVerbXY(0,144);
+
+        sntcVerb = WalkTo;
+        //sntcObjA = 0;
+        //sntcObjB = 0;
+
+        setCurrentVerb(SntcLine);
+        initVerb();
+        setVerbName("%v{sntcVerb} %n{sntcObjADesc} %s{sntcPrepo} %n{sntcObjBDesc}");
+        setVerbXY(160,147);
+        setVerbColor(dimColor);
+        verbCenter();
+
+        setCurrentVerb(WalkTo);
+        initVerb();
+        setVerbName("Walk to");
+        setVerbKey('w');
+
+        setCurrentVerb(Give);
+        initVerb();
+        setVerbName("Give");
+        setVerbXY(146,174);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('g');
+        
+        setCurrentVerb(PickUp);
+        initVerb();
+        setVerbName("Pick up");
+        setVerbXY(102,161);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('p');
+
+        setCurrentVerb(Use);
+        initVerb();
+        setVerbName("Use");
+        setVerbXY(146,187);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('u');
+
+        setCurrentVerb(Open);
+        initVerb();
+        setVerbName("Open");
+        setVerbXY(188,161);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('o');
+
+        setCurrentVerb(LookAt);
+        initVerb();
+        setVerbName("Examine");
+        setVerbXY(146,161);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('e');
+
+        setCurrentVerb(Smell);
+        initVerb();
+        setVerbName("Smell");
+        setVerbXY(188,174);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('s');
+
+        setCurrentVerb(TalkTo);
+        initVerb();
+        setVerbName("Talk to");
+        setVerbXY(102,174);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('t');
+
+        setCurrentVerb(Move);
+        initVerb();
+        setVerbName("Move");
+        setVerbXY(188,187);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        verbCenter();
+        setVerbOn();
+        setVerbKey('m');
+
+        setCurrentVerb(invUp);
+        initVerb();
+        setVerbName("\x03");
+        setVerbXY(309,165);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        //verbCenter();
+
+        setCurrentVerb(invDown);
+        initVerb();
+        setVerbName("\x02");
+        setVerbXY(309,185);
+        setVerbBackColor(backColor);
+        setVerbColor(color);
+        setVerbHiColor(hiColor);
+        setVerbDimColor(dimColor);
+        //verbCenter();
+
+        for(l = 0,vrb = invSlot0 ; l < INVENTORY_LINE ; l++)
+            for(c = 0 ; c < INVENTORY_COL ; c++, vrb++) {
+                setCurrentVerb(vrb);
+                initVerb();
+                //verbCenter();
+                setVerbXY(216 + c*48,162 + l*18);
+                setVerbOn();
+            }
+        dimInt(invObj,8);
+
+        saveVerbs(Give, Move, 2); // Main verbs (stored in slot 2)
+        saveVerbs(invSlot0, invSlot0+7, 3); // Inventory items (stored in slot 3)
+
+        initCharset(ResRoom::chtest);
+    }
+
+    // turn on all the verb for the interface 
+    // and fire the mouse watching thread
+    script showVerbs(int show) {
+        int* vrb;
+        int i;
+
+        if(!!show == verbsOn) return;
+
+        if (show)
+        {
+            setCurrentVerb(backgroundVerb);
+            setVerbOn();
+            redrawVerb();
+
+            restoreVerbs(Give, Move, 2); // Show main verbs
+            restoreVerbs(invSlot0, invSlot0+7, 3); // Show inventory items
+ 
+            ResRoom::inventoryHandler( 0 ); // reset display in case any items have been picked up
+            
+            // The rest can be turned on manually
+            setCurrentVerb(SntcLine);
+            setVerbOn();
+            redrawVerb();
+            setCurrentVerb(invUp);
+            setVerbOn();
+            redrawVerb();
+            setCurrentVerb(invDown);
+            setVerbOn();
+            redrawVerb();
+        }
+        else
+        {
+            saveVerbs(Give, Move, 2); // Hide main verbs
+            saveVerbs(invSlot0, invSlot0+7, 3); // Hide inventory items
+
+            // The rest can be turned off manually
+            setCurrentVerb(SntcLine);
+            setVerbOff();
+            redrawVerb();
+            setCurrentVerb(invUp);
+            setVerbOff();
+            redrawVerb();
+            setCurrentVerb(invDown);
+            setVerbOff();
+
+            redrawVerb();
+            setCurrentVerb(backgroundVerb);
+            setVerbOff();
+            redrawVerb();
+        }
+
+        verbsOn = !!show;
+
+    }
+
+
+}

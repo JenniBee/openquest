@@ -1,0 +1,285 @@
+/* ScummC
+ * Copyright (C) 2007  Alban Bedel, Gerrit Karius
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "inventoryitems.sch"
+#include "actors.sch"
+#include "secretroom.sch"
+
+#include "zob_anim.sch"
+
+room InventoryItems {
+
+    sound loadingGunSnd = "loading_gun.soun";
+    // the inventory icons
+    
+    
+    object axe {
+        w = 40;
+        h = 16;
+        x = 0;
+        name = "the axe";
+        states = {
+            { 0, 0, "graphics/inventory_items/inv_axe.bmp" }
+        };
+        state = 1;
+
+        verb(int vrb,int objA,int objB) {
+        case Icon:
+            startScript2(vrb, [ InventoryItems::axe, objA, objB ]);
+            return;
+        }
+    }
+    
+    object gun {
+        name = "gun";
+        states = {
+            { 0, 0, "graphics/inventory_items/gun_40.bmp" }
+        };
+        state = 0;
+
+        verb(int vrb,int objA,int objB) {
+        case LookAt:
+            egoSay("A crude ballistic firearm fashioned from a primitive alloy.");
+            return;
+        case Preposition:
+            if(vrb == Give)
+                sntcPrepo[0] = "to";
+            else
+                sntcPrepo[0] = "on";
+            return;
+        case Use:
+            switch(objB) {
+            case carol:
+                egoSay("Terminating this lifeform could attract unwarranted attention.");
+                if(getObjectState(gun) < 2) {
+                    waitForMessage();
+                    egoSay("And the weapon is not loaded anyway.");
+                }
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+            }
+            return;
+        case Give:
+            switch(objB) {
+            case commanderZif:
+                if( ! SecretRoom::hasShotAtNode ) {
+                    egoSay("And lose my advantage?");
+                    return;
+                }
+                SecretRoom::outro();
+                break;
+            default:
+                egoSay("I might need this.");
+            }
+            return;
+        }
+    }
+
+    // This is in a separate script because calling setObjectOwner()
+    // kill the object's script
+    script loadGun() {
+        setObjectState( gun, 2 );
+        setObjectOwner( bullets, 0 );
+        startSound(loadingGunSnd);
+        egoSay("The weapon has been loaded.");
+    }
+
+    object bullets {
+        name = "ammunition";
+        states = {
+            { 0, 0, "graphics/inventory_items/bullets.bmp" }
+        };
+        verb(int vrb,int objA,int objB) {
+        case LookAt:
+            egoSay("This ammunition may be compatible with a projectile weapon.");
+            return;
+        case Preposition:
+            if(vrb == Give)
+                sntcPrepo[0] = "to";
+            else
+                sntcPrepo[0] = "with";
+            return;
+        case UsedWith:
+        case Use:
+            switch(objB) {
+            case gun:
+                loadGun();
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+            }
+            return;
+        }
+    }
+
+    object card {
+        name = "card";
+        states = {
+            { 0, 0, "graphics/inventory_items/card.bmp" }
+        };
+        verb(int vrb,int objA,int objB) {
+        case LookAt:
+            egoSay("This device could be used to interact with some form of hardware.");
+            return;
+        case Preposition:
+            if(vrb == Give)
+                sntcPrepo[0] = "to";
+            else
+                sntcPrepo[0] = "on";
+            return;
+        case Use:
+            switch(objB) {
+            case scanner:
+                egoSay("The key isn't compatible with this model.");
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+                break;
+            }
+            return;
+        case Give:
+            switch(objB) {
+            case carol:
+                actorSay(carol,"I see you've got mainframe clearance.\w"
+                         "I'm gonna be dusting in there soon.\w"
+                         "Try and keep it tidy.");
+                break;
+            case commanderZif:
+                Actors::pauseRoaming(commanderZif);
+                actorSay(commanderZif,"Excellent work Zob, a key.\w"
+                         "Keep this, use it to infiltrate the mainframe.");
+                waitForMessage();
+                Actors::resumeRoaming(commanderZif);
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+                break;
+            }
+            return;
+        }
+    }
+
+    object batteries {
+        name = "batteries";
+        states = {
+            { 0, 0, "graphics/inventory_items/batteries.bmp" }
+        };
+
+        verb(int vrb,int objA,int objB) {
+        case LookAt:
+            egoSay("They used to power the hand scanner.");
+            return;
+        case Preposition:
+            if(vrb == Give)
+                sntcPrepo[0] = "to";
+            else
+                sntcPrepo[0] = "with";
+            return;
+        case Use:
+            switch(objB) {
+            case scanner:
+                egoSay("They won't go back in.");
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+                break;
+            }
+        }
+    }
+
+    object scanner {
+        w = 40;
+        h = 16;
+        x = 0;
+        name = "scanner";
+        states = {
+            { 0, 0, "graphics/inventory_items/scanner_40.bmp" },
+            { 0, 0, "graphics/inventory_items/scanner_dead_40.bmp" }
+        };
+        state = 1;
+
+        verb(int vrb,int objA,int objB) {
+        case LookAt:
+            egoSay("Standard issue hand scanner.");
+            waitForMessage();
+            egoSay("Detects most of the EM spectrum.");
+            return;
+        case Use:
+            if( getObjectState( scanner ) == 2 ) {
+                egoSay("The scanner no longer functions.");
+                return;
+            }
+            egoSay("I'll scan the area.");
+            waitForMessage();
+            animateActor(VAR_EGO, zob_anim_scan);
+            delay(30);
+            animateActor(VAR_EGO, zob_anim_scan);
+            delay(30);
+            animateActor(VAR_EGO, zob_anim_scan);
+            delay(30);
+            if( getActorRoom(VAR_EGO) == SecretRoom )
+                egoSay("The artifact is in this room.");
+            else
+                egoSay("I am detecting the artifact near this location.");
+            return;
+        case Preposition:
+            if(vrb == Give)
+                sntcPrepo[0] = "to";
+            return;
+        case Give:
+            switch(objB) {
+            case commanderZif:
+                Actors::pauseRoaming(commanderZif);
+                actorSay(commanderZif,"You're the scientist on this team, you use it.");
+                waitForMessage();
+                Actors::resumeRoaming(commanderZif);
+                break;
+            default:
+                ResRoom::defaultAction(vrb,objA,objB);
+            }
+            return;
+        case Open:
+            if( getObjectState( scanner ) == 2 ) {
+                egoSay("The casing appears to be broken.");
+                return;
+            }
+            egoSay("I'll open up the housing.");
+            waitForMessage();
+            pickupObject( batteries, InventoryItems );
+            /*
+            pickupObject( InventoryItems::batteries2, InventoryItems );
+            pickupObject( InventoryItems::batteries3, InventoryItems );
+            pickupObject( InventoryItems::batteries4, InventoryItems );
+            pickupObject( InventoryItems::batteries5, InventoryItems );
+            pickupObject( InventoryItems::batteries6, InventoryItems );
+            pickupObject( InventoryItems::batteries7, InventoryItems );
+            pickupObject( InventoryItems::batteries8, InventoryItems );
+            */
+            setObjectState( objA, 2 );
+            drawObject( objA, 2 );
+            egoSay("The batteries have fallen out.");
+
+            return;
+        }
+    }
+
+}

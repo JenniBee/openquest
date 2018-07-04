@@ -1,0 +1,262 @@
+/* ScummC
+ * Copyright (C) 2007  Alban Bedel, Gerrit Karius
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+palette("../graphics/rooms/back01_merged.bmp");
+flags = FLIP;
+
+
+picture walking_e00 = {
+    glob = "../graphics/zif/frames/walk_W_??.bmp",
+    position = { -13, -48 }
+};
+
+picture walking_w00 = {
+    glob = "../graphics/zif/frames/walk_W_??.bmp",
+    position = { -13, -48 }
+};
+
+picture walking_n00 = {
+    glob = "../graphics/zif/frames/walk_N_??.bmp",
+    position = { -13, -48 }
+};
+
+picture walking_s00 = {
+    glob = "../graphics/zif/frames/walk_S_??.bmp",
+    position = { -13, -48 }
+};
+
+
+picture standE = {
+    path = "../graphics/zif/frames/stand_SE.bmp",
+    position = { -13, -48 }
+};
+
+picture standW = {
+    path = "../graphics/zif/frames/stand_SE.bmp",
+    position = { -13, -48 }
+};
+
+picture standN = {
+    path = "../graphics/zif/frames/stand_N.bmp",
+    position = { -13, -48 }
+};
+
+picture standS = {
+    path = "../graphics/zif/frames/stand_S.bmp",
+    position = { -13, -48 }
+};
+
+
+picture standWithPhoneE = {
+    path = "../graphics/zif/frames/standwithphone_SE.bmp",
+    position = { -13, -48 }
+};
+
+picture standWithPhoneW = {
+    path = "../graphics/zif/frames/standwithphone_SE.bmp",
+    position = { -13, -48 }
+};
+
+picture standWithPhoneN = {
+    path = "../graphics/zif/frames/standwithphone_N.bmp",
+    position = { -13, -48 }
+};
+
+picture standWithPhoneS = {
+    path = "../graphics/zif/frames/standwithphone_S.bmp",
+    position = { -13, -48 }
+};
+
+
+picture talking_e00 = {
+    glob = "../graphics/zif/frames/talk_SE_??.bmp",
+    position = { -13, -48 }
+};
+
+picture talking_w00 = {
+    glob = "../graphics/zif/frames/talk_SE_??.bmp",
+    position = { -13, -48 }
+};
+
+picture talking_N = {
+    path = "../graphics/zif/frames/talk_N_02.bmp",
+    position = { -13, -48 }
+};
+
+picture talking_s00 = {
+    glob = "../graphics/zif/frames/talk_S_??.bmp",
+    position = { -13, -48 }
+};
+
+
+picture talkToPhone_e00 = {
+    glob = "../graphics/zif/frames/talktophone_SE_??.bmp",
+    position = { -13, -48 }
+};
+
+picture talkToPhone_w00 = {
+    glob = "../graphics/zif/frames/talktophone_SE_??.bmp",
+    position = { -13, -48 }
+};
+
+picture talkToPhone_N = {
+    path = "../graphics/zif/frames/talktophone_N_02.bmp",
+    position = { -13, -48 }
+};
+
+picture talkToPhone_s00 = {
+    glob = "../graphics/zif/frames/talktophone_S_??.bmp",
+    position = { -13, -48 }
+};
+
+
+picture raisearmE = {
+    glob = "../graphics/zif/frames/raisearm_SE_??.bmp",
+    position = { -13, -48 }
+};
+
+picture lookaroundS = {
+    glob = "../graphics/zif/frames/lookaround_S_??.bmp",
+    position = { -13, -48 }
+};
+
+picture beam = {
+    glob = "../graphics/zif/frames/beam_??.bmp",
+    position = { -13, -48 }
+};
+
+picture aimE = {
+    glob = "../graphics/zif/frames/aim_E_??.bmp",
+    position = { -13, -48 }
+};
+
+picture aimupE = {
+    path = "../graphics/zif/frames/aimup_E.bmp",
+    position = { -13, -49 }
+};
+
+picture fireupE = {
+    path = "../graphics/zif/frames/fireup_E.bmp",
+    position = { -13, -57 }
+};
+
+picture firestraightE = {
+    path = "../graphics/zif/frames/firestraight_E.bmp",
+    position = { -13, -48 }
+};
+
+limb body;
+
+anim walk = {
+    E = { body(walking_e0000, walking_e0001, walking_e0002, walking_e0003) };
+    W = { body(walking_w0000, walking_w0001, walking_w0002, walking_w0003) };
+    S = { body(walking_s0000, walking_s0001, walking_s0002, walking_s0003) };
+    N = { body(walking_n0000, walking_n0001, walking_n0002, walking_n0003) };
+};
+
+anim stand = {
+    E = { body(standE) };
+    W = { body(standW) };
+    N = { body(standN) };
+    S = { body(standS) };
+};
+
+anim init = {
+    E = { body(standE) };
+    W = { body(standW) };
+    N = { body(standN) };
+    S = { body(standS) };
+};
+
+anim talkStart = {
+    E = { body(talking_e0000, talking_e0001, talking_e0002) };
+    W = { body(talking_w0000, talking_w0001, talking_w0002) };
+    S = { body(talking_s0000, talking_s0001, talking_s0002) };
+    N = { body(standN, talking_N, standN) };
+};
+
+anim talkStop = {
+    E = { body(standE) };
+    W = { body(standW) };
+    N = { body(standN) };
+    S = { body(standS) };
+};
+
+anim raiseArm @ 24 = {
+    E = { body(raisearmE00, raisearmE01) !LOOP };
+    W = { body(raisearmE00, raisearmE01) !LOOP };
+    N = { body(raisearmE00, raisearmE01) !LOOP };
+    S = { body(raisearmE00, raisearmE01) !LOOP };
+};
+
+anim lowerArm @ 28 = {
+    E = { body(raisearmE00, standE) !LOOP };
+    W = { body(raisearmE00, standW) !LOOP };
+    N = { body(raisearmE00, standN) !LOOP };
+    S = { body(raisearmE00, standS) !LOOP };
+};
+
+anim standWithPhone @ 32 = {
+    E = { body(standWithPhoneE) };
+    W = { body(standWithPhoneW) };
+    N = { body(standWithPhoneN) };
+    S = { body(standWithPhoneS) };
+};
+
+anim talkToPhoneStart @ 36 = {
+    E = { body(talkToPhone_e0000, talkToPhone_e0001, talkToPhone_e0002) };
+    W = { body(talkToPhone_w0000, talkToPhone_w0001, talkToPhone_w0002) };
+    S = { body(talkToPhone_s0000, talkToPhone_s0001, talkToPhone_s0002) };
+    N = { body(standWithPhoneN, talking_N, standWithPhoneN) };
+};
+
+anim lookAround @ 40 = {
+    E = { body(lookaroundS00, standWithPhoneS, lookaroundS01, standWithPhoneE) };
+    W = { body(lookaroundS00, standWithPhoneS, lookaroundS01, standWithPhoneW) };
+    S = { body(lookaroundS00, standWithPhoneS, lookaroundS01, standWithPhoneS) };
+    N = { body(lookaroundS00, standWithPhoneS, lookaroundS01, standWithPhoneN) };
+};
+
+anim beam @ 44 = {
+    E = { body(beam00, beam01, beam02, beam03, beam04, beam05, beam06, beam07, beam08, beam09, beam10, standE) !LOOP };
+    W = { body(beam00, beam01, beam02, beam03, beam04, beam05, beam06, beam07, beam08, beam09, beam10, standW) !LOOP };
+    S = { body(beam00, beam01, beam02, beam03, beam04, beam05, beam06, beam07, beam08, beam09, beam10, standS) !LOOP };
+    N = { body(beam00, beam01, beam02, beam03, beam04, beam05, beam06, beam07, beam08, beam09, beam10, standN) !LOOP };
+};
+
+anim fireup @ 48 = {
+    E = { body(aimE00, aimE01, aimupE, fireupE, aimupE, aimE01, aimE00) !LOOP };
+    W = { body(aimE00, aimE01, aimupE, fireupE, aimupE, aimE01, aimE00) !LOOP };
+    S = { body(aimE00, aimE01, aimupE, fireupE, aimupE, aimE01, aimE00) !LOOP };
+    N = { body(aimE00, aimE01, aimupE, fireupE, aimupE, aimE01, aimE00) !LOOP };
+};
+
+anim firestraight @ 52 = {
+    E = { body(aimE00, aimE01, aimE02, firestraightE, aimE02, aimE01, aimE00) !LOOP };
+    W = { body(aimE00, aimE01, aimE02, firestraightE, aimE02, aimE01, aimE00) !LOOP };
+    S = { body(aimE00, aimE01, aimE02, firestraightE, aimE02, aimE01, aimE00) !LOOP };
+    N = { body(aimE00, aimE01, aimE02, firestraightE, aimE02, aimE01, aimE00) !LOOP };
+};
+
+
+
+
+
+
+

@@ -1,0 +1,406 @@
+/* ScummC
+ * Copyright (C) 2007  Alban Bedel, Gerrit Karius
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "actors.sch"
+#include "dialog.sch"
+#include "inventoryitems.sch"
+#include "officeroom.sch"
+#include "secretroom.sch"
+
+#include "zif_anim.sch"
+
+// 2-dim array used like a struct array
+nibble *roaming;
+
+#define RM_STATE        0
+#define RM_MIN_X        1
+#define RM_MAX_X        2
+#define RM_MIN_Y        3
+#define RM_MAX_Y        4
+#define RM_NUM_FIELD    5
+
+// Roaming state
+#define RM_STOPPED      0
+#define RM_PAUSED       1
+#define RM_RUNNING      2
+
+room Actors {
+
+    // the costumes for our actors
+    cost ensignZobCost = "zob.cost";
+    cost commanderZifCost = "zif.cost";
+    cost carolCost = "carol.cost";
+
+    cost bluecupCost = "bluecup.cost";
+    cost cubeCost = "cube.cost";
+
+    object commanderZifObj;
+    object ensignZobObj;
+    
+    
+    script setZifOnThePhone() {
+        setCurrentActor(commanderZif);
+        setActorStandFrame( zif_anim_standWithPhone );
+        setActorInitFrame( zif_anim_standWithPhone );
+        setActorTalkFrame( zif_anim_talkToPhoneStart,
+                           zif_anim_standWithPhone  );
+        setActorStanding();
+        setCurrentActor(VAR_EGO);
+    }
+
+    
+    script setZifOffThePhone() {
+        setCurrentActor(commanderZif);
+        setActorStandFrame( zif_anim_stand );
+        setActorInitFrame( zif_anim_init );
+        setActorTalkFrame( zif_anim_talkStart, zif_anim_talkStop );
+        setActorStanding();
+        setCurrentActor(VAR_EGO);
+    }
+
+    script roam(int a) {
+        int event, dstX, dstY, paused;
+        dbgPrint("Roaming script for %n{a} started");
+        while(roaming[a,RM_STATE] > RM_STOPPED) {
+            // Debug stuff
+            paused = 0;
+            until(VAR_EGO != a && roaming[a,RM_STATE] > RM_PAUSED) {
+                unless(paused) {
+                    paused = 1;
+                    dbgPrint("Roaming script for %n{a} paused");
+                }
+                breakScript();
+            }
+            if(paused) dbgPrint("Roaming script for %n{a} resumed");
+            // Select a new state
+            event = getRandomNumber(1);
+            switch(event) {
+            case 1: // go somewhere else
+                do {
+                    breakScript();
+                    dstX = getRandomNumberRange(roaming[a,RM_MIN_X],
+                                                roaming[a,RM_MAX_X]);
+                    dstY = getRandomNumberRange(roaming[a,RM_MIN_Y],
+                                                roaming[a,RM_MAX_Y]);
+                } while(getActorRoom(a) == VAR_ROOM && getActorAt(dstX,dstY));
+                dbgPrint("%n{a} roam to %i{dstX}x%i{dstY}");
+                walkActorTo(a,dstX,dstY);
+                break;
+                // TODO: add more stuff. For that we probably want
+                //       to call the actor object to know how many extra
+                //       event the actor support, and to execute them.
+            }
+            delay(getRandomNumberRange(50,200));
+        }
+        dbgPrint("Roaming script for %n{a} finished");
+    }
+
+    script startRoaming(int a, int x_min, int x_max, int y_min, int y_max) {
+        unless(a < 0xF) {
+            dbgPrint("Invalid actor id (%i{a}), can't make it roam.");
+            return;
+        }
+        dbgPrint("Starting roam script for %n{a}");
+        unless(roaming) dimNibble2(roaming,0xF,RM_NUM_FIELD);
+        roaming[a,RM_MIN_X] = x_min; roaming[a,RM_MAX_X] = x_max;
+        roaming[a,RM_MIN_Y] = y_min; roaming[a,RM_MAX_Y] = y_max;
+        if(roaming[a,RM_STATE] > RM_STOPPED)
+            roaming[a,RM_STATE] = RM_RUNNING;
+        else {
+            roaming[a,RM_STATE] = RM_RUNNING;
+            startScript(1,roam,[a]);
+        }
+    }
+
+    script pauseRoaming(int a) {
+        unless(a < 0xF && roaming) return;
+        unless(roaming[a,RM_STATE] > RM_STOPPED) return;
+        dbgPrint("Pausing roam script for %n{a}");
+        setCurrentActor(a);
+        setActorStanding();
+        roaming[a,RM_STATE] = RM_PAUSED;
+    }
+
+    script resumeRoaming(int a) {
+        unless(a < 0xF && roaming) return;
+        unless(roaming[a,RM_STATE] > RM_STOPPED) return;
+        dbgPrint("Resuming roam script for %n{a}");
+        roaming[a,RM_STATE] = RM_RUNNING;
+    }
+
+    script stopRoaming(int a) {
+        unless(a < 0xF && roaming) return;
+        unless(roaming[a,RM_STATE] > RM_STOPPED) return;
+        dbgPrint("Stoping roam script for %n{a}");
+        setCurrentActor(a);
+        setActorStanding();
+        roaming[a,RM_STATE] = RM_STOPPED;
+    }
+    
+    // set the actor costume, etc
+    script setupActors() {
+        dbgPrint("setupActors()");
+        
+        // initialize ensignZob
+        setCurrentActor(ensignZob);
+        initActor();
+        setActorCostume(ensignZobCost);
+        setActorName("Ensign Zob");
+        setActorWalkSpeed(2,1);
+        setActorTalkColor(ZOB_COLOR);
+        setActorWidth(20);
+        setActorAnimSpeed(4);
+        setObjectClass(ensignZob, [ 0x80 + Person ]);
+        actorObject[ensignZob] = ensignZobObj;
+        
+        setActorPalette(29, 122); // scummvm fix
+
+
+        // set VAR_EGO so we can use the *Ego* functions
+        VAR_EGO = ensignZob;
+        
+        // initialize commanderZif
+        setCurrentActor(commanderZif);
+        initActor();
+        setActorCostume(commanderZifCost);
+        setActorName("Commander Zif");
+        setActorWalkSpeed(2,1);
+        setActorTalkColor(ZIF_COLOR);
+        setActorWidth(20);
+        setActorAnimSpeed(4);
+        setObjectClass(commanderZif, [ 0x80 + Person ]);
+        actorObject[commanderZif] = commanderZifObj;
+        
+        setActorPalette(29, 122); // scummvm fix
+        
+        setCurrentActor(carol);
+        initActor();
+        setActorCostume(carolCost);
+        setActorName("indigenous lifeform");
+        setActorWidth(20);
+        setActorIgnoreBoxes();
+        setActorAnimSpeed( 7 );
+        setActorTalkColor(CAROL_COLOR);
+        setObjectClass(carol, [ 0x80 + Person ]);
+        actorObject[carol] = OfficeRoom::carolObj;
+
+        setCurrentActor(bluecupActor);
+        initActor();
+        setActorCostume(bluecupCost);
+        setActorName("blue cup");
+        setActorAnimSpeed(2);
+        actorObject[bluecupActor] = SecretRoom::blueCup;
+        putActorAt(bluecupActor,159,97,SecretRoom);
+        setActorElevation( 55 );
+        setActorWidth(0);
+
+        setCurrentActor(cubeActor);
+        initActor();
+        setActorCostume(cubeCost);
+        // TODO: make the cube irresponsive to mouseover
+        setActorName("blue cup");
+        setActorAnimSpeed(2);
+        setObjectClass(cubeActor, [ 0x80 + ClassUntouchable ]);
+        actorObject[cubeActor] = SecretRoom::blueCup;
+        putActorAt(cubeActor,160,98,SecretRoom);
+        setActorElevation( 55 );
+        setActorWidth(0);
+
+        pickupObject( InventoryItems::scanner, InventoryItems );
+        //pickupObject( InventoryItems::card, InventoryItems );
+        //pickupObject( InventoryItems::gun, InventoryItems );
+        //pickupObject( InventoryItems::bullets, InventoryItems );
+        invOffset = 0;
+        
+        setCurrentActor(VAR_EGO);
+
+    }
+
+    // This script is called on pre-entry to load the actor
+    // objects from this room
+    script loadObjects() {
+        loadFlObject(commanderZifObj,Actors);
+        loadFlObject(ensignZobObj,Actors);
+    }
+    
+    script zobTalkToZif() {
+            char* sentence;
+
+            cutscene(1) {
+                actorFace( commanderZif, VAR_EGO );
+                actorSay(commanderZif,"Yes, ensign?");
+                waitForMessage();
+            }
+            dialogLoop: while(1) {
+                sentence[0] = "What are your orders?";
+                Dialog::dialogAdd(sentence);
+                sentence = 0;
+                if( OfficeRoom::hasPressedPlate &&
+                    ! OfficeRoom::hasTalkedAboutPlate )
+                    sentence[0] = "I require your assistance with this opening mechanism.";
+                Dialog::dialogAdd(sentence);
+                sentence = 0;
+                sentence[0] = "I'll continue my search.";
+                Dialog::dialogAdd(sentence);
+                sentence = 0;
+
+                Dialog::dialogStart(ZOB_DIM_COLOR,ZOB_COLOR);
+                do breakScript() while(selectedSentence < 0);
+                Dialog::dialogHide();
+                cutscene() {
+                    sentence = dialogList[selectedSentence];
+                    egoSay("%s{sentence}");
+                    waitForMessage();
+                    switch(selectedSentence) {
+                    case 0:
+                        try {
+                        actorSay(commanderZif,"Locate the stolen artifact.");
+                        waitForMessage();
+                        egoSay("Any ideas where?");
+                        waitForMessage();
+                        actorSay(commanderZif,"Study your surroundings.");
+                        waitForMessage();
+                        actorSay(commanderZif,"Use all the cunning and guile at your disposal.");
+                        waitForMessage();
+                        actorSay(commanderZif,"Should you do this, you shall surely be successful.");
+                        waitForMessage();
+                        egoSay("Guile, right, aye sir.");
+                        waitForMessage();
+                        actorSay(commanderZif,"Also get a gun with which to shoot things.");
+                        waitForMessage();
+                        }
+                        override {
+                            if(VAR_OVERRIDE) {
+                                actorSay(0xFF, ""); //stopTalking();
+                            }
+                        }
+                        break;
+                    case 2:
+                        actorSay(commanderZif,"Very good.");
+                        break;
+                    case 1:
+                        actorSay(commanderZif,"Have you deciphered its secrets?");
+                        waitForMessage();
+                        egoSay("Yes, I believe two persons are required.");
+                        waitForMessage();
+                        actorSay(commanderZif,"In which case I shall follow you, ensign.");
+                        OfficeRoom::hasTalkedAboutPlate = 1;
+                        break;
+                    }
+                    waitForMessage();
+                }
+                Dialog::dialogClear(1);
+                if(selectedSentence == 2) break dialogLoop;
+            }
+            Dialog::dialogEnd();
+
+    }
+    
+    
+    script zobTalkToZifInSecretRoom() {
+            char* sentence;
+
+            cutscene(1) {
+                actorFace( commanderZif, VAR_EGO );
+                actorSay(commanderZif,"Yes, ensign?");
+                waitForMessage();
+            } 
+            dialogLoop: while(1) {
+                sentence[0] = "What now, Sir?";
+                Dialog::dialogAdd(sentence);
+                sentence = 0;
+                sentence[0] = "I'll continue my search.";
+                Dialog::dialogAdd(sentence);
+
+                Dialog::dialogStart(ZOB_DIM_COLOR,ZOB_COLOR);
+                do breakScript() while(selectedSentence < 0);
+                Dialog::dialogHide();
+                cutscene() {
+                    sentence = dialogList[selectedSentence];
+                    egoSay("%s{sentence}");
+                    waitForMessage();
+                    switch(selectedSentence) {
+                    case 0:
+                        try {
+                        actorSay(commanderZif,"Get artifact.");
+                        waitForMessage();
+                        actorSay(commanderZif,"We need to leave orbit quickly.");
+                        waitForMessage();
+                        egoSay("I'll see what I can do.");
+                        waitForMessage();
+                        }
+                        override {
+                            if(VAR_OVERRIDE) {
+                                stopTalking();
+                            }
+                        }
+                        break;
+                    case 1:
+                        actorSay(commanderZif,"Very good.");
+                        break;
+                    }
+                    waitForMessage();
+                }
+                Dialog::dialogClear(1);
+                if(selectedSentence == 1) break dialogLoop;
+            }
+            Dialog::dialogEnd();
+
+    }
+
+    object commanderZifObj {
+        name = "Commander Zif";
+        verb(int vrb,int objA,int objB) {
+            char* sentence;
+            int asked;
+        case TalkTo:
+            pauseRoaming(commanderZif);
+            if(SecretRoom::cubeDisappeared) {
+                zobTalkToZifInSecretRoom();
+                while(isScriptRunning(zobTalkToZifInSecretRoom)) breakScript();
+            } else {
+                zobTalkToZif();
+                while(isScriptRunning(zobTalkToZif)) breakScript();
+            }
+            resumeRoaming(commanderZif);
+            return;
+        case LookAt:
+            egoSay("My commanding officer, Commander Zif.");
+            return;
+        case Smell:
+            pauseRoaming(commanderZif);
+            egoSay("Is that a new cologne, Sir?");
+            waitForMessage();
+            actorSay(commanderZif,"I thought we got past these... feelings.");
+            waitForMessage();
+            egoSay("Sorry, Sir.");
+            resumeRoaming(commanderZif);
+            return;
+        }
+
+    }
+
+    object ensignZobObj {
+        name = "Ensign Zob";
+    }
+    
+
+}
