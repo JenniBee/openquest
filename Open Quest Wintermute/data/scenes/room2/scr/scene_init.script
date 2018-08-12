@@ -30,7 +30,7 @@ Zif.SkipTo(95, 102);
 Forcefield.Active = false;
 }
 
-if(EncryptionBroken == true && SolvedPuzzle = true && AllPieces != true)
+if(EncryptionBroken == true && SolvedPuzzle == true && AllPieces != true)
 {
 actor.SkipTo(87, 105);
 actor.Direction = DI_RIGHT;
